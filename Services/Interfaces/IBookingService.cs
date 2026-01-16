@@ -1,7 +1,6 @@
 using Gym_Manager_System.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Gym_Manager_System.Model;
 
 namespace Gym_Manager_System.Services.Interfaces
 {

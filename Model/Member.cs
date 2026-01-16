@@ -14,7 +14,7 @@ namespace Gym_Manager_System.Model
         private string? _phoneNumber;
         private DateTime _dateOfBirth;
         private DateTime _joinDate;
-        private enum Status { Active, Inactive, Suspended }
+        private string? _status;
         private string? _emergency_contact_name;
         private string? _emergency_contact_phone;
         private string? _medical_notes;
@@ -29,7 +29,8 @@ namespace Gym_Manager_System.Model
         public string? Emergency_contact_name { get => _emergency_contact_name; set => _emergency_contact_name = value; }
         public string? Emergency_contact_phone { get => _emergency_contact_phone; set => _emergency_contact_phone = value; }
         public string? Medical_notes { get => _medical_notes; set => _medical_notes = value; }
-            
+        public string? Status { get => _status; set => _status = value; }
+
 
     }
 }
