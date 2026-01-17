@@ -8,6 +8,7 @@ namespace Gym_Manager_System.Model
 {
     public class Member
     {
+        private int _id;
         private string? _firstName;
         private string? _lastName;
         private string? _email;
@@ -31,6 +32,6 @@ namespace Gym_Manager_System.Model
         public string? Medical_notes { get => _medical_notes; set => _medical_notes = value; }
         public string? Status { get => _status; set => _status = value; }
 
-
+        public int Id { get => _id; set => _id = value; }
     }
 }
