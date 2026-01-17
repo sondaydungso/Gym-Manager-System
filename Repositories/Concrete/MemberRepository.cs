@@ -170,12 +170,88 @@ namespace Gym_Manager_System.Repositories
 
         public Task<int> CreateAsync(Member member)
         {
-            throw new NotImplementedException();
+            var query = "INSERT INTO Members (FirstName, LastName, Email, PhoneNumber, DateOfBirth, JoinDate, Emergency_contact_name, Emergency_contact_phone, Medical_notes) " +
+                        "VALUES (@FirstName, @LastName, @Email, @PhoneNumber, @DateOfBirth, @JoinDate, @Emergency_contact_name, @Emergency_contact_phone, @Medical_notes);";
+
+            using (var connection = _context.CreateConnection())
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                {
+                    command.CommandText = query;
+
+                    // Use a dictionary to map parameter names to values
+                    var parameters = new Dictionary<string, object>
+                    {
+                        { "@FirstName", member.FirstName },
+                        { "@LastName", member.LastName },
+                        { "@Email", member.Email },
+                        { "@PhoneNumber", member.PhoneNumber },
+                        { "@DateOfBirth", member.DateOfBirth },
+                        { "@JoinDate", member.JoinDate },
+                        { "@Emergency_contact_name", member.Emergency_contact_name },
+                        { "@Emergency_contact_phone", member.Emergency_contact_phone },
+                        { "@Medical_notes", member.Medical_notes }
+                    };
+
+                    // Add parameters to the command
+                    foreach (var param in parameters)
+                    {
+                        var parameter = command.CreateParameter();
+                        parameter.ParameterName = param.Key;
+                        parameter.Value = param.Value;
+                        command.Parameters.Add(parameter);
+                    }
+
+                    var result = command.ExecuteNonQuery(); // Execute the command
+                    return Task.FromResult<int>(result);
+                }
+            }
         }
 
         public Task<bool> UpdateAsync(Member member)
         {
-            throw new NotImplementedException();
+            var query = "UPDATE Members SET FirstName = @FirstName, LastName = @LastName, Email = @Email, PhoneNumber = @PhoneNumber, " +
+                        "DateOfBirth = @DateOfBirth, JoinDate = @JoinDate, Emergency_contact_name = @Emergency_contact_name, " +
+                        "Emergency_contact_phone = @Emergency_contact_phone, Medical_notes = @Medical_notes, Status = @Status " +
+                        "WHERE MemberID = @MemberID";
+
+            using (var connection = _context.CreateConnection())
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                {
+                    command.CommandText = query;
+
+                    // Use a dictionary to map parameter names to values
+                    var parameters = new Dictionary<string, object>
+                    {
+                        { "@FirstName", member.FirstName },
+                        { "@LastName", member.LastName },
+                        { "@Email", member.Email },
+                        { "@PhoneNumber", member.PhoneNumber },
+                        { "@DateOfBirth", member.DateOfBirth },
+                        { "@JoinDate", member.JoinDate },
+                        { "@Emergency_contact_name", member.Emergency_contact_name },
+                        { "@Emergency_contact_phone", member.Emergency_contact_phone },
+                        { "@Medical_notes", member.Medical_notes },
+                        { "@Status", member.Status },
+                        { "@MemberID", member.Id   }
+                    };
+
+                    // Add parameters to the command
+                    foreach (var param in parameters)
+                    {
+                        var parameter = command.CreateParameter();
+                        parameter.ParameterName = param.Key;
+                        parameter.Value = param.Value;
+                        command.Parameters.Add(parameter);
+                    }
+
+                    var result = command.ExecuteNonQuery(); // Execute the command
+                    return Task.FromResult(result > 0); // Return true if at least one row was updated
+                }
+            }
         }
 
         public Task<bool> DeleteAsync(int memberId)
