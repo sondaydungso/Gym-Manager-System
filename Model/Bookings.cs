@@ -14,7 +14,8 @@ namespace Gym_Manager_System.Model
         private DateTime _bookingDate;
         private DateTime _cancelledAt;
         private string? _cancelReason;
-        public enum Status { Booked, Cancelled, Attended, NoShow }
+        private string _status;
+        public string Status { get => _status; set => _status = value; }
 
         public int BookingId { get => _bookingId; set => _bookingId = value; }
         public int MemberId { get => _memberId; set => _memberId = value; }

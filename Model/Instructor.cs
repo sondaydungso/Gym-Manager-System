@@ -16,8 +16,9 @@ namespace Gym_Manager_System.Model
         private string? _certifications;
         private string? _specializations;
         private DateTime _hireDate;
-        public enum Status { Active, Inactive}
+        private string _status;
         private DateTime _createdAt;
+        public string Status { get => _status; set => _status = value; }
 
         public int InstructorId { get => _instructorId; set => _instructorId = value; }
         public string? FirstName { get => _firstName; set => _firstName = value; }

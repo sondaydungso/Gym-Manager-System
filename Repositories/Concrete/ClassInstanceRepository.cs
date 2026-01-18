@@ -17,6 +17,7 @@ namespace Gym_Manager_System.Repositories
             _context = context;
         }
 
+        
         public Task<ClassInstance?> GetByIdAsync(int instanceId)
         {
             string query = "SELECT * FROM class_instances WHERE instance_id = @InstanceID";
@@ -47,7 +48,8 @@ namespace Gym_Manager_System.Repositories
                                 EndTime = TimeOnly.FromTimeSpan(reader["end_time"] != DBNull.Value ? ((TimeSpan)reader["end_time"]) : TimeSpan.Zero),
                                 Capacity = Convert.ToInt32(reader["capacity"]),
                                 CurrentBookings = Convert.ToInt32(reader["current_bookings"]),
-                                CancelationReason = reader["cancellation_reason"]?.ToString()
+                                CancelationReason = reader["cancellation_reason"]?.ToString(),
+                                Status = reader["status"]?.ToString()
                             };
                             return Task.FromResult<ClassInstance?>(instance); //Static method by .NET
                         }
@@ -84,7 +86,8 @@ namespace Gym_Manager_System.Repositories
                                 EndTime = TimeOnly.FromTimeSpan(reader["end_time"] != DBNull.Value ? ((TimeSpan)reader["end_time"]) : TimeSpan.Zero),
                                 Capacity = Convert.ToInt32(reader["capacity"]),
                                 CurrentBookings = Convert.ToInt32(reader["current_bookings"]),
-                                CancelationReason = reader["cancellation_reason"]?.ToString()
+                                CancelationReason = reader["cancellation_reason"]?.ToString(),
+                                Status = reader["status"]?.ToString()
                             };
                             instances.Add(instance);
                         }
@@ -124,7 +127,8 @@ namespace Gym_Manager_System.Repositories
                                 EndTime = TimeOnly.FromTimeSpan(reader["end_time"] != DBNull.Value ? ((TimeSpan)reader["end_time"]) : TimeSpan.Zero),
                                 Capacity = Convert.ToInt32(reader["capacity"]),
                                 CurrentBookings = Convert.ToInt32(reader["current_bookings"]),
-                                CancelationReason = reader["cancellation_reason"]?.ToString()
+                                CancelationReason = reader["cancellation_reason"]?.ToString(),
+                                Status = reader["status"]?.ToString()
                             };
                             instances.Add(instance);
                         }
@@ -164,7 +168,8 @@ namespace Gym_Manager_System.Repositories
                                 EndTime = TimeOnly.FromTimeSpan(reader["end_time"] != DBNull.Value ? ((TimeSpan)reader["end_time"]) : TimeSpan.Zero),
                                 Capacity = Convert.ToInt32(reader["capacity"]),
                                 CurrentBookings = Convert.ToInt32(reader["current_bookings"]),
-                                CancelationReason = reader["cancellation_reason"]?.ToString()
+                                CancelationReason = reader["cancellation_reason"]?.ToString(),
+                                Status = reader["status"]?.ToString()
                             };
                             instances.Add(instance);
                         }
@@ -208,7 +213,8 @@ namespace Gym_Manager_System.Repositories
                                 EndTime = TimeOnly.FromTimeSpan(reader["end_time"] != DBNull.Value ? ((TimeSpan)reader["end_time"]) : TimeSpan.Zero),
                                 Capacity = Convert.ToInt32(reader["capacity"]),
                                 CurrentBookings = Convert.ToInt32(reader["current_bookings"]),
-                                CancelationReason = reader["cancellation_reason"]?.ToString()
+                                CancelationReason = reader["cancellation_reason"]?.ToString(),
+                                Status = reader["status"]?.ToString()
                             };
                             instances.Add(instance);
                         }
@@ -248,7 +254,8 @@ namespace Gym_Manager_System.Repositories
                                 EndTime = TimeOnly.FromTimeSpan(reader["end_time"] != DBNull.Value ? ((TimeSpan)reader["end_time"]) : TimeSpan.Zero),
                                 Capacity = Convert.ToInt32(reader["capacity"]),
                                 CurrentBookings = Convert.ToInt32(reader["current_bookings"]),
-                                CancelationReason = reader["cancellation_reason"]?.ToString()
+                                CancelationReason = reader["cancellation_reason"]?.ToString(),
+                                Status = reader["status"]?.ToString()
                             };
                             instances.Add(instance);
                         }
@@ -310,7 +317,8 @@ namespace Gym_Manager_System.Repositories
                                 EndTime = TimeOnly.FromTimeSpan(reader["end_time"] != DBNull.Value ? ((TimeSpan)reader["end_time"]) : TimeSpan.Zero),
                                 Capacity = Convert.ToInt32(reader["capacity"]),
                                 CurrentBookings = Convert.ToInt32(reader["current_bookings"]),
-                                CancelationReason = reader["cancellation_reason"]?.ToString()
+                                CancelationReason = reader["cancellation_reason"]?.ToString(),
+                                Status = reader["status"]?.ToString()
                             };
                             instances.Add(instance);
                         }
@@ -343,7 +351,7 @@ namespace Gym_Manager_System.Repositories
                         { "@RoomID", instance.RoomId },
                         { "@Capacity", instance.Capacity },
                         { "@CurrentBookings", instance.CurrentBookings },
-                        { "@Status", "scheduled" },
+                        { "@Status", instance.Status },
                         { "@CancellationReason", instance.CancelationReason ?? (object)DBNull.Value },
                         { "@CreatedAt", instance.CreatedAt }
                     };
@@ -389,7 +397,7 @@ namespace Gym_Manager_System.Repositories
                         { "@RoomID", instance.RoomId },
                         { "@Capacity", instance.Capacity },
                         { "@CurrentBookings", instance.CurrentBookings },
-                        { "@Status", "scheduled" },
+                        { "@Status", instance.Status },
                         { "@CancellationReason", instance.CancelationReason ?? (object)DBNull.Value },
                         { "@InstanceID", instance.ClassInstanceId }
                     };

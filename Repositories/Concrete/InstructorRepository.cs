@@ -80,7 +80,8 @@ namespace Gym_Manager_System.Repositories
                                 Certifications = reader["certifications"]?.ToString(),
                                 Specializations = reader["specializations"]?.ToString(),
                                 HireDate = Convert.ToDateTime(reader["hire_date"]),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"])
+                                CreatedAt = Convert.ToDateTime(reader["created_at"]),
+                                Status = reader["status"]?.ToString()
                             };
                             instructors.Add(instructor);
                         }

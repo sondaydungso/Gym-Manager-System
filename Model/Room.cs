@@ -12,9 +12,11 @@ namespace Gym_Manager_System.Model
         private string? _roomName;
         private int _capacity;
         private string? _equipmentAvailable;
-        public enum Status { Available, Maintenance, Closed }
+        private string _status;
+        
         private DateTime _createdAt;
 
+        public string Status { get => _status; set => _status = value; }
         public int RoomId { get => _roomId; set => _roomId = value; }
         public string? RoomName { get => _roomName; set => _roomName = value; }
         public int Capacity { get => _capacity; set => _capacity = value; }

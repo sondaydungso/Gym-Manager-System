@@ -236,7 +236,7 @@ namespace Gym_Manager_System.Repositories
                         { "@Emergency_contact_phone", member.Emergency_contact_phone },
                         { "@Medical_notes", member.Medical_notes },
                         { "@Status", member.Status },
-                        { "@MemberID", member.Id   }
+                        
                     };
 
                     // Add parameters to the command
@@ -262,6 +262,42 @@ namespace Gym_Manager_System.Repositories
         public Task<bool> ExistsAsync(int memberId)
         {
             throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateFieldsAsync(int memberId, Dictionary<string, object> fieldsToUpdate)
+        {
+            if (fieldsToUpdate == null || fieldsToUpdate.Count == 0)
+                throw new ArgumentException("No fields provided to update.", nameof(fieldsToUpdate));
+
+            var setClause = string.Join(", ", fieldsToUpdate.Keys.Select(field => $"{field} = @{field}"));
+            var query = $"UPDATE Members SET {setClause} WHERE MemberID = @MemberID";
+
+            using (var connection = _context.CreateConnection())
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand()) // Create a command to execute the query  
+                {
+                    command.CommandText = query;
+
+                    // Add parameters for each field  
+                    foreach (var field in fieldsToUpdate)
+                    {
+                        var parameter = command.CreateParameter();
+                        parameter.ParameterName = $"@{field.Key}";
+                        parameter.Value = field.Value;
+                        command.Parameters.Add(parameter);
+                    }
+
+                    // Add the MemberID parameter  
+                    var idParameter = command.CreateParameter();
+                    idParameter.ParameterName = "@MemberID";
+                    idParameter.Value = memberId;
+                    command.Parameters.Add(idParameter);
+
+                    var result = command.ExecuteNonQuery(); // Execute the command  
+                    return Task.FromResult(result > 0); // Return true if at least one row was updated  
+                }
+            }
         }
     }
 }

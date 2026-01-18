@@ -19,7 +19,9 @@ namespace Gym_Manager_System.Model
         private int _capacity;
         private int _currentBookings;
         private string? _cancelationReason;
-        public enum Status { Scheduled, Completed, Canceled }
+
+        private string _status;
+        
         public int ClassInstanceId { get => _classInstanceId; set => _classInstanceId = value; }
         public int ClassScheduleId { get => _classScheduleId; set => _classScheduleId = value; }
         public DateTime ClassDate { get => _classDate; set => _classDate = value; }
@@ -31,6 +33,7 @@ namespace Gym_Manager_System.Model
         public int Capacity { get => _capacity; set => _capacity = value; }
         public int CurrentBookings { get => _currentBookings; set => _currentBookings = value; }
         public string? CancelationReason { get => _cancelationReason; set => _cancelationReason = value; }
+        public string Status { get => _status; set => _status = value; }
 
     }
 }

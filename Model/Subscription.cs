@@ -13,11 +13,11 @@ namespace Gym_Manager_System.Model
         private int _planId;
         private DateTime _startDate;
         private DateTime _endDate;
-        public enum Status { Active, Expired, Cancelled, Paused }
         public enum PaymentStatus { Paid, Unpaid, Pending }
         private DateTime _createdAt;
         private DateTime _updatedAt;
-
+        private string _status;
+        public string Status { get => _status; set => _status = value; }
         public int SubscriptionId { get => _subscriptionId; set => _subscriptionId = value; }
         public int MemberId { get => _memberId; set => _memberId = value; }
         public int PlanId { get => _planId; set => _planId = value; }
