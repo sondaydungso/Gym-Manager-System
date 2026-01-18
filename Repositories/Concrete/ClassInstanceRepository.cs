@@ -40,16 +40,16 @@ namespace Gym_Manager_System.Repositories
                             {
                                 ClassInstanceId = Convert.ToInt32(reader["instance_id"]),
                                 ClassScheduleId = Convert.ToInt32(reader["schedule_id"]),
-                                ClassDate = Convert.ToDateTime(reader["class_date"]),
+                                ClassDate = reader["class_date"] != DBNull.Value ? Convert.ToDateTime(reader["class_date"]) : default,
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 RoomId = Convert.ToInt32(reader["room_id"]),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"]),
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default,
                                 StartTime = TimeOnly.FromTimeSpan(reader["start_time"] != DBNull.Value ? ((TimeSpan)reader["start_time"]) : TimeSpan.Zero),
                                 EndTime = TimeOnly.FromTimeSpan(reader["end_time"] != DBNull.Value ? ((TimeSpan)reader["end_time"]) : TimeSpan.Zero),
-                                Capacity = Convert.ToInt32(reader["capacity"]),
-                                CurrentBookings = Convert.ToInt32(reader["current_bookings"]),
+                                Capacity = reader["capacity"] != DBNull.Value ? Convert.ToInt32(reader["capacity"]) : 0,
+                                CurrentBookings = reader["current_bookings"] != DBNull.Value ? Convert.ToInt32(reader["current_bookings"]) : 0,
                                 CancelationReason = reader["cancellation_reason"]?.ToString(),
-                                Status = reader["status"]?.ToString()
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty
                             };
                             return Task.FromResult<ClassInstance?>(instance); //Static method by .NET
                         }
@@ -78,16 +78,16 @@ namespace Gym_Manager_System.Repositories
                             {
                                 ClassInstanceId = Convert.ToInt32(reader["instance_id"]),
                                 ClassScheduleId = Convert.ToInt32(reader["schedule_id"]),
-                                ClassDate = Convert.ToDateTime(reader["class_date"]),
+                                ClassDate = reader["class_date"] != DBNull.Value ? Convert.ToDateTime(reader["class_date"]) : default,
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 RoomId = Convert.ToInt32(reader["room_id"]),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"]),
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default,
                                 StartTime = TimeOnly.FromTimeSpan(reader["start_time"] != DBNull.Value ? ((TimeSpan)reader["start_time"]) : TimeSpan.Zero),
                                 EndTime = TimeOnly.FromTimeSpan(reader["end_time"] != DBNull.Value ? ((TimeSpan)reader["end_time"]) : TimeSpan.Zero),
-                                Capacity = Convert.ToInt32(reader["capacity"]),
-                                CurrentBookings = Convert.ToInt32(reader["current_bookings"]),
+                                Capacity = reader["capacity"] != DBNull.Value ? Convert.ToInt32(reader["capacity"]) : 0,
+                                CurrentBookings = reader["current_bookings"] != DBNull.Value ? Convert.ToInt32(reader["current_bookings"]) : 0,
                                 CancelationReason = reader["cancellation_reason"]?.ToString(),
-                                Status = reader["status"]?.ToString()
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty
                             };
                             instances.Add(instance);
                         }
@@ -119,16 +119,16 @@ namespace Gym_Manager_System.Repositories
                             {
                                 ClassInstanceId = Convert.ToInt32(reader["instance_id"]),
                                 ClassScheduleId = Convert.ToInt32(reader["schedule_id"]),
-                                ClassDate = Convert.ToDateTime(reader["class_date"]),
+                                ClassDate = reader["class_date"] != DBNull.Value ? Convert.ToDateTime(reader["class_date"]) : default,
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 RoomId = Convert.ToInt32(reader["room_id"]),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"]),
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default,
                                 StartTime = TimeOnly.FromTimeSpan(reader["start_time"] != DBNull.Value ? ((TimeSpan)reader["start_time"]) : TimeSpan.Zero),
                                 EndTime = TimeOnly.FromTimeSpan(reader["end_time"] != DBNull.Value ? ((TimeSpan)reader["end_time"]) : TimeSpan.Zero),
-                                Capacity = Convert.ToInt32(reader["capacity"]),
-                                CurrentBookings = Convert.ToInt32(reader["current_bookings"]),
+                                Capacity = reader["capacity"] != DBNull.Value ? Convert.ToInt32(reader["capacity"]) : 0,
+                                CurrentBookings = reader["current_bookings"] != DBNull.Value ? Convert.ToInt32(reader["current_bookings"]) : 0,
                                 CancelationReason = reader["cancellation_reason"]?.ToString(),
-                                Status = reader["status"]?.ToString()
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty
                             };
                             instances.Add(instance);
                         }
@@ -160,16 +160,16 @@ namespace Gym_Manager_System.Repositories
                             {
                                 ClassInstanceId = Convert.ToInt32(reader["instance_id"]),
                                 ClassScheduleId = Convert.ToInt32(reader["schedule_id"]),
-                                ClassDate = Convert.ToDateTime(reader["class_date"]),
+                                ClassDate = reader["class_date"] != DBNull.Value ? Convert.ToDateTime(reader["class_date"]) : default,
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 RoomId = Convert.ToInt32(reader["room_id"]),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"]),
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default,
                                 StartTime = TimeOnly.FromTimeSpan(reader["start_time"] != DBNull.Value ? ((TimeSpan)reader["start_time"]) : TimeSpan.Zero),
                                 EndTime = TimeOnly.FromTimeSpan(reader["end_time"] != DBNull.Value ? ((TimeSpan)reader["end_time"]) : TimeSpan.Zero),
-                                Capacity = Convert.ToInt32(reader["capacity"]),
-                                CurrentBookings = Convert.ToInt32(reader["current_bookings"]),
+                                Capacity = reader["capacity"] != DBNull.Value ? Convert.ToInt32(reader["capacity"]) : 0,
+                                CurrentBookings = reader["current_bookings"] != DBNull.Value ? Convert.ToInt32(reader["current_bookings"]) : 0,
                                 CancelationReason = reader["cancellation_reason"]?.ToString(),
-                                Status = reader["status"]?.ToString()
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty
                             };
                             instances.Add(instance);
                         }
@@ -205,16 +205,16 @@ namespace Gym_Manager_System.Repositories
                             {
                                 ClassInstanceId = Convert.ToInt32(reader["instance_id"]),
                                 ClassScheduleId = Convert.ToInt32(reader["schedule_id"]),
-                                ClassDate = Convert.ToDateTime(reader["class_date"]),
+                                ClassDate = reader["class_date"] != DBNull.Value ? Convert.ToDateTime(reader["class_date"]) : default,
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 RoomId = Convert.ToInt32(reader["room_id"]),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"]),
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default,
                                 StartTime = TimeOnly.FromTimeSpan(reader["start_time"] != DBNull.Value ? ((TimeSpan)reader["start_time"]) : TimeSpan.Zero),
                                 EndTime = TimeOnly.FromTimeSpan(reader["end_time"] != DBNull.Value ? ((TimeSpan)reader["end_time"]) : TimeSpan.Zero),
-                                Capacity = Convert.ToInt32(reader["capacity"]),
-                                CurrentBookings = Convert.ToInt32(reader["current_bookings"]),
+                                Capacity = reader["capacity"] != DBNull.Value ? Convert.ToInt32(reader["capacity"]) : 0,
+                                CurrentBookings = reader["current_bookings"] != DBNull.Value ? Convert.ToInt32(reader["current_bookings"]) : 0,
                                 CancelationReason = reader["cancellation_reason"]?.ToString(),
-                                Status = reader["status"]?.ToString()
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty
                             };
                             instances.Add(instance);
                         }
@@ -246,16 +246,16 @@ namespace Gym_Manager_System.Repositories
                             {
                                 ClassInstanceId = Convert.ToInt32(reader["instance_id"]),
                                 ClassScheduleId = Convert.ToInt32(reader["schedule_id"]),
-                                ClassDate = Convert.ToDateTime(reader["class_date"]),
+                                ClassDate = reader["class_date"] != DBNull.Value ? Convert.ToDateTime(reader["class_date"]) : default,
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 RoomId = Convert.ToInt32(reader["room_id"]),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"]),
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default,
                                 StartTime = TimeOnly.FromTimeSpan(reader["start_time"] != DBNull.Value ? ((TimeSpan)reader["start_time"]) : TimeSpan.Zero),
                                 EndTime = TimeOnly.FromTimeSpan(reader["end_time"] != DBNull.Value ? ((TimeSpan)reader["end_time"]) : TimeSpan.Zero),
-                                Capacity = Convert.ToInt32(reader["capacity"]),
-                                CurrentBookings = Convert.ToInt32(reader["current_bookings"]),
+                                Capacity = reader["capacity"] != DBNull.Value ? Convert.ToInt32(reader["capacity"]) : 0,
+                                CurrentBookings = reader["current_bookings"] != DBNull.Value ? Convert.ToInt32(reader["current_bookings"]) : 0,
                                 CancelationReason = reader["cancellation_reason"]?.ToString(),
-                                Status = reader["status"]?.ToString()
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty
                             };
                             instances.Add(instance);
                         }
@@ -309,16 +309,16 @@ namespace Gym_Manager_System.Repositories
                             {
                                 ClassInstanceId = Convert.ToInt32(reader["instance_id"]),
                                 ClassScheduleId = Convert.ToInt32(reader["schedule_id"]),
-                                ClassDate = Convert.ToDateTime(reader["class_date"]),
+                                ClassDate = reader["class_date"] != DBNull.Value ? Convert.ToDateTime(reader["class_date"]) : default,
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 RoomId = Convert.ToInt32(reader["room_id"]),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"]),
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default,
                                 StartTime = TimeOnly.FromTimeSpan(reader["start_time"] != DBNull.Value ? ((TimeSpan)reader["start_time"]) : TimeSpan.Zero),
                                 EndTime = TimeOnly.FromTimeSpan(reader["end_time"] != DBNull.Value ? ((TimeSpan)reader["end_time"]) : TimeSpan.Zero),
-                                Capacity = Convert.ToInt32(reader["capacity"]),
-                                CurrentBookings = Convert.ToInt32(reader["current_bookings"]),
+                                Capacity = reader["capacity"] != DBNull.Value ? Convert.ToInt32(reader["capacity"]) : 0,
+                                CurrentBookings = reader["current_bookings"] != DBNull.Value ? Convert.ToInt32(reader["current_bookings"]) : 0,
                                 CancelationReason = reader["cancellation_reason"]?.ToString(),
-                                Status = reader["status"]?.ToString()
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty
                             };
                             instances.Add(instance);
                         }
@@ -340,30 +340,61 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@ScheduleID", instance.ClassScheduleId },
-                        { "@ClassDate", instance.ClassDate },
-                        { "@StartTime", instance.StartTime.ToTimeSpan() },
-                        { "@EndTime", instance.EndTime.ToTimeSpan() },
-                        { "@InstructorID", instance.InstructorId },
-                        { "@RoomID", instance.RoomId },
-                        { "@Capacity", instance.Capacity },
-                        { "@CurrentBookings", instance.CurrentBookings },
-                        { "@Status", instance.Status },
-                        { "@CancellationReason", instance.CancelationReason ?? (object)DBNull.Value },
-                        { "@CreatedAt", instance.CreatedAt }
-                    };
+                    // Bind parameters directly
+                    var scheduleIdParam = command.CreateParameter();
+                    scheduleIdParam.ParameterName = "@ScheduleID";
+                    scheduleIdParam.Value = instance.ClassScheduleId;
+                    command.Parameters.Add(scheduleIdParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var classDateParam = command.CreateParameter();
+                    classDateParam.ParameterName = "@ClassDate";
+                    classDateParam.Value = instance.ClassDate;
+                    command.Parameters.Add(classDateParam);
+
+                    var startTimeParam = command.CreateParameter();
+                    startTimeParam.ParameterName = "@StartTime";
+                    startTimeParam.Value = instance.StartTime.ToTimeSpan();
+                    command.Parameters.Add(startTimeParam);
+
+                    var endTimeParam = command.CreateParameter();
+                    endTimeParam.ParameterName = "@EndTime";
+                    endTimeParam.Value = instance.EndTime.ToTimeSpan();
+                    command.Parameters.Add(endTimeParam);
+
+                    var instructorIdParam = command.CreateParameter();
+                    instructorIdParam.ParameterName = "@InstructorID";
+                    instructorIdParam.Value = instance.InstructorId;
+                    command.Parameters.Add(instructorIdParam);
+
+                    var roomIdParam = command.CreateParameter();
+                    roomIdParam.ParameterName = "@RoomID";
+                    roomIdParam.Value = instance.RoomId;
+                    command.Parameters.Add(roomIdParam);
+
+                    var capacityParam = command.CreateParameter();
+                    capacityParam.ParameterName = "@Capacity";
+                    capacityParam.Value = instance.Capacity;
+                    command.Parameters.Add(capacityParam);
+
+                    var currentBookingsParam = command.CreateParameter();
+                    currentBookingsParam.ParameterName = "@CurrentBookings";
+                    currentBookingsParam.Value = instance.CurrentBookings;
+                    command.Parameters.Add(currentBookingsParam);
+
+                    var statusParam = command.CreateParameter();
+                    statusParam.ParameterName = "@Status";
+                    statusParam.Value = instance.Status ?? (object)DBNull.Value;
+                    command.Parameters.Add(statusParam);
+
+                    var cancellationReasonParam = command.CreateParameter();
+                    cancellationReasonParam.ParameterName = "@CancellationReason";
+                    cancellationReasonParam.Value = instance.CancelationReason ?? (object)DBNull.Value;
+                    command.Parameters.Add(cancellationReasonParam);
+
+                    var createdAtParam = command.CreateParameter();
+                    createdAtParam.ParameterName = "@CreatedAt";
+                    createdAtParam.Value = instance.CreatedAt;
+                    command.Parameters.Add(createdAtParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult<int>(result);
@@ -386,30 +417,61 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@ScheduleID", instance.ClassScheduleId },
-                        { "@ClassDate", instance.ClassDate },
-                        { "@StartTime", instance.StartTime.ToTimeSpan() },
-                        { "@EndTime", instance.EndTime.ToTimeSpan() },
-                        { "@InstructorID", instance.InstructorId },
-                        { "@RoomID", instance.RoomId },
-                        { "@Capacity", instance.Capacity },
-                        { "@CurrentBookings", instance.CurrentBookings },
-                        { "@Status", instance.Status },
-                        { "@CancellationReason", instance.CancelationReason ?? (object)DBNull.Value },
-                        { "@InstanceID", instance.ClassInstanceId }
-                    };
+                    // Bind parameters directly
+                    var scheduleIdParam = command.CreateParameter();
+                    scheduleIdParam.ParameterName = "@ScheduleID";
+                    scheduleIdParam.Value = instance.ClassScheduleId;
+                    command.Parameters.Add(scheduleIdParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var classDateParam = command.CreateParameter();
+                    classDateParam.ParameterName = "@ClassDate";
+                    classDateParam.Value = instance.ClassDate;
+                    command.Parameters.Add(classDateParam);
+
+                    var startTimeParam = command.CreateParameter();
+                    startTimeParam.ParameterName = "@StartTime";
+                    startTimeParam.Value = instance.StartTime.ToTimeSpan();
+                    command.Parameters.Add(startTimeParam);
+
+                    var endTimeParam = command.CreateParameter();
+                    endTimeParam.ParameterName = "@EndTime";
+                    endTimeParam.Value = instance.EndTime.ToTimeSpan();
+                    command.Parameters.Add(endTimeParam);
+
+                    var instructorIdParam = command.CreateParameter();
+                    instructorIdParam.ParameterName = "@InstructorID";
+                    instructorIdParam.Value = instance.InstructorId;
+                    command.Parameters.Add(instructorIdParam);
+
+                    var roomIdParam = command.CreateParameter();
+                    roomIdParam.ParameterName = "@RoomID";
+                    roomIdParam.Value = instance.RoomId;
+                    command.Parameters.Add(roomIdParam);
+
+                    var capacityParam = command.CreateParameter();
+                    capacityParam.ParameterName = "@Capacity";
+                    capacityParam.Value = instance.Capacity;
+                    command.Parameters.Add(capacityParam);
+
+                    var currentBookingsParam = command.CreateParameter();
+                    currentBookingsParam.ParameterName = "@CurrentBookings";
+                    currentBookingsParam.Value = instance.CurrentBookings;
+                    command.Parameters.Add(currentBookingsParam);
+
+                    var statusParam = command.CreateParameter();
+                    statusParam.ParameterName = "@Status";
+                    statusParam.Value = instance.Status ?? (object)DBNull.Value;
+                    command.Parameters.Add(statusParam);
+
+                    var cancellationReasonParam = command.CreateParameter();
+                    cancellationReasonParam.ParameterName = "@CancellationReason";
+                    cancellationReasonParam.Value = instance.CancelationReason ?? (object)DBNull.Value;
+                    command.Parameters.Add(cancellationReasonParam);
+
+                    var instanceIdParam = command.CreateParameter();
+                    instanceIdParam.ParameterName = "@InstanceID";
+                    instanceIdParam.Value = instance.ClassInstanceId;
+                    command.Parameters.Add(instanceIdParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult(result > 0); // Return true if at least one row was updated

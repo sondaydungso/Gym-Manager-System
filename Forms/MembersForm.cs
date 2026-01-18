@@ -96,7 +96,7 @@ namespace Gym_Manager_System.Forms
                 
                 if (membersGridView.Columns.Count > 0)
                 {
-                    membersGridView.Columns["Id"].HeaderText = "ID";
+                    membersGridView.Columns["MemberId"].HeaderText = "ID";
                     membersGridView.Columns["FirstName"].HeaderText = "First Name";
                     membersGridView.Columns["LastName"].HeaderText = "Last Name";
                     membersGridView.Columns["Email"].HeaderText = "Email";

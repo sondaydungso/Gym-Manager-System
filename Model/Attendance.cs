@@ -12,7 +12,7 @@ namespace Gym_Manager_System.Model
         private int _bookingId;
         private DateTime _checkInTime;
         private bool _attended;
-        private string _note;
+        private string _note = string.Empty;
 
         public int AttendanceId { get => _attendanceId; set => _attendanceId = value; }
         public int BookingId { get => _bookingId; set => _bookingId = value; }

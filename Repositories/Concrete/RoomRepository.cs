@@ -41,7 +41,8 @@ namespace Gym_Manager_System.Repositories
                                 RoomName = reader["room_name"]?.ToString(),
                                 Capacity = Convert.ToInt32(reader["capacity"]),
                                 EquipmentAvailable = reader["equipment_available"]?.ToString(),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"])
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default
                             };
                             return Task.FromResult<Room?>(room); //Static method by .NET
                         }
@@ -72,7 +73,8 @@ namespace Gym_Manager_System.Repositories
                                 RoomName = reader["room_name"]?.ToString(),
                                 Capacity = Convert.ToInt32(reader["capacity"]),
                                 EquipmentAvailable = reader["equipment_available"]?.ToString(),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"])
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default
                             };
                             rooms.Add(room);
                         }
@@ -102,7 +104,8 @@ namespace Gym_Manager_System.Repositories
                                 RoomName = reader["room_name"]?.ToString(),
                                 Capacity = Convert.ToInt32(reader["capacity"]),
                                 EquipmentAvailable = reader["equipment_available"]?.ToString(),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"])
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default
                             };
                             rooms.Add(room);
                         }
@@ -124,24 +127,31 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@RoomName", room.RoomName ?? (object)DBNull.Value },
-                        { "@Capacity", room.Capacity },
-                        { "@EquipmentAvailable", room.EquipmentAvailable ?? (object)DBNull.Value },
-                        { "@Status", "available" },
-                        { "@CreatedAt", room.CreatedAt }
-                    };
+                    // Bind parameters directly
+                    var roomNameParam = command.CreateParameter();
+                    roomNameParam.ParameterName = "@RoomName";
+                    roomNameParam.Value = room.RoomName ?? (object)DBNull.Value;
+                    command.Parameters.Add(roomNameParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var capacityParam = command.CreateParameter();
+                    capacityParam.ParameterName = "@Capacity";
+                    capacityParam.Value = room.Capacity;
+                    command.Parameters.Add(capacityParam);
+
+                    var equipmentAvailableParam = command.CreateParameter();
+                    equipmentAvailableParam.ParameterName = "@EquipmentAvailable";
+                    equipmentAvailableParam.Value = room.EquipmentAvailable ?? (object)DBNull.Value;
+                    command.Parameters.Add(equipmentAvailableParam);
+
+                    var statusParam = command.CreateParameter();
+                    statusParam.ParameterName = "@Status";
+                    statusParam.Value = "available";
+                    command.Parameters.Add(statusParam);
+
+                    var createdAtParam = command.CreateParameter();
+                    createdAtParam.ParameterName = "@CreatedAt";
+                    createdAtParam.Value = room.CreatedAt;
+                    command.Parameters.Add(createdAtParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult<int>(result);
@@ -162,23 +172,26 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@RoomName", room.RoomName ?? (object)DBNull.Value },
-                        { "@Capacity", room.Capacity },
-                        { "@EquipmentAvailable", room.EquipmentAvailable ?? (object)DBNull.Value },
-                        { "@RoomID", room.RoomId }
-                    };
+                    // Bind parameters directly
+                    var roomNameParam = command.CreateParameter();
+                    roomNameParam.ParameterName = "@RoomName";
+                    roomNameParam.Value = room.RoomName ?? (object)DBNull.Value;
+                    command.Parameters.Add(roomNameParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var capacityParam = command.CreateParameter();
+                    capacityParam.ParameterName = "@Capacity";
+                    capacityParam.Value = room.Capacity;
+                    command.Parameters.Add(capacityParam);
+
+                    var equipmentAvailableParam = command.CreateParameter();
+                    equipmentAvailableParam.ParameterName = "@EquipmentAvailable";
+                    equipmentAvailableParam.Value = room.EquipmentAvailable ?? (object)DBNull.Value;
+                    command.Parameters.Add(equipmentAvailableParam);
+
+                    var roomIdParam = command.CreateParameter();
+                    roomIdParam.ParameterName = "@RoomID";
+                    roomIdParam.Value = room.RoomId;
+                    command.Parameters.Add(roomIdParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult(result > 0); // Return true if at least one row was updated
