@@ -39,8 +39,8 @@ namespace Gym_Manager_System.Repositories
                             {
                                 AttendanceId = Convert.ToInt32(reader["attendance_id"]),
                                 BookingId = Convert.ToInt32(reader["booking_id"]),
-                                CheckInTime = Convert.ToDateTime(reader["check_in_time"]),
-                                Attended = Convert.ToBoolean(reader["attended"]),
+                                CheckInTime = reader["check_in_time"] != DBNull.Value ? Convert.ToDateTime(reader["check_in_time"]) : default,
+                                Attended = reader["attended"] != DBNull.Value ? Convert.ToBoolean(reader["attended"]) : false,
                                 Note = reader["notes"]?.ToString()
                             };
                             return Task.FromResult<Attendance?>(attendance); //Static method by .NET
@@ -74,8 +74,8 @@ namespace Gym_Manager_System.Repositories
                             {
                                 AttendanceId = Convert.ToInt32(reader["attendance_id"]),
                                 BookingId = Convert.ToInt32(reader["booking_id"]),
-                                CheckInTime = Convert.ToDateTime(reader["check_in_time"]),
-                                Attended = Convert.ToBoolean(reader["attended"]),
+                                CheckInTime = reader["check_in_time"] != DBNull.Value ? Convert.ToDateTime(reader["check_in_time"]) : default,
+                                Attended = reader["attended"] != DBNull.Value ? Convert.ToBoolean(reader["attended"]) : false,
                                 Note = reader["notes"]?.ToString()
                             };
                             return Task.FromResult<Attendance?>(attendance); //Static method by .NET
@@ -108,8 +108,8 @@ namespace Gym_Manager_System.Repositories
                             {
                                 AttendanceId = Convert.ToInt32(reader["attendance_id"]),
                                 BookingId = Convert.ToInt32(reader["booking_id"]),
-                                CheckInTime = Convert.ToDateTime(reader["check_in_time"]),
-                                Attended = Convert.ToBoolean(reader["attended"]),
+                                CheckInTime = reader["check_in_time"] != DBNull.Value ? Convert.ToDateTime(reader["check_in_time"]) : default,
+                                Attended = reader["attended"] != DBNull.Value ? Convert.ToBoolean(reader["attended"]) : false,
                                 Note = reader["notes"]?.ToString()
                             };
                             attendances.Add(attendance);
@@ -164,8 +164,8 @@ namespace Gym_Manager_System.Repositories
                             {
                                 AttendanceId = Convert.ToInt32(reader["attendance_id"]),
                                 BookingId = Convert.ToInt32(reader["booking_id"]),
-                                CheckInTime = Convert.ToDateTime(reader["check_in_time"]),
-                                Attended = Convert.ToBoolean(reader["attended"]),
+                                CheckInTime = reader["check_in_time"] != DBNull.Value ? Convert.ToDateTime(reader["check_in_time"]) : default,
+                                Attended = reader["attended"] != DBNull.Value ? Convert.ToBoolean(reader["attended"]) : false,
                                 Note = reader["notes"]?.ToString()
                             };
                             attendances.Add(attendance);
@@ -198,8 +198,8 @@ namespace Gym_Manager_System.Repositories
                             {
                                 AttendanceId = Convert.ToInt32(reader["attendance_id"]),
                                 BookingId = Convert.ToInt32(reader["booking_id"]),
-                                CheckInTime = Convert.ToDateTime(reader["check_in_time"]),
-                                Attended = Convert.ToBoolean(reader["attended"]),
+                                CheckInTime = reader["check_in_time"] != DBNull.Value ? Convert.ToDateTime(reader["check_in_time"]) : default,
+                                Attended = reader["attended"] != DBNull.Value ? Convert.ToBoolean(reader["attended"]) : false,
                                 Note = reader["notes"]?.ToString()
                             };
                             attendances.Add(attendance);
@@ -222,23 +222,26 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@BookingID", attendance.BookingId },
-                        { "@CheckInTime", attendance.CheckInTime },
-                        { "@Attended", attendance.Attended },
-                        { "@Note", attendance.Note ?? (object)DBNull.Value }
-                    };
+                    // Bind parameters directly
+                    var bookingIdParam = command.CreateParameter();
+                    bookingIdParam.ParameterName = "@BookingID";
+                    bookingIdParam.Value = attendance.BookingId;
+                    command.Parameters.Add(bookingIdParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var checkInTimeParam = command.CreateParameter();
+                    checkInTimeParam.ParameterName = "@CheckInTime";
+                    checkInTimeParam.Value = attendance.CheckInTime;
+                    command.Parameters.Add(checkInTimeParam);
+
+                    var attendedParam = command.CreateParameter();
+                    attendedParam.ParameterName = "@Attended";
+                    attendedParam.Value = attendance.Attended;
+                    command.Parameters.Add(attendedParam);
+
+                    var noteParam = command.CreateParameter();
+                    noteParam.ParameterName = "@Note";
+                    noteParam.Value = attendance.Note ?? (object)DBNull.Value;
+                    command.Parameters.Add(noteParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult<int>(result);
@@ -259,24 +262,31 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@BookingID", attendance.BookingId },
-                        { "@CheckInTime", attendance.CheckInTime },
-                        { "@Attended", attendance.Attended },
-                        { "@Note", attendance.Note ?? (object)DBNull.Value },
-                        { "@AttendanceID", attendance.AttendanceId }
-                    };
+                    // Bind parameters directly
+                    var bookingIdParam = command.CreateParameter();
+                    bookingIdParam.ParameterName = "@BookingID";
+                    bookingIdParam.Value = attendance.BookingId;
+                    command.Parameters.Add(bookingIdParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var checkInTimeParam = command.CreateParameter();
+                    checkInTimeParam.ParameterName = "@CheckInTime";
+                    checkInTimeParam.Value = attendance.CheckInTime;
+                    command.Parameters.Add(checkInTimeParam);
+
+                    var attendedParam = command.CreateParameter();
+                    attendedParam.ParameterName = "@Attended";
+                    attendedParam.Value = attendance.Attended;
+                    command.Parameters.Add(attendedParam);
+
+                    var noteParam = command.CreateParameter();
+                    noteParam.ParameterName = "@Note";
+                    noteParam.Value = attendance.Note ?? (object)DBNull.Value;
+                    command.Parameters.Add(noteParam);
+
+                    var attendanceIdParam = command.CreateParameter();
+                    attendanceIdParam.ParameterName = "@AttendanceID";
+                    attendanceIdParam.Value = attendance.AttendanceId;
+                    command.Parameters.Add(attendanceIdParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult(result > 0); // Return true if at least one row was updated

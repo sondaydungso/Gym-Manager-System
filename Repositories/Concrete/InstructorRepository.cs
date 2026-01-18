@@ -44,8 +44,9 @@ namespace Gym_Manager_System.Repositories
                                 PhoneNumber = reader["phone"]?.ToString(),
                                 Certifications = reader["certifications"]?.ToString(),
                                 Specializations = reader["specializations"]?.ToString(),
-                                HireDate = Convert.ToDateTime(reader["hire_date"]),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"])
+                                HireDate = reader["hire_date"] != DBNull.Value ? Convert.ToDateTime(reader["hire_date"]) : default,
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default
                             };
                             return Task.FromResult<Instructor?>(instructor); //Static method by .NET
                         }
@@ -80,7 +81,8 @@ namespace Gym_Manager_System.Repositories
                                 Certifications = reader["certifications"]?.ToString(),
                                 Specializations = reader["specializations"]?.ToString(),
                                 HireDate = Convert.ToDateTime(reader["hire_date"]),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"])
+                                CreatedAt = Convert.ToDateTime(reader["created_at"]),
+                                Status = reader["status"]?.ToString()
                             };
                             instructors.Add(instructor);
                         }
@@ -113,8 +115,9 @@ namespace Gym_Manager_System.Repositories
                                 PhoneNumber = reader["phone"]?.ToString(),
                                 Certifications = reader["certifications"]?.ToString(),
                                 Specializations = reader["specializations"]?.ToString(),
-                                HireDate = Convert.ToDateTime(reader["hire_date"]),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"])
+                                HireDate = reader["hire_date"] != DBNull.Value ? Convert.ToDateTime(reader["hire_date"]) : default,
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default
                             };
                             instructors.Add(instructor);
                         }
@@ -136,28 +139,51 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@FirstName", instructor.FirstName ?? (object)DBNull.Value },
-                        { "@LastName", instructor.LastName ?? (object)DBNull.Value },
-                        { "@Email", instructor.Email ?? (object)DBNull.Value },
-                        { "@Phone", instructor.PhoneNumber ?? (object)DBNull.Value },
-                        { "@Certifications", instructor.Certifications ?? (object)DBNull.Value },
-                        { "@Specializations", instructor.Specializations ?? (object)DBNull.Value },
-                        { "@HireDate", instructor.HireDate },
-                        { "@Status", "active" },
-                        { "@CreatedAt", instructor.CreatedAt }
-                    };
+                    // Bind parameters directly
+                    var firstNameParam = command.CreateParameter();
+                    firstNameParam.ParameterName = "@FirstName";
+                    firstNameParam.Value = instructor.FirstName ?? (object)DBNull.Value;
+                    command.Parameters.Add(firstNameParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var lastNameParam = command.CreateParameter();
+                    lastNameParam.ParameterName = "@LastName";
+                    lastNameParam.Value = instructor.LastName ?? (object)DBNull.Value;
+                    command.Parameters.Add(lastNameParam);
+
+                    var emailParam = command.CreateParameter();
+                    emailParam.ParameterName = "@Email";
+                    emailParam.Value = instructor.Email ?? (object)DBNull.Value;
+                    command.Parameters.Add(emailParam);
+
+                    var phoneParam = command.CreateParameter();
+                    phoneParam.ParameterName = "@Phone";
+                    phoneParam.Value = instructor.PhoneNumber ?? (object)DBNull.Value;
+                    command.Parameters.Add(phoneParam);
+
+                    var certificationsParam = command.CreateParameter();
+                    certificationsParam.ParameterName = "@Certifications";
+                    certificationsParam.Value = instructor.Certifications ?? (object)DBNull.Value;
+                    command.Parameters.Add(certificationsParam);
+
+                    var specializationsParam = command.CreateParameter();
+                    specializationsParam.ParameterName = "@Specializations";
+                    specializationsParam.Value = instructor.Specializations ?? (object)DBNull.Value;
+                    command.Parameters.Add(specializationsParam);
+
+                    var hireDateParam = command.CreateParameter();
+                    hireDateParam.ParameterName = "@HireDate";
+                    hireDateParam.Value = instructor.HireDate;
+                    command.Parameters.Add(hireDateParam);
+
+                    var statusParam = command.CreateParameter();
+                    statusParam.ParameterName = "@Status";
+                    statusParam.Value = "active";
+                    command.Parameters.Add(statusParam);
+
+                    var createdAtParam = command.CreateParameter();
+                    createdAtParam.ParameterName = "@CreatedAt";
+                    createdAtParam.Value = instructor.CreatedAt;
+                    command.Parameters.Add(createdAtParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult<int>(result);
@@ -179,27 +205,46 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@FirstName", instructor.FirstName ?? (object)DBNull.Value },
-                        { "@LastName", instructor.LastName ?? (object)DBNull.Value },
-                        { "@Email", instructor.Email ?? (object)DBNull.Value },
-                        { "@Phone", instructor.PhoneNumber ?? (object)DBNull.Value },
-                        { "@Certifications", instructor.Certifications ?? (object)DBNull.Value },
-                        { "@Specializations", instructor.Specializations ?? (object)DBNull.Value },
-                        { "@HireDate", instructor.HireDate },
-                        { "@InstructorID", instructor.InstructorId }
-                    };
+                    // Bind parameters directly
+                    var firstNameParam = command.CreateParameter();
+                    firstNameParam.ParameterName = "@FirstName";
+                    firstNameParam.Value = instructor.FirstName ?? (object)DBNull.Value;
+                    command.Parameters.Add(firstNameParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var lastNameParam = command.CreateParameter();
+                    lastNameParam.ParameterName = "@LastName";
+                    lastNameParam.Value = instructor.LastName ?? (object)DBNull.Value;
+                    command.Parameters.Add(lastNameParam);
+
+                    var emailParam = command.CreateParameter();
+                    emailParam.ParameterName = "@Email";
+                    emailParam.Value = instructor.Email ?? (object)DBNull.Value;
+                    command.Parameters.Add(emailParam);
+
+                    var phoneParam = command.CreateParameter();
+                    phoneParam.ParameterName = "@Phone";
+                    phoneParam.Value = instructor.PhoneNumber ?? (object)DBNull.Value;
+                    command.Parameters.Add(phoneParam);
+
+                    var certificationsParam = command.CreateParameter();
+                    certificationsParam.ParameterName = "@Certifications";
+                    certificationsParam.Value = instructor.Certifications ?? (object)DBNull.Value;
+                    command.Parameters.Add(certificationsParam);
+
+                    var specializationsParam = command.CreateParameter();
+                    specializationsParam.ParameterName = "@Specializations";
+                    specializationsParam.Value = instructor.Specializations ?? (object)DBNull.Value;
+                    command.Parameters.Add(specializationsParam);
+
+                    var hireDateParam = command.CreateParameter();
+                    hireDateParam.ParameterName = "@HireDate";
+                    hireDateParam.Value = instructor.HireDate;
+                    command.Parameters.Add(hireDateParam);
+
+                    var instructorIdParam = command.CreateParameter();
+                    instructorIdParam.ParameterName = "@InstructorID";
+                    instructorIdParam.Value = instructor.InstructorId;
+                    command.Parameters.Add(instructorIdParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult(result > 0); // Return true if at least one row was updated

@@ -43,10 +43,10 @@ namespace Gym_Manager_System.Repositories
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 DayOfWeek = Convert.ToInt32(reader["day_of_week"]),
                                 StartTime = reader["start_time"] != DBNull.Value ? ((TimeSpan)reader["start_time"]) : TimeSpan.Zero,
-                                IsActive = Convert.ToBoolean(reader["is_active"]),
-                                EffectiveFrom = Convert.ToDateTime(reader["effective_from"]),
+                                IsActive = reader["is_active"] != DBNull.Value ? Convert.ToBoolean(reader["is_active"]) : false,
+                                EffectiveFrom = reader["effective_from"] != DBNull.Value ? Convert.ToDateTime(reader["effective_from"]) : default,
                                 EffectiveUntil = reader["effective_until"] != DBNull.Value ? Convert.ToDateTime(reader["effective_until"]) : default,
-                                CreatedAt = Convert.ToDateTime(reader["created_at"])
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default
                             };
                             return Task.FromResult<ClassSchedule?>(schedule); //Static method by .NET
                         }
@@ -79,10 +79,10 @@ namespace Gym_Manager_System.Repositories
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 DayOfWeek = Convert.ToInt32(reader["day_of_week"]),
                                 StartTime = reader["start_time"] != DBNull.Value ? ((TimeSpan)reader["start_time"]) : TimeSpan.Zero,
-                                IsActive = Convert.ToBoolean(reader["is_active"]),
-                                EffectiveFrom = Convert.ToDateTime(reader["effective_from"]),
+                                IsActive = reader["is_active"] != DBNull.Value ? Convert.ToBoolean(reader["is_active"]) : false,
+                                EffectiveFrom = reader["effective_from"] != DBNull.Value ? Convert.ToDateTime(reader["effective_from"]) : default,
                                 EffectiveUntil = reader["effective_until"] != DBNull.Value ? Convert.ToDateTime(reader["effective_until"]) : default,
-                                CreatedAt = Convert.ToDateTime(reader["created_at"])
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default
                             };
                             schedules.Add(schedule);
                         }
@@ -114,10 +114,10 @@ namespace Gym_Manager_System.Repositories
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 DayOfWeek = Convert.ToInt32(reader["day_of_week"]),
                                 StartTime = reader["start_time"] != DBNull.Value ? ((TimeSpan)reader["start_time"]) : TimeSpan.Zero,
-                                IsActive = Convert.ToBoolean(reader["is_active"]),
-                                EffectiveFrom = Convert.ToDateTime(reader["effective_from"]),
+                                IsActive = reader["is_active"] != DBNull.Value ? Convert.ToBoolean(reader["is_active"]) : false,
+                                EffectiveFrom = reader["effective_from"] != DBNull.Value ? Convert.ToDateTime(reader["effective_from"]) : default,
                                 EffectiveUntil = reader["effective_until"] != DBNull.Value ? Convert.ToDateTime(reader["effective_until"]) : default,
-                                CreatedAt = Convert.ToDateTime(reader["created_at"])
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default
                             };
                             schedules.Add(schedule);
                         }
@@ -153,10 +153,10 @@ namespace Gym_Manager_System.Repositories
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 DayOfWeek = Convert.ToInt32(reader["day_of_week"]),
                                 StartTime = reader["start_time"] != DBNull.Value ? ((TimeSpan)reader["start_time"]) : TimeSpan.Zero,
-                                IsActive = Convert.ToBoolean(reader["is_active"]),
-                                EffectiveFrom = Convert.ToDateTime(reader["effective_from"]),
+                                IsActive = reader["is_active"] != DBNull.Value ? Convert.ToBoolean(reader["is_active"]) : false,
+                                EffectiveFrom = reader["effective_from"] != DBNull.Value ? Convert.ToDateTime(reader["effective_from"]) : default,
                                 EffectiveUntil = reader["effective_until"] != DBNull.Value ? Convert.ToDateTime(reader["effective_until"]) : default,
-                                CreatedAt = Convert.ToDateTime(reader["created_at"])
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default
                             };
                             schedules.Add(schedule);
                         }
@@ -192,10 +192,10 @@ namespace Gym_Manager_System.Repositories
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 DayOfWeek = Convert.ToInt32(reader["day_of_week"]),
                                 StartTime = reader["start_time"] != DBNull.Value ? ((TimeSpan)reader["start_time"]) : TimeSpan.Zero,
-                                IsActive = Convert.ToBoolean(reader["is_active"]),
-                                EffectiveFrom = Convert.ToDateTime(reader["effective_from"]),
+                                IsActive = reader["is_active"] != DBNull.Value ? Convert.ToBoolean(reader["is_active"]) : false,
+                                EffectiveFrom = reader["effective_from"] != DBNull.Value ? Convert.ToDateTime(reader["effective_from"]) : default,
                                 EffectiveUntil = reader["effective_until"] != DBNull.Value ? Convert.ToDateTime(reader["effective_until"]) : default,
-                                CreatedAt = Convert.ToDateTime(reader["created_at"])
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default
                             };
                             schedules.Add(schedule);
                         }
@@ -231,10 +231,10 @@ namespace Gym_Manager_System.Repositories
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 DayOfWeek = Convert.ToInt32(reader["day_of_week"]),
                                 StartTime = reader["start_time"] != DBNull.Value ? ((TimeSpan)reader["start_time"]) : TimeSpan.Zero,
-                                IsActive = Convert.ToBoolean(reader["is_active"]),
-                                EffectiveFrom = Convert.ToDateTime(reader["effective_from"]),
+                                IsActive = reader["is_active"] != DBNull.Value ? Convert.ToBoolean(reader["is_active"]) : false,
+                                EffectiveFrom = reader["effective_from"] != DBNull.Value ? Convert.ToDateTime(reader["effective_from"]) : default,
                                 EffectiveUntil = reader["effective_until"] != DBNull.Value ? Convert.ToDateTime(reader["effective_until"]) : default,
-                                CreatedAt = Convert.ToDateTime(reader["created_at"])
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default
                             };
                             schedules.Add(schedule);
                         }
@@ -256,28 +256,51 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@ClassTypeID", schedule.ClassTypeId },
-                        { "@InstructorID", schedule.InstructorId },
-                        { "@RoomID", schedule.RoomId },
-                        { "@DayOfWeek", schedule.DayOfWeek },
-                        { "@StartTime", schedule.StartTime },
-                        { "@IsActive", schedule.IsActive },
-                        { "@EffectiveFrom", schedule.EffectiveFrom },
-                        { "@EffectiveUntil", schedule.EffectiveUntil == default ? (object)DBNull.Value : schedule.EffectiveUntil },
-                        { "@CreatedAt", schedule.CreatedAt }
-                    };
+                    // Bind parameters directly
+                    var classTypeIdParam = command.CreateParameter();
+                    classTypeIdParam.ParameterName = "@ClassTypeID";
+                    classTypeIdParam.Value = schedule.ClassTypeId;
+                    command.Parameters.Add(classTypeIdParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var instructorIdParam = command.CreateParameter();
+                    instructorIdParam.ParameterName = "@InstructorID";
+                    instructorIdParam.Value = schedule.InstructorId;
+                    command.Parameters.Add(instructorIdParam);
+
+                    var roomIdParam = command.CreateParameter();
+                    roomIdParam.ParameterName = "@RoomID";
+                    roomIdParam.Value = schedule.RoomId;
+                    command.Parameters.Add(roomIdParam);
+
+                    var dayOfWeekParam = command.CreateParameter();
+                    dayOfWeekParam.ParameterName = "@DayOfWeek";
+                    dayOfWeekParam.Value = schedule.DayOfWeek;
+                    command.Parameters.Add(dayOfWeekParam);
+
+                    var startTimeParam = command.CreateParameter();
+                    startTimeParam.ParameterName = "@StartTime";
+                    startTimeParam.Value = schedule.StartTime;
+                    command.Parameters.Add(startTimeParam);
+
+                    var isActiveParam = command.CreateParameter();
+                    isActiveParam.ParameterName = "@IsActive";
+                    isActiveParam.Value = schedule.IsActive;
+                    command.Parameters.Add(isActiveParam);
+
+                    var effectiveFromParam = command.CreateParameter();
+                    effectiveFromParam.ParameterName = "@EffectiveFrom";
+                    effectiveFromParam.Value = schedule.EffectiveFrom;
+                    command.Parameters.Add(effectiveFromParam);
+
+                    var effectiveUntilParam = command.CreateParameter();
+                    effectiveUntilParam.ParameterName = "@EffectiveUntil";
+                    effectiveUntilParam.Value = schedule.EffectiveUntil == default ? (object)DBNull.Value : schedule.EffectiveUntil;
+                    command.Parameters.Add(effectiveUntilParam);
+
+                    var createdAtParam = command.CreateParameter();
+                    createdAtParam.ParameterName = "@CreatedAt";
+                    createdAtParam.Value = schedule.CreatedAt;
+                    command.Parameters.Add(createdAtParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult<int>(result);
@@ -299,28 +322,51 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@ClassTypeID", schedule.ClassTypeId },
-                        { "@InstructorID", schedule.InstructorId },
-                        { "@RoomID", schedule.RoomId },
-                        { "@DayOfWeek", schedule.DayOfWeek },
-                        { "@StartTime", schedule.StartTime },
-                        { "@IsActive", schedule.IsActive },
-                        { "@EffectiveFrom", schedule.EffectiveFrom },
-                        { "@EffectiveUntil", schedule.EffectiveUntil == default ? (object)DBNull.Value : schedule.EffectiveUntil },
-                        { "@ScheduleID", schedule.ClassScheduleId }
-                    };
+                    // Bind parameters directly
+                    var classTypeIdParam = command.CreateParameter();
+                    classTypeIdParam.ParameterName = "@ClassTypeID";
+                    classTypeIdParam.Value = schedule.ClassTypeId;
+                    command.Parameters.Add(classTypeIdParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var instructorIdParam = command.CreateParameter();
+                    instructorIdParam.ParameterName = "@InstructorID";
+                    instructorIdParam.Value = schedule.InstructorId;
+                    command.Parameters.Add(instructorIdParam);
+
+                    var roomIdParam = command.CreateParameter();
+                    roomIdParam.ParameterName = "@RoomID";
+                    roomIdParam.Value = schedule.RoomId;
+                    command.Parameters.Add(roomIdParam);
+
+                    var dayOfWeekParam = command.CreateParameter();
+                    dayOfWeekParam.ParameterName = "@DayOfWeek";
+                    dayOfWeekParam.Value = schedule.DayOfWeek;
+                    command.Parameters.Add(dayOfWeekParam);
+
+                    var startTimeParam = command.CreateParameter();
+                    startTimeParam.ParameterName = "@StartTime";
+                    startTimeParam.Value = schedule.StartTime;
+                    command.Parameters.Add(startTimeParam);
+
+                    var isActiveParam = command.CreateParameter();
+                    isActiveParam.ParameterName = "@IsActive";
+                    isActiveParam.Value = schedule.IsActive;
+                    command.Parameters.Add(isActiveParam);
+
+                    var effectiveFromParam = command.CreateParameter();
+                    effectiveFromParam.ParameterName = "@EffectiveFrom";
+                    effectiveFromParam.Value = schedule.EffectiveFrom;
+                    command.Parameters.Add(effectiveFromParam);
+
+                    var effectiveUntilParam = command.CreateParameter();
+                    effectiveUntilParam.ParameterName = "@EffectiveUntil";
+                    effectiveUntilParam.Value = schedule.EffectiveUntil == default ? (object)DBNull.Value : schedule.EffectiveUntil;
+                    command.Parameters.Add(effectiveUntilParam);
+
+                    var scheduleIdParam = command.CreateParameter();
+                    scheduleIdParam.ParameterName = "@ScheduleID";
+                    scheduleIdParam.Value = schedule.ClassScheduleId;
+                    command.Parameters.Add(scheduleIdParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult(result > 0); // Return true if at least one row was updated

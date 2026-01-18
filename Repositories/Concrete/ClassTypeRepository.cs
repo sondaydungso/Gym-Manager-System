@@ -42,7 +42,7 @@ namespace Gym_Manager_System.Repositories
                                 ClassTypeDescription = reader["description"]?.ToString(),
                                 DurationInMinutes = Convert.ToInt32(reader["duration_minutes"]),
                                 Capacity = Convert.ToInt32(reader["default_capacity"]),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"])
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default
                             };
                             return Task.FromResult<ClassType?>(classType); //Static method by .NET
                         }
@@ -74,7 +74,7 @@ namespace Gym_Manager_System.Repositories
                                 ClassTypeDescription = reader["description"]?.ToString(),
                                 DurationInMinutes = Convert.ToInt32(reader["duration_minutes"]),
                                 Capacity = Convert.ToInt32(reader["default_capacity"]),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"])
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default
                             };
                             classTypes.Add(classType);
                         }
@@ -96,24 +96,31 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@ClassName", classType.ClassTypeName ?? (object)DBNull.Value },
-                        { "@Description", classType.ClassTypeDescription ?? (object)DBNull.Value },
-                        { "@DurationMinutes", classType.DurationInMinutes },
-                        { "@DefaultCapacity", classType.Capacity },
-                        { "@CreatedAt", classType.CreatedAt }
-                    };
+                    // Bind parameters directly
+                    var classNameParam = command.CreateParameter();
+                    classNameParam.ParameterName = "@ClassName";
+                    classNameParam.Value = classType.ClassTypeName ?? (object)DBNull.Value;
+                    command.Parameters.Add(classNameParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var descriptionParam = command.CreateParameter();
+                    descriptionParam.ParameterName = "@Description";
+                    descriptionParam.Value = classType.ClassTypeDescription ?? (object)DBNull.Value;
+                    command.Parameters.Add(descriptionParam);
+
+                    var durationMinutesParam = command.CreateParameter();
+                    durationMinutesParam.ParameterName = "@DurationMinutes";
+                    durationMinutesParam.Value = classType.DurationInMinutes;
+                    command.Parameters.Add(durationMinutesParam);
+
+                    var defaultCapacityParam = command.CreateParameter();
+                    defaultCapacityParam.ParameterName = "@DefaultCapacity";
+                    defaultCapacityParam.Value = classType.Capacity;
+                    command.Parameters.Add(defaultCapacityParam);
+
+                    var createdAtParam = command.CreateParameter();
+                    createdAtParam.ParameterName = "@CreatedAt";
+                    createdAtParam.Value = classType.CreatedAt;
+                    command.Parameters.Add(createdAtParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult<int>(result);
@@ -134,24 +141,31 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@ClassName", classType.ClassTypeName ?? (object)DBNull.Value },
-                        { "@Description", classType.ClassTypeDescription ?? (object)DBNull.Value },
-                        { "@DurationMinutes", classType.DurationInMinutes },
-                        { "@DefaultCapacity", classType.Capacity },
-                        { "@ClassTypeID", classType.ClassTypeId }
-                    };
+                    // Bind parameters directly
+                    var classNameParam = command.CreateParameter();
+                    classNameParam.ParameterName = "@ClassName";
+                    classNameParam.Value = classType.ClassTypeName ?? (object)DBNull.Value;
+                    command.Parameters.Add(classNameParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var descriptionParam = command.CreateParameter();
+                    descriptionParam.ParameterName = "@Description";
+                    descriptionParam.Value = classType.ClassTypeDescription ?? (object)DBNull.Value;
+                    command.Parameters.Add(descriptionParam);
+
+                    var durationMinutesParam = command.CreateParameter();
+                    durationMinutesParam.ParameterName = "@DurationMinutes";
+                    durationMinutesParam.Value = classType.DurationInMinutes;
+                    command.Parameters.Add(durationMinutesParam);
+
+                    var defaultCapacityParam = command.CreateParameter();
+                    defaultCapacityParam.ParameterName = "@DefaultCapacity";
+                    defaultCapacityParam.Value = classType.Capacity;
+                    command.Parameters.Add(defaultCapacityParam);
+
+                    var classTypeIdParam = command.CreateParameter();
+                    classTypeIdParam.ParameterName = "@ClassTypeID";
+                    classTypeIdParam.Value = classType.ClassTypeId;
+                    command.Parameters.Add(classTypeIdParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult(result > 0); // Return true if at least one row was updated

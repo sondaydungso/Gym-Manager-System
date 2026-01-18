@@ -37,10 +37,11 @@ namespace Gym_Manager_System.Repositories
                         {
                             var booking = new Booking
                             {
-                                BookingId = Convert.ToInt32(reader["booking_id"]),
-                                MemberId = Convert.ToInt32(reader["member_id"]),
-                                InstanceId = Convert.ToInt32(reader["instance_id"]),
-                                BookingDate = Convert.ToDateTime(reader["booking_time"]),
+                                BookingId = reader["booking_id"] != DBNull.Value ? Convert.ToInt32(reader["booking_id"]) : 0,
+                                MemberId = reader["member_id"] != DBNull.Value ? Convert.ToInt32(reader["member_id"]) : 0,
+                                InstanceId = reader["instance_id"] != DBNull.Value ? Convert.ToInt32(reader["instance_id"]) : 0,
+                                BookingDate = reader["booking_time"] != DBNull.Value ? Convert.ToDateTime(reader["booking_time"]) : default,
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
                                 CancelledAt = reader["cancelled_at"] != DBNull.Value ? Convert.ToDateTime(reader["cancelled_at"]) : default,
                                 CancelReason = reader["cancellation_reason"]?.ToString()
                             };
@@ -73,10 +74,11 @@ namespace Gym_Manager_System.Repositories
                         {
                             var booking = new Booking
                             {
-                                BookingId = Convert.ToInt32(reader["booking_id"]),
-                                MemberId = Convert.ToInt32(reader["member_id"]),
-                                InstanceId = Convert.ToInt32(reader["instance_id"]),
-                                BookingDate = Convert.ToDateTime(reader["booking_time"]),
+                                BookingId = reader["booking_id"] != DBNull.Value ? Convert.ToInt32(reader["booking_id"]) : 0,
+                                MemberId = reader["member_id"] != DBNull.Value ? Convert.ToInt32(reader["member_id"]) : 0,
+                                InstanceId = reader["instance_id"] != DBNull.Value ? Convert.ToInt32(reader["instance_id"]) : 0,
+                                BookingDate = reader["booking_time"] != DBNull.Value ? Convert.ToDateTime(reader["booking_time"]) : default,
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
                                 CancelledAt = reader["cancelled_at"] != DBNull.Value ? Convert.ToDateTime(reader["cancelled_at"]) : default,
                                 CancelReason = reader["cancellation_reason"]?.ToString()
                             };
@@ -108,10 +110,11 @@ namespace Gym_Manager_System.Repositories
                         {
                             var booking = new Booking
                             {
-                                BookingId = Convert.ToInt32(reader["booking_id"]),
-                                MemberId = Convert.ToInt32(reader["member_id"]),
-                                InstanceId = Convert.ToInt32(reader["instance_id"]),
-                                BookingDate = Convert.ToDateTime(reader["booking_time"]),
+                                BookingId = reader["booking_id"] != DBNull.Value ? Convert.ToInt32(reader["booking_id"]) : 0,
+                                MemberId = reader["member_id"] != DBNull.Value ? Convert.ToInt32(reader["member_id"]) : 0,
+                                InstanceId = reader["instance_id"] != DBNull.Value ? Convert.ToInt32(reader["instance_id"]) : 0,
+                                BookingDate = reader["booking_time"] != DBNull.Value ? Convert.ToDateTime(reader["booking_time"]) : default,
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
                                 CancelledAt = reader["cancelled_at"] != DBNull.Value ? Convert.ToDateTime(reader["cancelled_at"]) : default,
                                 CancelReason = reader["cancellation_reason"]?.ToString()
                             };
@@ -147,10 +150,11 @@ namespace Gym_Manager_System.Repositories
                         {
                             var booking = new Booking
                             {
-                                BookingId = Convert.ToInt32(reader["booking_id"]),
-                                MemberId = Convert.ToInt32(reader["member_id"]),
-                                InstanceId = Convert.ToInt32(reader["instance_id"]),
-                                BookingDate = Convert.ToDateTime(reader["booking_time"]),
+                                BookingId = reader["booking_id"] != DBNull.Value ? Convert.ToInt32(reader["booking_id"]) : 0,
+                                MemberId = reader["member_id"] != DBNull.Value ? Convert.ToInt32(reader["member_id"]) : 0,
+                                InstanceId = reader["instance_id"] != DBNull.Value ? Convert.ToInt32(reader["instance_id"]) : 0,
+                                BookingDate = reader["booking_time"] != DBNull.Value ? Convert.ToDateTime(reader["booking_time"]) : default,
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
                                 CancelledAt = reader["cancelled_at"] != DBNull.Value ? Convert.ToDateTime(reader["cancelled_at"]) : default,
                                 CancelReason = reader["cancellation_reason"]?.ToString()
                             };
@@ -182,10 +186,11 @@ namespace Gym_Manager_System.Repositories
                         {
                             var booking = new Booking
                             {
-                                BookingId = Convert.ToInt32(reader["booking_id"]),
-                                MemberId = Convert.ToInt32(reader["member_id"]),
-                                InstanceId = Convert.ToInt32(reader["instance_id"]),
-                                BookingDate = Convert.ToDateTime(reader["booking_time"]),
+                                BookingId = reader["booking_id"] != DBNull.Value ? Convert.ToInt32(reader["booking_id"]) : 0,
+                                MemberId = reader["member_id"] != DBNull.Value ? Convert.ToInt32(reader["member_id"]) : 0,
+                                InstanceId = reader["instance_id"] != DBNull.Value ? Convert.ToInt32(reader["instance_id"]) : 0,
+                                BookingDate = reader["booking_time"] != DBNull.Value ? Convert.ToDateTime(reader["booking_time"]) : default,
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
                                 CancelledAt = reader["cancelled_at"] != DBNull.Value ? Convert.ToDateTime(reader["cancelled_at"]) : default,
                                 CancelReason = reader["cancellation_reason"]?.ToString()
                             };
@@ -217,10 +222,11 @@ namespace Gym_Manager_System.Repositories
                         {
                             var booking = new Booking
                             {
-                                BookingId = Convert.ToInt32(reader["booking_id"]),
-                                MemberId = Convert.ToInt32(reader["member_id"]),
-                                InstanceId = Convert.ToInt32(reader["instance_id"]),
-                                BookingDate = Convert.ToDateTime(reader["booking_time"]),
+                                BookingId = reader["booking_id"] != DBNull.Value ? Convert.ToInt32(reader["booking_id"]) : 0,
+                                MemberId = reader["member_id"] != DBNull.Value ? Convert.ToInt32(reader["member_id"]) : 0,
+                                InstanceId = reader["instance_id"] != DBNull.Value ? Convert.ToInt32(reader["instance_id"]) : 0,
+                                BookingDate = reader["booking_time"] != DBNull.Value ? Convert.ToDateTime(reader["booking_time"]) : default,
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
                                 CancelledAt = reader["cancelled_at"] != DBNull.Value ? Convert.ToDateTime(reader["cancelled_at"]) : default,
                                 CancelReason = reader["cancellation_reason"]?.ToString()
                             };
@@ -252,10 +258,11 @@ namespace Gym_Manager_System.Repositories
                         {
                             var booking = new Booking
                             {
-                                BookingId = Convert.ToInt32(reader["booking_id"]),
-                                MemberId = Convert.ToInt32(reader["member_id"]),
-                                InstanceId = Convert.ToInt32(reader["instance_id"]),
-                                BookingDate = Convert.ToDateTime(reader["booking_time"]),
+                                BookingId = reader["booking_id"] != DBNull.Value ? Convert.ToInt32(reader["booking_id"]) : 0,
+                                MemberId = reader["member_id"] != DBNull.Value ? Convert.ToInt32(reader["member_id"]) : 0,
+                                InstanceId = reader["instance_id"] != DBNull.Value ? Convert.ToInt32(reader["instance_id"]) : 0,
+                                BookingDate = reader["booking_time"] != DBNull.Value ? Convert.ToDateTime(reader["booking_time"]) : default,
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
                                 CancelledAt = reader["cancelled_at"] != DBNull.Value ? Convert.ToDateTime(reader["cancelled_at"]) : default,
                                 CancelReason = reader["cancellation_reason"]?.ToString()
                             };
@@ -279,25 +286,36 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@MemberID", booking.MemberId },
-                        { "@InstanceID", booking.InstanceId },
-                        { "@BookingTime", booking.BookingDate },
-                        { "@Status", "confirmed" },
-                        { "@CancelledAt", booking.CancelledAt == default ? (object)DBNull.Value : booking.CancelledAt },
-                        { "@CancellationReason", booking.CancelReason ?? (object)DBNull.Value }
-                    };
+                    // Bind parameters directly
+                    var memberIdParam = command.CreateParameter();
+                    memberIdParam.ParameterName = "@MemberID";
+                    memberIdParam.Value = booking.MemberId;
+                    command.Parameters.Add(memberIdParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var instanceIdParam = command.CreateParameter();
+                    instanceIdParam.ParameterName = "@InstanceID";
+                    instanceIdParam.Value = booking.InstanceId;
+                    command.Parameters.Add(instanceIdParam);
+
+                    var bookingTimeParam = command.CreateParameter();
+                    bookingTimeParam.ParameterName = "@BookingTime";
+                    bookingTimeParam.Value = booking.BookingDate;
+                    command.Parameters.Add(bookingTimeParam);
+
+                    var statusParam = command.CreateParameter();
+                    statusParam.ParameterName = "@Status";
+                    statusParam.Value = "confirmed";
+                    command.Parameters.Add(statusParam);
+
+                    var cancelledAtParam = command.CreateParameter();
+                    cancelledAtParam.ParameterName = "@CancelledAt";
+                    cancelledAtParam.Value = booking.CancelledAt == default ? (object)DBNull.Value : booking.CancelledAt;
+                    command.Parameters.Add(cancelledAtParam);
+
+                    var cancellationReasonParam = command.CreateParameter();
+                    cancellationReasonParam.ParameterName = "@CancellationReason";
+                    cancellationReasonParam.Value = booking.CancelReason ?? (object)DBNull.Value;
+                    command.Parameters.Add(cancellationReasonParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult<int>(result);
@@ -319,26 +337,41 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@MemberID", booking.MemberId },
-                        { "@InstanceID", booking.InstanceId },
-                        { "@BookingTime", booking.BookingDate },
-                        { "@Status", "confirmed" },
-                        { "@CancelledAt", booking.CancelledAt == default ? (object)DBNull.Value : booking.CancelledAt },
-                        { "@CancellationReason", booking.CancelReason ?? (object)DBNull.Value },
-                        { "@BookingID", booking.BookingId }
-                    };
+                    // Bind parameters directly
+                    var memberIdParam = command.CreateParameter();
+                    memberIdParam.ParameterName = "@MemberID";
+                    memberIdParam.Value = booking.MemberId;
+                    command.Parameters.Add(memberIdParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var instanceIdParam = command.CreateParameter();
+                    instanceIdParam.ParameterName = "@InstanceID";
+                    instanceIdParam.Value = booking.InstanceId;
+                    command.Parameters.Add(instanceIdParam);
+
+                    var bookingTimeParam = command.CreateParameter();
+                    bookingTimeParam.ParameterName = "@BookingTime";
+                    bookingTimeParam.Value = booking.BookingDate;
+                    command.Parameters.Add(bookingTimeParam);
+
+                    var statusParam = command.CreateParameter();
+                    statusParam.ParameterName = "@Status";
+                    statusParam.Value = "confirmed";
+                    command.Parameters.Add(statusParam);
+
+                    var cancelledAtParam = command.CreateParameter();
+                    cancelledAtParam.ParameterName = "@CancelledAt";
+                    cancelledAtParam.Value = booking.CancelledAt == default ? (object)DBNull.Value : booking.CancelledAt;
+                    command.Parameters.Add(cancelledAtParam);
+
+                    var cancellationReasonParam = command.CreateParameter();
+                    cancellationReasonParam.ParameterName = "@CancellationReason";
+                    cancellationReasonParam.Value = booking.CancelReason ?? (object)DBNull.Value;
+                    command.Parameters.Add(cancellationReasonParam);
+
+                    var bookingIdParam = command.CreateParameter();
+                    bookingIdParam.ParameterName = "@BookingID";
+                    bookingIdParam.Value = booking.BookingId;
+                    command.Parameters.Add(bookingIdParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult(result > 0); // Return true if at least one row was updated
@@ -358,22 +391,21 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@CancelledAt", DateTime.Now },
-                        { "@CancellationReason", reason ?? (object)DBNull.Value },
-                        { "@BookingID", bookingId }
-                    };
+                    // Bind parameters directly
+                    var cancelledAtParam = command.CreateParameter();
+                    cancelledAtParam.ParameterName = "@CancelledAt";
+                    cancelledAtParam.Value = DateTime.Now;
+                    command.Parameters.Add(cancelledAtParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var cancellationReasonParam = command.CreateParameter();
+                    cancellationReasonParam.ParameterName = "@CancellationReason";
+                    cancellationReasonParam.Value = reason ?? (object)DBNull.Value;
+                    command.Parameters.Add(cancellationReasonParam);
+
+                    var bookingIdParam = command.CreateParameter();
+                    bookingIdParam.ParameterName = "@BookingID";
+                    bookingIdParam.Value = bookingId;
+                    command.Parameters.Add(bookingIdParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult(result > 0); // Return true if at least one row was updated

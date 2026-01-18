@@ -13,15 +13,16 @@ namespace Gym_Manager_System.Model
         private int _instanceId;
         private DateTime _bookingDate;
         private DateTime _cancelledAt;
-        private string? _cancelReason;
-        public enum Status { Booked, Cancelled, Attended, NoShow }
+        private string _cancelReason = string.Empty;
+        private string _status = string.Empty;
+        public string Status { get => _status; set => _status = value; }
 
         public int BookingId { get => _bookingId; set => _bookingId = value; }
         public int MemberId { get => _memberId; set => _memberId = value; }
         public int InstanceId { get => _instanceId; set => _instanceId = value; }
         public DateTime BookingDate { get => _bookingDate; set => _bookingDate = value; }
         public DateTime CancelledAt { get => _cancelledAt; set => _cancelledAt = value; }
-        public string? CancelReason { get => _cancelReason; set => _cancelReason = value; }
+        public string CancelReason { get => _cancelReason; set => _cancelReason = value; }
 
     }
 }

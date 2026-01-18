@@ -40,10 +40,11 @@ namespace Gym_Manager_System.Repositories
                                 SubscriptionId = Convert.ToInt32(reader["subscription_id"]),
                                 MemberId = Convert.ToInt32(reader["member_id"]),
                                 PlanId = Convert.ToInt32(reader["plan_id"]),
-                                StartDate = Convert.ToDateTime(reader["start_date"]),
-                                EndDate = Convert.ToDateTime(reader["end_date"]),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"]),
-                                UpdatedAt = Convert.ToDateTime(reader["updated_at"])
+                                StartDate = reader["start_date"] != DBNull.Value ? Convert.ToDateTime(reader["start_date"]) : default,
+                                EndDate = reader["end_date"] != DBNull.Value ? Convert.ToDateTime(reader["end_date"]) : default,
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default,
+                                UpdatedAt = reader["updated_at"] != DBNull.Value ? Convert.ToDateTime(reader["updated_at"]) : default
                             };
                             return Task.FromResult<Subscription?>(subscription); //Static method by .NET
                         }
@@ -77,10 +78,11 @@ namespace Gym_Manager_System.Repositories
                                 SubscriptionId = Convert.ToInt32(reader["subscription_id"]),
                                 MemberId = Convert.ToInt32(reader["member_id"]),
                                 PlanId = Convert.ToInt32(reader["plan_id"]),
-                                StartDate = Convert.ToDateTime(reader["start_date"]),
-                                EndDate = Convert.ToDateTime(reader["end_date"]),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"]),
-                                UpdatedAt = Convert.ToDateTime(reader["updated_at"])
+                                StartDate = reader["start_date"] != DBNull.Value ? Convert.ToDateTime(reader["start_date"]) : default,
+                                EndDate = reader["end_date"] != DBNull.Value ? Convert.ToDateTime(reader["end_date"]) : default,
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default,
+                                UpdatedAt = reader["updated_at"] != DBNull.Value ? Convert.ToDateTime(reader["updated_at"]) : default
                             };
                             subscriptions.Add(subscription);
                         }
@@ -113,10 +115,11 @@ namespace Gym_Manager_System.Repositories
                                 SubscriptionId = Convert.ToInt32(reader["subscription_id"]),
                                 MemberId = Convert.ToInt32(reader["member_id"]),
                                 PlanId = Convert.ToInt32(reader["plan_id"]),
-                                StartDate = Convert.ToDateTime(reader["start_date"]),
-                                EndDate = Convert.ToDateTime(reader["end_date"]),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"]),
-                                UpdatedAt = Convert.ToDateTime(reader["updated_at"])
+                                StartDate = reader["start_date"] != DBNull.Value ? Convert.ToDateTime(reader["start_date"]) : default,
+                                EndDate = reader["end_date"] != DBNull.Value ? Convert.ToDateTime(reader["end_date"]) : default,
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default,
+                                UpdatedAt = reader["updated_at"] != DBNull.Value ? Convert.ToDateTime(reader["updated_at"]) : default
                             };
                             return Task.FromResult<Subscription?>(subscription); //Static method by .NET
                         }
@@ -149,10 +152,11 @@ namespace Gym_Manager_System.Repositories
                                 SubscriptionId = Convert.ToInt32(reader["subscription_id"]),
                                 MemberId = Convert.ToInt32(reader["member_id"]),
                                 PlanId = Convert.ToInt32(reader["plan_id"]),
-                                StartDate = Convert.ToDateTime(reader["start_date"]),
-                                EndDate = Convert.ToDateTime(reader["end_date"]),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"]),
-                                UpdatedAt = Convert.ToDateTime(reader["updated_at"])
+                                StartDate = reader["start_date"] != DBNull.Value ? Convert.ToDateTime(reader["start_date"]) : default,
+                                EndDate = reader["end_date"] != DBNull.Value ? Convert.ToDateTime(reader["end_date"]) : default,
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default,
+                                UpdatedAt = reader["updated_at"] != DBNull.Value ? Convert.ToDateTime(reader["updated_at"]) : default
                             };
                             subscriptions.Add(subscription);
                         }
@@ -181,10 +185,11 @@ namespace Gym_Manager_System.Repositories
                                 SubscriptionId = Convert.ToInt32(reader["subscription_id"]),
                                 MemberId = Convert.ToInt32(reader["member_id"]),
                                 PlanId = Convert.ToInt32(reader["plan_id"]),
-                                StartDate = Convert.ToDateTime(reader["start_date"]),
-                                EndDate = Convert.ToDateTime(reader["end_date"]),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"]),
-                                UpdatedAt = Convert.ToDateTime(reader["updated_at"])
+                                StartDate = reader["start_date"] != DBNull.Value ? Convert.ToDateTime(reader["start_date"]) : default,
+                                EndDate = reader["end_date"] != DBNull.Value ? Convert.ToDateTime(reader["end_date"]) : default,
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default,
+                                UpdatedAt = reader["updated_at"] != DBNull.Value ? Convert.ToDateTime(reader["updated_at"]) : default
                             };
                             subscriptions.Add(subscription);
                         }
@@ -206,27 +211,46 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@MemberID", subscription.MemberId },
-                        { "@PlanID", subscription.PlanId },
-                        { "@StartDate", subscription.StartDate },
-                        { "@EndDate", subscription.EndDate },
-                        { "@Status", "active" },
-                        { "@PaymentStatus", "pending" },
-                        { "@CreatedAt", subscription.CreatedAt },
-                        { "@UpdatedAt", subscription.UpdatedAt }
-                    };
+                    // Bind parameters directly
+                    var memberIdParam = command.CreateParameter();
+                    memberIdParam.ParameterName = "@MemberID";
+                    memberIdParam.Value = subscription.MemberId;
+                    command.Parameters.Add(memberIdParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var planIdParam = command.CreateParameter();
+                    planIdParam.ParameterName = "@PlanID";
+                    planIdParam.Value = subscription.PlanId;
+                    command.Parameters.Add(planIdParam);
+
+                    var startDateParam = command.CreateParameter();
+                    startDateParam.ParameterName = "@StartDate";
+                    startDateParam.Value = subscription.StartDate;
+                    command.Parameters.Add(startDateParam);
+
+                    var endDateParam = command.CreateParameter();
+                    endDateParam.ParameterName = "@EndDate";
+                    endDateParam.Value = subscription.EndDate;
+                    command.Parameters.Add(endDateParam);
+
+                    var statusParam = command.CreateParameter();
+                    statusParam.ParameterName = "@Status";
+                    statusParam.Value = "active";
+                    command.Parameters.Add(statusParam);
+
+                    var paymentStatusParam = command.CreateParameter();
+                    paymentStatusParam.ParameterName = "@PaymentStatus";
+                    paymentStatusParam.Value = "pending";
+                    command.Parameters.Add(paymentStatusParam);
+
+                    var createdAtParam = command.CreateParameter();
+                    createdAtParam.ParameterName = "@CreatedAt";
+                    createdAtParam.Value = subscription.CreatedAt;
+                    command.Parameters.Add(createdAtParam);
+
+                    var updatedAtParam = command.CreateParameter();
+                    updatedAtParam.ParameterName = "@UpdatedAt";
+                    updatedAtParam.Value = subscription.UpdatedAt;
+                    command.Parameters.Add(updatedAtParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult<int>(result);
@@ -247,25 +271,36 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@MemberID", subscription.MemberId },
-                        { "@PlanID", subscription.PlanId },
-                        { "@StartDate", subscription.StartDate },
-                        { "@EndDate", subscription.EndDate },
-                        { "@UpdatedAt", subscription.UpdatedAt },
-                        { "@SubscriptionID", subscription.SubscriptionId }
-                    };
+                    // Bind parameters directly
+                    var memberIdParam = command.CreateParameter();
+                    memberIdParam.ParameterName = "@MemberID";
+                    memberIdParam.Value = subscription.MemberId;
+                    command.Parameters.Add(memberIdParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var planIdParam = command.CreateParameter();
+                    planIdParam.ParameterName = "@PlanID";
+                    planIdParam.Value = subscription.PlanId;
+                    command.Parameters.Add(planIdParam);
+
+                    var startDateParam = command.CreateParameter();
+                    startDateParam.ParameterName = "@StartDate";
+                    startDateParam.Value = subscription.StartDate;
+                    command.Parameters.Add(startDateParam);
+
+                    var endDateParam = command.CreateParameter();
+                    endDateParam.ParameterName = "@EndDate";
+                    endDateParam.Value = subscription.EndDate;
+                    command.Parameters.Add(endDateParam);
+
+                    var updatedAtParam = command.CreateParameter();
+                    updatedAtParam.ParameterName = "@UpdatedAt";
+                    updatedAtParam.Value = subscription.UpdatedAt;
+                    command.Parameters.Add(updatedAtParam);
+
+                    var subscriptionIdParam = command.CreateParameter();
+                    subscriptionIdParam.ParameterName = "@SubscriptionID";
+                    subscriptionIdParam.Value = subscription.SubscriptionId;
+                    command.Parameters.Add(subscriptionIdParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult(result > 0); // Return true if at least one row was updated

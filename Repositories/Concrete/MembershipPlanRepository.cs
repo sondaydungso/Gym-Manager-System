@@ -40,10 +40,10 @@ namespace Gym_Manager_System.Repositories
                                 PlanId = Convert.ToInt32(reader["plan_id"]),
                                 PlanName = reader["plan_name"]?.ToString(),
                                 PlanDurationInMonths = Convert.ToInt32(reader["duration_months"]),
-                                PlanPrice = Convert.ToDecimal(reader["price"]),
+                                PlanPrice = reader["price"] != DBNull.Value ? Convert.ToDecimal(reader["price"]) : 0,
                                 MaxClassPerMonth = reader["max_classes_per_month"] != DBNull.Value ? Convert.ToInt32(reader["max_classes_per_month"]) : 0,
                                 PlanDescription = reader["description"]?.ToString(),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"])
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default
                             };
                             return Task.FromResult<MembershipPlan?>(plan); //Static method by .NET
                         }
@@ -73,10 +73,10 @@ namespace Gym_Manager_System.Repositories
                                 PlanId = Convert.ToInt32(reader["plan_id"]),
                                 PlanName = reader["plan_name"]?.ToString(),
                                 PlanDurationInMonths = Convert.ToInt32(reader["duration_months"]),
-                                PlanPrice = Convert.ToDecimal(reader["price"]),
+                                PlanPrice = reader["price"] != DBNull.Value ? Convert.ToDecimal(reader["price"]) : 0,
                                 MaxClassPerMonth = reader["max_classes_per_month"] != DBNull.Value ? Convert.ToInt32(reader["max_classes_per_month"]) : 0,
                                 PlanDescription = reader["description"]?.ToString(),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"])
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default
                             };
                             plans.Add(plan);
                         }
@@ -105,10 +105,10 @@ namespace Gym_Manager_System.Repositories
                                 PlanId = Convert.ToInt32(reader["plan_id"]),
                                 PlanName = reader["plan_name"]?.ToString(),
                                 PlanDurationInMonths = Convert.ToInt32(reader["duration_months"]),
-                                PlanPrice = Convert.ToDecimal(reader["price"]),
+                                PlanPrice = reader["price"] != DBNull.Value ? Convert.ToDecimal(reader["price"]) : 0,
                                 MaxClassPerMonth = reader["max_classes_per_month"] != DBNull.Value ? Convert.ToInt32(reader["max_classes_per_month"]) : 0,
                                 PlanDescription = reader["description"]?.ToString(),
-                                CreatedAt = Convert.ToDateTime(reader["created_at"])
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default
                             };
                             plans.Add(plan);
                         }
@@ -130,26 +130,41 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@PlanName", plan.PlanName ?? (object)DBNull.Value },
-                        { "@DurationMonths", plan.PlanDurationInMonths },
-                        { "@Price", plan.PlanPrice },
-                        { "@MaxClassesPerMonth", plan.MaxClassPerMonth },
-                        { "@Description", plan.PlanDescription ?? (object)DBNull.Value },
-                        { "@IsActive", 1 },
-                        { "@CreatedAt", plan.CreatedAt }
-                    };
+                    // Bind parameters directly
+                    var planNameParam = command.CreateParameter();
+                    planNameParam.ParameterName = "@PlanName";
+                    planNameParam.Value = plan.PlanName ?? (object)DBNull.Value;
+                    command.Parameters.Add(planNameParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var durationMonthsParam = command.CreateParameter();
+                    durationMonthsParam.ParameterName = "@DurationMonths";
+                    durationMonthsParam.Value = plan.PlanDurationInMonths;
+                    command.Parameters.Add(durationMonthsParam);
+
+                    var priceParam = command.CreateParameter();
+                    priceParam.ParameterName = "@Price";
+                    priceParam.Value = plan.PlanPrice;
+                    command.Parameters.Add(priceParam);
+
+                    var maxClassesPerMonthParam = command.CreateParameter();
+                    maxClassesPerMonthParam.ParameterName = "@MaxClassesPerMonth";
+                    maxClassesPerMonthParam.Value = plan.MaxClassPerMonth;
+                    command.Parameters.Add(maxClassesPerMonthParam);
+
+                    var descriptionParam = command.CreateParameter();
+                    descriptionParam.ParameterName = "@Description";
+                    descriptionParam.Value = plan.PlanDescription ?? (object)DBNull.Value;
+                    command.Parameters.Add(descriptionParam);
+
+                    var isActiveParam = command.CreateParameter();
+                    isActiveParam.ParameterName = "@IsActive";
+                    isActiveParam.Value = 1;
+                    command.Parameters.Add(isActiveParam);
+
+                    var createdAtParam = command.CreateParameter();
+                    createdAtParam.ParameterName = "@CreatedAt";
+                    createdAtParam.Value = plan.CreatedAt;
+                    command.Parameters.Add(createdAtParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult<int>(result);
@@ -170,25 +185,36 @@ namespace Gym_Manager_System.Repositories
                 {
                     command.CommandText = query;
 
-                    // Use a dictionary to map parameter names to values
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@PlanName", plan.PlanName ?? (object)DBNull.Value },
-                        { "@DurationMonths", plan.PlanDurationInMonths },
-                        { "@Price", plan.PlanPrice },
-                        { "@MaxClassesPerMonth", plan.MaxClassPerMonth },
-                        { "@Description", plan.PlanDescription ?? (object)DBNull.Value },
-                        { "@PlanID", plan.PlanId }
-                    };
+                    // Bind parameters directly
+                    var planNameParam = command.CreateParameter();
+                    planNameParam.ParameterName = "@PlanName";
+                    planNameParam.Value = plan.PlanName ?? (object)DBNull.Value;
+                    command.Parameters.Add(planNameParam);
 
-                    // Add parameters to the command
-                    foreach (var param in parameters)
-                    {
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = param.Key;
-                        parameter.Value = param.Value;
-                        command.Parameters.Add(parameter);
-                    }
+                    var durationMonthsParam = command.CreateParameter();
+                    durationMonthsParam.ParameterName = "@DurationMonths";
+                    durationMonthsParam.Value = plan.PlanDurationInMonths;
+                    command.Parameters.Add(durationMonthsParam);
+
+                    var priceParam = command.CreateParameter();
+                    priceParam.ParameterName = "@Price";
+                    priceParam.Value = plan.PlanPrice;
+                    command.Parameters.Add(priceParam);
+
+                    var maxClassesPerMonthParam = command.CreateParameter();
+                    maxClassesPerMonthParam.ParameterName = "@MaxClassesPerMonth";
+                    maxClassesPerMonthParam.Value = plan.MaxClassPerMonth;
+                    command.Parameters.Add(maxClassesPerMonthParam);
+
+                    var descriptionParam = command.CreateParameter();
+                    descriptionParam.ParameterName = "@Description";
+                    descriptionParam.Value = plan.PlanDescription ?? (object)DBNull.Value;
+                    command.Parameters.Add(descriptionParam);
+
+                    var planIdParam = command.CreateParameter();
+                    planIdParam.ParameterName = "@PlanID";
+                    planIdParam.Value = plan.PlanId;
+                    command.Parameters.Add(planIdParam);
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult(result > 0); // Return true if at least one row was updated
