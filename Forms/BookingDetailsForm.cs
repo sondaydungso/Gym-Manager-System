@@ -14,11 +14,6 @@ namespace Gym_Manager_System.Forms
         private readonly IClassService _classService;
         private readonly Booking? _booking;
 
-        private ComboBox memberComboBox;
-        private ComboBox classComboBox;
-        private Button saveButton;
-        private Button cancelButton;
-
         public BookingDetailsForm(IBookingService bookingService, IMemberService memberService, IClassService classService, Booking? booking)
         {
             _bookingService = bookingService;
@@ -26,55 +21,11 @@ namespace Gym_Manager_System.Forms
             _classService = classService;
             _booking = booking;
             InitializeComponent();
+            if (_booking != null)
+            {
+                this.Text = "Edit Booking";
+            }
             LoadData();
-        }
-
-        private void InitializeComponent()
-        {
-            this.Text = _booking == null ? "New Booking" : "Edit Booking";
-            this.Size = new System.Drawing.Size(500, 200);
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-
-            int yPos = 20;
-            int labelWidth = 150;
-            int comboBoxWidth = 300;
-
-            // Member
-            var memberLabel = new Label { Text = "Member:", Location = new System.Drawing.Point(20, yPos), Width = labelWidth };
-            memberComboBox = new ComboBox { Location = new System.Drawing.Point(180, yPos), Width = comboBoxWidth, DropDownStyle = ComboBoxStyle.DropDownList };
-            this.Controls.AddRange(new Control[] { memberLabel, memberComboBox });
-            yPos += 40;
-
-            // Class Instance
-            var classLabel = new Label { Text = "Class:", Location = new System.Drawing.Point(20, yPos), Width = labelWidth };
-            classComboBox = new ComboBox { Location = new System.Drawing.Point(180, yPos), Width = comboBoxWidth, DropDownStyle = ComboBoxStyle.DropDownList };
-            this.Controls.AddRange(new Control[] { classLabel, classComboBox });
-            yPos += 60;
-
-            // Buttons
-            saveButton = new Button
-            {
-                Text = "Save",
-                Location = new System.Drawing.Point(180, yPos),
-                Width = 100,
-                DialogResult = DialogResult.OK
-            };
-            saveButton.Click += SaveButton_Click;
-
-            cancelButton = new Button
-            {
-                Text = "Cancel",
-                Location = new System.Drawing.Point(290, yPos),
-                Width = 100,
-                DialogResult = DialogResult.Cancel
-            };
-
-            this.Controls.AddRange(new Control[] { saveButton, cancelButton });
-            this.AcceptButton = saveButton;
-            this.CancelButton = cancelButton;
         }
 
         private async void LoadData()
@@ -143,4 +94,5 @@ namespace Gym_Manager_System.Forms
         }
     }
 }
+
 

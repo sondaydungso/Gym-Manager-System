@@ -10,81 +10,12 @@ namespace Gym_Manager_System.Forms
     public partial class MembersForm : Form
     {
         private readonly IMemberService _memberService;
-        private DataGridView membersGridView;
-        private Button addButton;
-        private Button editButton;
-        private Button deleteButton;
-        private Button refreshButton;
 
         public MembersForm(IMemberService memberService)
         {
             _memberService = memberService;
             InitializeComponent();
             LoadMembers();
-        }
-
-        private void InitializeComponent()
-        {
-            this.Text = "Members Management";
-            this.Size = new System.Drawing.Size(1000, 600);
-            this.StartPosition = FormStartPosition.CenterParent;
-
-            // Create DataGridView
-            membersGridView = new DataGridView
-            {
-                Dock = DockStyle.Fill,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-                ReadOnly = true,
-                AllowUserToAddRows = false
-            };
-            membersGridView.SelectionChanged += MembersGridView_SelectionChanged;
-
-            // Create buttons panel
-            var buttonPanel = new Panel
-            {
-                Dock = DockStyle.Bottom,
-                Height = 50
-            };
-
-            addButton = new Button
-            {
-                Text = "Add Member",
-                Location = new System.Drawing.Point(10, 10),
-                Size = new System.Drawing.Size(100, 30)
-            };
-            addButton.Click += AddButton_Click;
-
-            editButton = new Button
-            {
-                Text = "Edit Member",
-                Location = new System.Drawing.Point(120, 10),
-                Size = new System.Drawing.Size(100, 30),
-                Enabled = false
-            };
-            editButton.Click += EditButton_Click;
-
-            deleteButton = new Button
-            {
-                Text = "Delete Member",
-                Location = new System.Drawing.Point(230, 10),
-                Size = new System.Drawing.Size(100, 30),
-                Enabled = false
-            };
-            deleteButton.Click += DeleteButton_Click;
-
-            refreshButton = new Button
-            {
-                Text = "Refresh",
-                Location = new System.Drawing.Point(340, 10),
-                Size = new System.Drawing.Size(100, 30)
-            };
-            refreshButton.Click += (s, e) => LoadMembers();
-
-            buttonPanel.Controls.AddRange(new Control[] { addButton, editButton, deleteButton, refreshButton });
-
-            this.Controls.Add(membersGridView);
-            this.Controls.Add(buttonPanel);
         }
 
         private async void LoadMembers()
@@ -179,6 +110,11 @@ namespace Gym_Manager_System.Forms
                     }
                 }
             }
+        }
+
+        private void RefreshButton_Click(object sender, EventArgs e)
+        {
+            LoadMembers();
         }
     }
 }

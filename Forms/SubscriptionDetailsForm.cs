@@ -13,74 +13,18 @@ namespace Gym_Manager_System.Forms
         private readonly IMemberService _memberService;
         private readonly Subscription? _subscription;
 
-        private ComboBox memberComboBox;
-        private ComboBox planComboBox;
-        private DateTimePicker startDatePicker;
-        private Button saveButton;
-        private Button cancelButton;
-
         public SubscriptionDetailsForm(ISubscriptionService subscriptionService, IMemberService memberService, Subscription? subscription)
         {
             _subscriptionService = subscriptionService;
             _memberService = memberService;
             _subscription = subscription;
             InitializeComponent();
-            LoadData();
-        }
-
-        private void InitializeComponent()
-        {
-            this.Text = _subscription == null ? "New Subscription" : "Edit Subscription";
-            this.Size = new System.Drawing.Size(500, 250);
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-
-            int yPos = 20;
-            int labelWidth = 150;
-            int controlWidth = 300;
-
-            // Member
-            var memberLabel = new Label { Text = "Member:", Location = new System.Drawing.Point(20, yPos), Width = labelWidth };
-            memberComboBox = new ComboBox { Location = new System.Drawing.Point(180, yPos), Width = controlWidth, DropDownStyle = ComboBoxStyle.DropDownList };
-            this.Controls.AddRange(new Control[] { memberLabel, memberComboBox });
-            yPos += 40;
-
-            // Plan (would need to load from MembershipPlanRepository)
-            var planLabel = new Label { Text = "Plan:", Location = new System.Drawing.Point(20, yPos), Width = labelWidth };
-            planComboBox = new ComboBox { Location = new System.Drawing.Point(180, yPos), Width = controlWidth, DropDownStyle = ComboBoxStyle.DropDownList };
-            this.Controls.AddRange(new Control[] { planLabel, planComboBox });
-            yPos += 40;
-
-            // Start Date
-            var startDateLabel = new Label { Text = "Start Date:", Location = new System.Drawing.Point(20, yPos), Width = labelWidth };
-            startDatePicker = new DateTimePicker { Location = new System.Drawing.Point(180, yPos), Width = controlWidth };
+            if (_subscription != null)
+            {
+                this.Text = "Edit Subscription";
+            }
             startDatePicker.Value = DateTime.Now;
-            this.Controls.AddRange(new Control[] { startDateLabel, startDatePicker });
-            yPos += 60;
-
-            // Buttons
-            saveButton = new Button
-            {
-                Text = "Save",
-                Location = new System.Drawing.Point(180, yPos),
-                Width = 100,
-                DialogResult = DialogResult.OK
-            };
-            saveButton.Click += SaveButton_Click;
-
-            cancelButton = new Button
-            {
-                Text = "Cancel",
-                Location = new System.Drawing.Point(290, yPos),
-                Width = 100,
-                DialogResult = DialogResult.Cancel
-            };
-
-            this.Controls.AddRange(new Control[] { saveButton, cancelButton });
-            this.AcceptButton = saveButton;
-            this.CancelButton = cancelButton;
+            LoadData();
         }
 
         private async void LoadData()
@@ -142,4 +86,5 @@ namespace Gym_Manager_System.Forms
         }
     }
 }
+
 

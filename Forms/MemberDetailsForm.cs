@@ -9,120 +9,23 @@ namespace Gym_Manager_System.Forms
     {
         private readonly IMemberService _memberService;
         private readonly Member? _member;
-        
-        private TextBox firstNameTextBox;
-        private TextBox lastNameTextBox;
-        private TextBox emailTextBox;
-        private TextBox phoneTextBox;
-        private DateTimePicker dateOfBirthPicker;
-        private TextBox emergencyContactNameTextBox;
-        private TextBox emergencyContactPhoneTextBox;
-        private TextBox medicalNotesTextBox;
-        private ComboBox statusComboBox;
-        private Button saveButton;
-        private Button cancelButton;
 
         public MemberDetailsForm(IMemberService memberService, Member? member)
         {
             _memberService = memberService;
             _member = member;
             InitializeComponent();
-            LoadMemberData();
-        }
-
-        private void InitializeComponent()
-        {
-            this.Text = _member == null ? "Add New Member" : "Edit Member";
-            this.Size = new System.Drawing.Size(500, 500);
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-
-            int yPos = 20;
-            int labelWidth = 150;
-            int textBoxWidth = 300;
-            int spacing = 30;
-
-            // First Name
-            var firstNameLabel = new Label { Text = "First Name:", Location = new System.Drawing.Point(20, yPos), Width = labelWidth };
-            firstNameTextBox = new TextBox { Location = new System.Drawing.Point(180, yPos), Width = textBoxWidth };
-            this.Controls.AddRange(new Control[] { firstNameLabel, firstNameTextBox });
-            yPos += spacing;
-
-            // Last Name
-            var lastNameLabel = new Label { Text = "Last Name:", Location = new System.Drawing.Point(20, yPos), Width = labelWidth };
-            lastNameTextBox = new TextBox { Location = new System.Drawing.Point(180, yPos), Width = textBoxWidth };
-            this.Controls.AddRange(new Control[] { lastNameLabel, lastNameTextBox });
-            yPos += spacing;
-
-            // Email
-            var emailLabel = new Label { Text = "Email:", Location = new System.Drawing.Point(20, yPos), Width = labelWidth };
-            emailTextBox = new TextBox { Location = new System.Drawing.Point(180, yPos), Width = textBoxWidth };
-            this.Controls.AddRange(new Control[] { emailLabel, emailTextBox });
-            yPos += spacing;
-
-            // Phone
-            var phoneLabel = new Label { Text = "Phone Number:", Location = new System.Drawing.Point(20, yPos), Width = labelWidth };
-            phoneTextBox = new TextBox { Location = new System.Drawing.Point(180, yPos), Width = textBoxWidth };
-            this.Controls.AddRange(new Control[] { phoneLabel, phoneTextBox });
-            yPos += spacing;
-
-            // Date of Birth
-            var dobLabel = new Label { Text = "Date of Birth:", Location = new System.Drawing.Point(20, yPos), Width = labelWidth };
-            dateOfBirthPicker = new DateTimePicker { Location = new System.Drawing.Point(180, yPos), Width = textBoxWidth };
-            this.Controls.AddRange(new Control[] { dobLabel, dateOfBirthPicker });
-            yPos += spacing;
-
-            // Emergency Contact Name
-            var emergencyNameLabel = new Label { Text = "Emergency Contact:", Location = new System.Drawing.Point(20, yPos), Width = labelWidth };
-            emergencyContactNameTextBox = new TextBox { Location = new System.Drawing.Point(180, yPos), Width = textBoxWidth };
-            this.Controls.AddRange(new Control[] { emergencyNameLabel, emergencyContactNameTextBox });
-            yPos += spacing;
-
-            // Emergency Contact Phone
-            var emergencyPhoneLabel = new Label { Text = "Emergency Phone:", Location = new System.Drawing.Point(20, yPos), Width = labelWidth };
-            emergencyContactPhoneTextBox = new TextBox { Location = new System.Drawing.Point(180, yPos), Width = textBoxWidth };
-            this.Controls.AddRange(new Control[] { emergencyPhoneLabel, emergencyContactPhoneTextBox });
-            yPos += spacing;
-
-            // Medical Notes
-            var medicalNotesLabel = new Label { Text = "Medical Notes:", Location = new System.Drawing.Point(20, yPos), Width = labelWidth };
-            medicalNotesTextBox = new TextBox { Location = new System.Drawing.Point(180, yPos), Width = textBoxWidth, Height = 60, Multiline = true };
-            this.Controls.AddRange(new Control[] { medicalNotesLabel, medicalNotesTextBox });
-            yPos += 80;
-
-            // Status (only for edit mode)
             if (_member != null)
             {
-                var statusLabel = new Label { Text = "Status:", Location = new System.Drawing.Point(20, yPos), Width = labelWidth };
-                statusComboBox = new ComboBox { Location = new System.Drawing.Point(180, yPos), Width = textBoxWidth, DropDownStyle = ComboBoxStyle.DropDownList };
+                this.Text = "Edit Member";
                 statusComboBox.Items.AddRange(new[] { "active", "inactive", "suspended" });
-                this.Controls.AddRange(new Control[] { statusLabel, statusComboBox });
-                yPos += spacing;
             }
-
-            // Buttons
-            saveButton = new Button
+            else
             {
-                Text = "Save",
-                Location = new System.Drawing.Point(180, yPos + 20),
-                Width = 100,
-                DialogResult = DialogResult.OK
-            };
-            saveButton.Click += SaveButton_Click;
-
-            cancelButton = new Button
-            {
-                Text = "Cancel",
-                Location = new System.Drawing.Point(290, yPos + 20),
-                Width = 100,
-                DialogResult = DialogResult.Cancel
-            };
-
-            this.Controls.AddRange(new Control[] { saveButton, cancelButton });
-            this.AcceptButton = saveButton;
-            this.CancelButton = cancelButton;
+                statusLabel.Visible = false;
+                statusComboBox.Visible = false;
+            }
+            LoadMemberData();
         }
 
         private void LoadMemberData()
@@ -200,4 +103,5 @@ namespace Gym_Manager_System.Forms
         }
     }
 }
+
 

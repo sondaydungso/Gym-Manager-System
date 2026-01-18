@@ -19,7 +19,7 @@ namespace Gym_Manager_System.Forms
         private System.Windows.Forms.ToolStripMenuItem viewSubscriptionsMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
-        private System.Windows.Forms.Label welcomeLabel;
+        
 
         /// <summary>
         /// Clean up any resources being used.
@@ -42,159 +42,139 @@ namespace Gym_Manager_System.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.membersMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewMembersMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bookingsMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewBookingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.classesMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewClassesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.subscriptionsMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewSubscriptionsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.welcomeLabel = new System.Windows.Forms.Label();
-            this.menuStrip.SuspendLayout();
-            this.statusStrip.SuspendLayout();
-            this.SuspendLayout();
+            menuStrip = new MenuStrip();
+            fileMenu = new ToolStripMenuItem();
+            exitMenuItem = new ToolStripMenuItem();
+            membersMenu = new ToolStripMenuItem();
+            viewMembersMenuItem = new ToolStripMenuItem();
+            bookingsMenu = new ToolStripMenuItem();
+            viewBookingsMenuItem = new ToolStripMenuItem();
+            classesMenu = new ToolStripMenuItem();
+            viewClassesMenuItem = new ToolStripMenuItem();
+            subscriptionsMenu = new ToolStripMenuItem();
+            viewSubscriptionsMenuItem = new ToolStripMenuItem();
+            statusStrip = new StatusStrip();
+            statusLabel = new ToolStripStatusLabel();
+            
+            menuStrip.SuspendLayout();
+            statusStrip.SuspendLayout();
+            SuspendLayout();
             // 
             // menuStrip
             // 
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileMenu,
-            this.membersMenu,
-            this.bookingsMenu,
-            this.classesMenu,
-            this.subscriptionsMenu});
-            this.menuStrip.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1200, 24);
-            this.menuStrip.TabIndex = 0;
-            this.menuStrip.Text = "menuStrip";
+            menuStrip.Items.AddRange(new ToolStripItem[] { fileMenu, membersMenu, bookingsMenu, classesMenu, subscriptionsMenu });
+            menuStrip.Location = new Point(0, 0);
+            menuStrip.Name = "menuStrip";
+            menuStrip.Size = new Size(1200, 24);
+            menuStrip.TabIndex = 0;
+            menuStrip.Text = "menuStrip";
             // 
             // fileMenu
             // 
-            this.fileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitMenuItem});
-            this.fileMenu.Name = "fileMenu";
-            this.fileMenu.Size = new System.Drawing.Size(37, 20);
-            this.fileMenu.Text = "File";
+            fileMenu.DropDownItems.AddRange(new ToolStripItem[] { exitMenuItem });
+            fileMenu.Name = "fileMenu";
+            fileMenu.Size = new Size(37, 20);
+            fileMenu.Text = "File";
             // 
             // exitMenuItem
             // 
-            this.exitMenuItem.Name = "exitMenuItem";
-            this.exitMenuItem.Size = new System.Drawing.Size(93, 22);
-            this.exitMenuItem.Text = "Exit";
-            this.exitMenuItem.Click += new System.EventHandler(this.ExitMenuItem_Click);
+            exitMenuItem.Name = "exitMenuItem";
+            exitMenuItem.Size = new Size(92, 22);
+            exitMenuItem.Text = "Exit";
+            exitMenuItem.Click += ExitMenuItem_Click;
             // 
             // membersMenu
             // 
-            this.membersMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewMembersMenuItem});
-            this.membersMenu.Name = "membersMenu";
-            this.membersMenu.Size = new System.Drawing.Size(65, 20);
-            this.membersMenu.Text = "Members";
+            membersMenu.DropDownItems.AddRange(new ToolStripItem[] { viewMembersMenuItem });
+            membersMenu.Name = "membersMenu";
+            membersMenu.Size = new Size(69, 20);
+            membersMenu.Text = "Members";
             // 
             // viewMembersMenuItem
             // 
-            this.viewMembersMenuItem.Name = "viewMembersMenuItem";
-            this.viewMembersMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.viewMembersMenuItem.Text = "View Members";
-            this.viewMembersMenuItem.Click += new System.EventHandler(this.ViewMembersMenuItem_Click);
+            viewMembersMenuItem.Name = "viewMembersMenuItem";
+            viewMembersMenuItem.Size = new Size(152, 22);
+            viewMembersMenuItem.Text = "View Members";
+            viewMembersMenuItem.Click += ViewMembersMenuItem_Click;
             // 
             // bookingsMenu
             // 
-            this.bookingsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewBookingsMenuItem});
-            this.bookingsMenu.Name = "bookingsMenu";
-            this.bookingsMenu.Size = new System.Drawing.Size(66, 20);
-            this.bookingsMenu.Text = "Bookings";
+            bookingsMenu.DropDownItems.AddRange(new ToolStripItem[] { viewBookingsMenuItem });
+            bookingsMenu.Name = "bookingsMenu";
+            bookingsMenu.Size = new Size(68, 20);
+            bookingsMenu.Text = "Bookings";
             // 
             // viewBookingsMenuItem
             // 
-            this.viewBookingsMenuItem.Name = "viewBookingsMenuItem";
-            this.viewBookingsMenuItem.Size = new System.Drawing.Size(151, 22);
-            this.viewBookingsMenuItem.Text = "View Bookings";
-            this.viewBookingsMenuItem.Click += new System.EventHandler(this.ViewBookingsMenuItem_Click);
+            viewBookingsMenuItem.Name = "viewBookingsMenuItem";
+            viewBookingsMenuItem.Size = new Size(151, 22);
+            viewBookingsMenuItem.Text = "View Bookings";
+            viewBookingsMenuItem.Click += ViewBookingsMenuItem_Click;
             // 
             // classesMenu
             // 
-            this.classesMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewClassesMenuItem});
-            this.classesMenu.Name = "classesMenu";
-            this.classesMenu.Size = new System.Drawing.Size(54, 20);
-            this.classesMenu.Text = "Classes";
+            classesMenu.DropDownItems.AddRange(new ToolStripItem[] { viewClassesMenuItem });
+            classesMenu.Name = "classesMenu";
+            classesMenu.Size = new Size(57, 20);
+            classesMenu.Text = "Classes";
             // 
             // viewClassesMenuItem
             // 
-            this.viewClassesMenuItem.Name = "viewClassesMenuItem";
-            this.viewClassesMenuItem.Size = new System.Drawing.Size(139, 22);
-            this.viewClassesMenuItem.Text = "View Classes";
-            this.viewClassesMenuItem.Click += new System.EventHandler(this.ViewClassesMenuItem_Click);
+            viewClassesMenuItem.Name = "viewClassesMenuItem";
+            viewClassesMenuItem.Size = new Size(140, 22);
+            viewClassesMenuItem.Text = "View Classes";
+            viewClassesMenuItem.Click += ViewClassesMenuItem_Click;
             // 
             // subscriptionsMenu
             // 
-            this.subscriptionsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewSubscriptionsMenuItem});
-            this.subscriptionsMenu.Name = "subscriptionsMenu";
-            this.subscriptionsMenu.Size = new System.Drawing.Size(87, 20);
-            this.subscriptionsMenu.Text = "Subscriptions";
+            subscriptionsMenu.DropDownItems.AddRange(new ToolStripItem[] { viewSubscriptionsMenuItem });
+            subscriptionsMenu.Name = "subscriptionsMenu";
+            subscriptionsMenu.Size = new Size(90, 20);
+            subscriptionsMenu.Text = "Subscriptions";
             // 
             // viewSubscriptionsMenuItem
             // 
-            this.viewSubscriptionsMenuItem.Name = "viewSubscriptionsMenuItem";
-            this.viewSubscriptionsMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.viewSubscriptionsMenuItem.Text = "View Subscriptions";
-            this.viewSubscriptionsMenuItem.Click += new System.EventHandler(this.ViewSubscriptionsMenuItem_Click);
+            viewSubscriptionsMenuItem.Name = "viewSubscriptionsMenuItem";
+            viewSubscriptionsMenuItem.Size = new Size(173, 22);
+            viewSubscriptionsMenuItem.Text = "View Subscriptions";
+            viewSubscriptionsMenuItem.Click += ViewSubscriptionsMenuItem_Click;
             // 
             // statusStrip
             // 
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 776);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1200, 24);
-            this.statusStrip.TabIndex = 1;
-            this.statusStrip.Text = "statusStrip";
+            statusStrip.Items.AddRange(new ToolStripItem[] { statusLabel });
+            statusStrip.Location = new Point(0, 778);
+            statusStrip.Name = "statusStrip";
+            statusStrip.Size = new Size(1200, 22);
+            statusStrip.TabIndex = 1;
+            statusStrip.Text = "statusStrip";
             // 
             // statusLabel
             // 
-            this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(39, 19);
-            this.statusLabel.Text = "Ready";
+            statusLabel.Name = "statusLabel";
+            statusLabel.Size = new Size(39, 17);
+            statusLabel.Text = "Ready";
             // 
-            // welcomeLabel
-            // 
-            this.welcomeLabel.AutoSize = true;
-            this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.welcomeLabel.Location = new System.Drawing.Point(50, 100);
-            this.welcomeLabel.Name = "welcomeLabel";
-            this.welcomeLabel.Size = new System.Drawing.Size(456, 37);
-            this.welcomeLabel.TabIndex = 2;
-            this.welcomeLabel.Text = "Welcome to Gym Management System";
+            
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 800);
-            this.Controls.Add(this.welcomeLabel);
-            this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.menuStrip);
-            this.IsMdiContainer = true;
-            this.MainMenuStrip = this.menuStrip;
-            this.Name = "MainForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Gym Management System";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.menuStrip.ResumeLayout(false);
-            this.menuStrip.PerformLayout();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1200, 800);
+            Controls.Add(statusStrip);
+            Controls.Add(menuStrip);
+            IsMdiContainer = true;
+            MainMenuStrip = menuStrip;
+            Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Gym Management System";
+            WindowState = FormWindowState.Maximized;
+            menuStrip.ResumeLayout(false);
+            menuStrip.PerformLayout();
+            statusStrip.ResumeLayout(false);
+            statusStrip.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

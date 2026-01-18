@@ -12,12 +12,6 @@ namespace Gym_Manager_System.Forms
         private readonly IBookingService _bookingService;
         private readonly IMemberService _memberService;
         private readonly IClassService _classService;
-        private DataGridView bookingsGridView;
-        private Button addButton;
-        private Button cancelButton;
-        private Button checkInButton;
-        private Button refreshButton;
-        private ComboBox memberFilterComboBox;
 
         public BookingsForm(IBookingService bookingService, IMemberService memberService, IClassService classService)
         {
@@ -29,111 +23,14 @@ namespace Gym_Manager_System.Forms
             LoadMembers();
         }
 
-        private void InitializeComponent()
-        {
-            this.Text = "Bookings Management";
-            this.Size = new System.Drawing.Size(1200, 600);
-            this.StartPosition = FormStartPosition.CenterParent;
-
-            // Filter panel
-            var filterPanel = new Panel
-            {
-                Dock = DockStyle.Top,
-                Height = 50
-            };
-
-            var memberFilterLabel = new Label
-            {
-                Text = "Filter by Member:",
-                Location = new System.Drawing.Point(10, 15),
-                AutoSize = true
-            };
-
-            memberFilterComboBox = new ComboBox
-            {
-                Location = new System.Drawing.Point(120, 12),
-                Width = 200,
-                DropDownStyle = ComboBoxStyle.DropDownList
-            };
-            memberFilterComboBox.SelectedIndexChanged += MemberFilterComboBox_SelectedIndexChanged;
-
-            var allMembersOption = new { Id = 0, Name = "All Members" };
-            memberFilterComboBox.DisplayMember = "Name";
-            memberFilterComboBox.ValueMember = "Id";
-
-            filterPanel.Controls.AddRange(new Control[] { memberFilterLabel, memberFilterComboBox });
-            this.Controls.Add(filterPanel);
-
-            // Create DataGridView
-            bookingsGridView = new DataGridView
-            {
-                Dock = DockStyle.Fill,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-                ReadOnly = true,
-                AllowUserToAddRows = false
-            };
-
-            // Create buttons panel
-            var buttonPanel = new Panel
-            {
-                Dock = DockStyle.Bottom,
-                Height = 50
-            };
-
-            addButton = new Button
-            {
-                Text = "New Booking",
-                Location = new System.Drawing.Point(10, 10),
-                Size = new System.Drawing.Size(100, 30)
-            };
-            addButton.Click += AddButton_Click;
-
-            cancelButton = new Button
-            {
-                Text = "Cancel Booking",
-                Location = new System.Drawing.Point(120, 10),
-                Size = new System.Drawing.Size(100, 30),
-                Enabled = false
-            };
-            cancelButton.Click += CancelBookingButton_Click;
-
-            checkInButton = new Button
-            {
-                Text = "Check In",
-                Location = new System.Drawing.Point(230, 10),
-                Size = new System.Drawing.Size(100, 30),
-                Enabled = false
-            };
-            checkInButton.Click += CheckInButton_Click;
-
-            refreshButton = new Button
-            {
-                Text = "Refresh",
-                Location = new System.Drawing.Point(340, 10),
-                Size = new System.Drawing.Size(100, 30)
-            };
-            refreshButton.Click += (s, e) => LoadBookings();
-
-            bookingsGridView.SelectionChanged += (s, e) =>
-            {
-                bool hasSelection = bookingsGridView.SelectedRows.Count > 0;
-                cancelButton.Enabled = hasSelection;
-                checkInButton.Enabled = hasSelection;
-            };
-
-            buttonPanel.Controls.AddRange(new Control[] { addButton, cancelButton, checkInButton, refreshButton });
-
-            this.Controls.Add(bookingsGridView);
-            this.Controls.Add(buttonPanel);
-        }
-
         private async void LoadMembers()
         {
             try
             {
                 var members = await _memberService.GetAllMembersAsync();
                 memberFilterComboBox.Items.Clear();
+                memberFilterComboBox.DisplayMember = "Name";
+                memberFilterComboBox.ValueMember = "Id";
                 memberFilterComboBox.Items.Add(new { Id = 0, Name = "All Members" });
                 foreach (var member in members)
                 {
@@ -253,11 +150,22 @@ namespace Gym_Manager_System.Forms
                     catch (Exception ex)
                     {
                         MessageBox.Show($"Error checking in member: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
                     }
                 }
             }
         }
-    
+
+        private void RefreshButton_Click(object sender, EventArgs e)
+        {
+            LoadBookings();
+        }
+
+        private void BookingsGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            bool hasSelection = bookingsGridView.SelectedRows.Count > 0;
+            cancelButton.Enabled = hasSelection;
+            checkInButton.Enabled = hasSelection;
+        }
+    }
+}
 

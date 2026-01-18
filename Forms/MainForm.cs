@@ -28,7 +28,7 @@ namespace Gym_Manager_System.Forms
             {
                 // Initialize dependencies
                 var connectionString = "Server=54.252.85.7;Database=gym_management_system;UserID=admin_son;Password=son16012005;";
-                
+
                 // Test connection first
                 string? connectionError = null;
                 if (!TestDatabaseConnection(connectionString, out connectionError))
@@ -46,7 +46,7 @@ namespace Gym_Manager_System.Forms
                         "Database Connection Error",
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Error);
-                    
+
                     if (result == DialogResult.No)
                     {
                         Application.Exit();
@@ -55,9 +55,9 @@ namespace Gym_Manager_System.Forms
                     // Continue without services
                     return;
                 }
-                
+
                 var dbContext = new DatabaseContext(connectionString);
-                
+
                 // Initialize repositories
                 var memberRepository = new MemberRepository(dbContext);
                 var bookingRepository = new BookingRepository(dbContext);
@@ -66,7 +66,7 @@ namespace Gym_Manager_System.Forms
                 var subscriptionRepository = new SubscriptionRepository(dbContext);
                 var membershipPlanRepository = new MembershipPlanRepository(dbContext);
                 var attendanceRepository = new AttendanceRepository(dbContext);
-                
+
                 // Initialize services
                 _memberService = new MemberService(memberRepository);
                 _bookingService = new BookingService(bookingRepository, classInstanceRepository, memberRepository, subscriptionRepository, attendanceRepository);
@@ -175,6 +175,8 @@ namespace Gym_Manager_System.Forms
             subscriptionsForm.MdiParent = this;
             subscriptionsForm.Show();
         }
+
+        
     }
 }
 
