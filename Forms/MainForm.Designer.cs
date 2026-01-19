@@ -17,6 +17,12 @@ namespace Gym_Manager_System.Forms
         private System.Windows.Forms.ToolStripMenuItem viewClassesMenuItem;
         private System.Windows.Forms.ToolStripMenuItem subscriptionsMenu;
         private System.Windows.Forms.ToolStripMenuItem viewSubscriptionsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem instructorsMenu;
+        private System.Windows.Forms.ToolStripMenuItem viewInstructorsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem roomsMenu;
+        private System.Windows.Forms.ToolStripMenuItem viewRoomsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem plansMenu;
+        private System.Windows.Forms.ToolStripMenuItem viewPlansMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
         
@@ -53,6 +59,12 @@ namespace Gym_Manager_System.Forms
             viewClassesMenuItem = new ToolStripMenuItem();
             subscriptionsMenu = new ToolStripMenuItem();
             viewSubscriptionsMenuItem = new ToolStripMenuItem();
+            instructorsMenu = new ToolStripMenuItem();
+            viewInstructorsMenuItem = new ToolStripMenuItem();
+            roomsMenu = new ToolStripMenuItem();
+            viewRoomsMenuItem = new ToolStripMenuItem();
+            plansMenu = new ToolStripMenuItem();
+            viewPlansMenuItem = new ToolStripMenuItem();
             statusStrip = new StatusStrip();
             statusLabel = new ToolStripStatusLabel();
             
@@ -62,7 +74,7 @@ namespace Gym_Manager_System.Forms
             // 
             // menuStrip
             // 
-            menuStrip.Items.AddRange(new ToolStripItem[] { fileMenu, membersMenu, bookingsMenu, classesMenu, subscriptionsMenu });
+            menuStrip.Items.AddRange(new ToolStripItem[] { fileMenu, membersMenu, bookingsMenu, classesMenu, subscriptionsMenu, instructorsMenu, roomsMenu, plansMenu });
             menuStrip.Location = new Point(0, 0);
             menuStrip.Name = "menuStrip";
             menuStrip.Size = new Size(1200, 24);
@@ -138,6 +150,48 @@ namespace Gym_Manager_System.Forms
             viewSubscriptionsMenuItem.Size = new Size(173, 22);
             viewSubscriptionsMenuItem.Text = "View Subscriptions";
             viewSubscriptionsMenuItem.Click += ViewSubscriptionsMenuItem_Click;
+            // 
+            // instructorsMenu
+            // 
+            instructorsMenu.DropDownItems.AddRange(new ToolStripItem[] { viewInstructorsMenuItem });
+            instructorsMenu.Name = "instructorsMenu";
+            instructorsMenu.Size = new Size(78, 20);
+            instructorsMenu.Text = "Instructors";
+            // 
+            // viewInstructorsMenuItem
+            // 
+            viewInstructorsMenuItem.Name = "viewInstructorsMenuItem";
+            viewInstructorsMenuItem.Size = new Size(162, 22);
+            viewInstructorsMenuItem.Text = "View Instructors";
+            viewInstructorsMenuItem.Click += ViewInstructorsMenuItem_Click;
+            // 
+            // roomsMenu
+            // 
+            roomsMenu.DropDownItems.AddRange(new ToolStripItem[] { viewRoomsMenuItem });
+            roomsMenu.Name = "roomsMenu";
+            roomsMenu.Size = new Size(55, 20);
+            roomsMenu.Text = "Rooms";
+            // 
+            // viewRoomsMenuItem
+            // 
+            viewRoomsMenuItem.Name = "viewRoomsMenuItem";
+            viewRoomsMenuItem.Size = new Size(139, 22);
+            viewRoomsMenuItem.Text = "View Rooms";
+            viewRoomsMenuItem.Click += ViewRoomsMenuItem_Click;
+            // 
+            // plansMenu
+            // 
+            plansMenu.DropDownItems.AddRange(new ToolStripItem[] { viewPlansMenuItem });
+            plansMenu.Name = "plansMenu";
+            plansMenu.Size = new Size(55, 20);
+            plansMenu.Text = "Plans";
+            // 
+            // viewPlansMenuItem
+            // 
+            viewPlansMenuItem.Name = "viewPlansMenuItem";
+            viewPlansMenuItem.Size = new Size(180, 22);
+            viewPlansMenuItem.Text = "View Plans";
+            viewPlansMenuItem.Click += ViewPlansMenuItem_Click;
             // 
             // statusStrip
             // 

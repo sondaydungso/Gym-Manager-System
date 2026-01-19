@@ -35,8 +35,11 @@ namespace Gym_Manager_System.Forms
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            // Implementation for adding a class manually
-            MessageBox.Show("Add class functionality to be implemented.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var addForm = new ClassDetailsForm(_classService, null);
+            if (addForm.ShowDialog() == DialogResult.OK)
+            {
+                LoadClasses();
+            }
         }
 
         private async void GenerateButton_Click(object sender, EventArgs e)

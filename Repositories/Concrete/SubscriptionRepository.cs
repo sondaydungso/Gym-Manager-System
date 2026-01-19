@@ -92,6 +92,38 @@ namespace Gym_Manager_System.Repositories
             return Task.FromResult<IEnumerable<Subscription>>(subscriptions); //return a list of subscription
         }
 
+        public Task<IEnumerable<Subscription>> GetAllMemberIdAsync()
+        {
+            var query = "SELECT * FROM subscriptions";
+            var subscriptions = new List<Subscription>();
+            using (var connection = _context.CreateConnection())
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                {
+                    command.CommandText = query;
+                    using (var reader = command.ExecuteReader()) // Execute the command and read the results
+                    {
+                        while (reader.Read())
+                        {
+                            var subscription = new Subscription
+                            {
+                                SubscriptionId = Convert.ToInt32(reader["subscription_id"]),
+                                MemberId = Convert.ToInt32(reader["member_id"]),
+                                PlanId = Convert.ToInt32(reader["plan_id"]),
+                                StartDate = reader["start_date"] != DBNull.Value ? Convert.ToDateTime(reader["start_date"]) : default,
+                                EndDate = reader["end_date"] != DBNull.Value ? Convert.ToDateTime(reader["end_date"]) : default,
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
+                                CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default,
+                                UpdatedAt = reader["updated_at"] != DBNull.Value ? Convert.ToDateTime(reader["updated_at"]) : default
+                            };
+                            subscriptions.Add(subscription);
+                        }
+                    }
+                }
+            }
+            return Task.FromResult<IEnumerable<Subscription>>(subscriptions); //return a list of subscription
+        }
         public Task<Subscription?> GetActiveSubscriptionByMemberIdAsync(int memberId)
         {
             var query = "SELECT * FROM subscriptions WHERE member_id = @MemberID AND status = 'active' AND end_date >= CURDATE()";

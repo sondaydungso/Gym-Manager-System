@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Gym_Manager_System.Model;
 using Gym_Manager_System.Services.Interfaces;
+using Gym_Manager_System.Repositories.Interfaces;
+using Gym_Manager_System.DataFolder;
+using Gym_Manager_System.Repositories;
 
 namespace Gym_Manager_System.Forms
 {
@@ -11,6 +14,7 @@ namespace Gym_Manager_System.Forms
     {
         private readonly ISubscriptionService _subscriptionService;
         private readonly IMemberService _memberService;
+        private readonly IMembershipPlanRepository _membershipPlanRepository;
         private readonly Subscription? _subscription;
 
         public SubscriptionDetailsForm(ISubscriptionService subscriptionService, IMemberService memberService, Subscription? subscription)
@@ -18,6 +22,12 @@ namespace Gym_Manager_System.Forms
             _subscriptionService = subscriptionService;
             _memberService = memberService;
             _subscription = subscription;
+            
+            // Initialize repository with the same connection string as MainForm
+            var connectionString = "Server=54.252.85.7;Database=gym_management_system;UserID=admin_son;Password=son16012005;";
+            var dbContext = new DatabaseContext(connectionString);
+            _membershipPlanRepository = new MembershipPlanRepository(dbContext);
+            
             InitializeComponent();
             if (_subscription != null)
             {
@@ -40,17 +50,45 @@ namespace Gym_Manager_System.Forms
                     memberComboBox.Items.Add(new { Id = member.MemberId, FullName = $"{member.FirstName} {member.LastName}" });
                 }
 
-                // Note: Plan loading would need MembershipPlanRepository
-                // For now, adding placeholder
-                planComboBox.Items.Add(new { Id = 1, Name = "Basic Plan" });
-                planComboBox.Items.Add(new { Id = 2, Name = "Premium Plan" });
-                planComboBox.DisplayMember = "Name";
-                planComboBox.ValueMember = "Id";
+                // Load membership plans from database
+                var plans = await _membershipPlanRepository.GetActivePlansAsync();
+                planComboBox.DisplayMember = "DisplayName";
+                planComboBox.ValueMember = "PlanId";
+                foreach (var plan in plans)
+                {
+                    planComboBox.Items.Add(new 
+                    { 
+                        PlanId = plan.PlanId, 
+                        DisplayName = $"{plan.PlanName} - ${plan.PlanPrice:F2} ({plan.PlanDurationInMonths} months)" 
+                    });
+                }
 
                 if (_subscription != null)
                 {
                     // Set selected values for edit mode
-                    // Implementation for edit mode if needed
+                    startDatePicker.Value = _subscription.StartDate != default ? _subscription.StartDate : DateTime.Now;
+                    
+                    // Set selected member
+                    foreach (var item in memberComboBox.Items)
+                    {
+                        var memberObj = item.GetType().GetProperty("Id")?.GetValue(item);
+                        if (memberObj != null && (int)memberObj == _subscription.MemberId)
+                        {
+                            memberComboBox.SelectedItem = item;
+                            break;
+                        }
+                    }
+                    
+                    // Set selected plan
+                    foreach (var item in planComboBox.Items)
+                    {
+                        var planObj = item.GetType().GetProperty("PlanId")?.GetValue(item);
+                        if (planObj != null && (int)planObj == _subscription.PlanId)
+                        {
+                            planComboBox.SelectedItem = item;
+                            break;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -71,7 +109,7 @@ namespace Gym_Manager_System.Forms
                 }
 
                 var memberId = (int)memberComboBox.SelectedItem.GetType().GetProperty("Id")?.GetValue(memberComboBox.SelectedItem)!;
-                var planId = (int)planComboBox.SelectedItem.GetType().GetProperty("Id")?.GetValue(planComboBox.SelectedItem)!;
+                var planId = (int)planComboBox.SelectedItem.GetType().GetProperty("PlanId")?.GetValue(planComboBox.SelectedItem)!;
                 var startDate = startDatePicker.Value;
 
                 await _subscriptionService.CreateSubscriptionAsync(memberId, planId, startDate);

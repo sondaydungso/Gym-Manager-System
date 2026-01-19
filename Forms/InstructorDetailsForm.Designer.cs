@@ -1,6 +1,6 @@
 namespace Gym_Manager_System.Forms
 {
-    partial class MemberDetailsForm
+    partial class InstructorDetailsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -36,14 +36,12 @@ namespace Gym_Manager_System.Forms
             this.emailTextBox = new System.Windows.Forms.TextBox();
             this.phoneLabel = new System.Windows.Forms.Label();
             this.phoneTextBox = new System.Windows.Forms.TextBox();
-            this.dobLabel = new System.Windows.Forms.Label();
-            this.dateOfBirthPicker = new System.Windows.Forms.DateTimePicker();
-            this.emergencyNameLabel = new System.Windows.Forms.Label();
-            this.emergencyContactNameTextBox = new System.Windows.Forms.TextBox();
-            this.emergencyPhoneLabel = new System.Windows.Forms.Label();
-            this.emergencyContactPhoneTextBox = new System.Windows.Forms.TextBox();
-            this.medicalNotesLabel = new System.Windows.Forms.Label();
-            this.medicalNotesTextBox = new System.Windows.Forms.TextBox();
+            this.hireDateLabel = new System.Windows.Forms.Label();
+            this.hireDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.certificationsLabel = new System.Windows.Forms.Label();
+            this.certificationsTextBox = new System.Windows.Forms.TextBox();
+            this.specializationsLabel = new System.Windows.Forms.Label();
+            this.specializationsTextBox = new System.Windows.Forms.TextBox();
             this.statusLabel = new System.Windows.Forms.Label();
             this.statusComboBox = new System.Windows.Forms.ComboBox();
             this.saveButton = new System.Windows.Forms.Button();
@@ -110,82 +108,68 @@ namespace Gym_Manager_System.Forms
             this.phoneTextBox.Size = new System.Drawing.Size(300, 23);
             this.phoneTextBox.TabIndex = 7;
             // 
-            // dobLabel
+            // hireDateLabel
             // 
-            this.dobLabel.Location = new System.Drawing.Point(20, 140);
-            this.dobLabel.Name = "dobLabel";
-            this.dobLabel.Size = new System.Drawing.Size(150, 23);
-            this.dobLabel.TabIndex = 8;
-            this.dobLabel.Text = "Date of Birth:";
+            this.hireDateLabel.Location = new System.Drawing.Point(20, 140);
+            this.hireDateLabel.Name = "hireDateLabel";
+            this.hireDateLabel.Size = new System.Drawing.Size(150, 23);
+            this.hireDateLabel.TabIndex = 8;
+            this.hireDateLabel.Text = "Hire Date:";
             // 
-            // dateOfBirthPicker
+            // hireDatePicker
             // 
-            this.dateOfBirthPicker.Location = new System.Drawing.Point(180, 140);
-            this.dateOfBirthPicker.Name = "dateOfBirthPicker";
-            this.dateOfBirthPicker.Size = new System.Drawing.Size(300, 23);
-            this.dateOfBirthPicker.TabIndex = 9;
+            this.hireDatePicker.Location = new System.Drawing.Point(180, 140);
+            this.hireDatePicker.Name = "hireDatePicker";
+            this.hireDatePicker.Size = new System.Drawing.Size(300, 23);
+            this.hireDatePicker.TabIndex = 9;
             // 
-            // emergencyNameLabel
+            // certificationsLabel
             // 
-            this.emergencyNameLabel.Location = new System.Drawing.Point(20, 170);
-            this.emergencyNameLabel.Name = "emergencyNameLabel";
-            this.emergencyNameLabel.Size = new System.Drawing.Size(150, 23);
-            this.emergencyNameLabel.TabIndex = 10;
-            this.emergencyNameLabel.Text = "Emergency Contact:";
+            this.certificationsLabel.Location = new System.Drawing.Point(20, 170);
+            this.certificationsLabel.Name = "certificationsLabel";
+            this.certificationsLabel.Size = new System.Drawing.Size(150, 23);
+            this.certificationsLabel.TabIndex = 10;
+            this.certificationsLabel.Text = "Certifications:";
             // 
-            // emergencyContactNameTextBox
+            // certificationsTextBox
             // 
-            this.emergencyContactNameTextBox.Location = new System.Drawing.Point(180, 170);
-            this.emergencyContactNameTextBox.Name = "emergencyContactNameTextBox";
-            this.emergencyContactNameTextBox.Size = new System.Drawing.Size(300, 23);
-            this.emergencyContactNameTextBox.TabIndex = 11;
+            this.certificationsTextBox.Location = new System.Drawing.Point(180, 170);
+            this.certificationsTextBox.Multiline = true;
+            this.certificationsTextBox.Name = "certificationsTextBox";
+            this.certificationsTextBox.Size = new System.Drawing.Size(300, 60);
+            this.certificationsTextBox.TabIndex = 11;
             // 
-            // emergencyPhoneLabel
+            // specializationsLabel
             // 
-            this.emergencyPhoneLabel.Location = new System.Drawing.Point(20, 200);
-            this.emergencyPhoneLabel.Name = "emergencyPhoneLabel";
-            this.emergencyPhoneLabel.Size = new System.Drawing.Size(150, 23);
-            this.emergencyPhoneLabel.TabIndex = 12;
-            this.emergencyPhoneLabel.Text = "Emergency Phone:";
+            this.specializationsLabel.Location = new System.Drawing.Point(20, 240);
+            this.specializationsLabel.Name = "specializationsLabel";
+            this.specializationsLabel.Size = new System.Drawing.Size(150, 23);
+            this.specializationsLabel.TabIndex = 12;
+            this.specializationsLabel.Text = "Specializations:";
             // 
-            // emergencyContactPhoneTextBox
+            // specializationsTextBox
             // 
-            this.emergencyContactPhoneTextBox.Location = new System.Drawing.Point(180, 200);
-            this.emergencyContactPhoneTextBox.Name = "emergencyContactPhoneTextBox";
-            this.emergencyContactPhoneTextBox.Size = new System.Drawing.Size(300, 23);
-            this.emergencyContactPhoneTextBox.TabIndex = 13;
-            // 
-            // medicalNotesLabel
-            // 
-            this.medicalNotesLabel.Location = new System.Drawing.Point(20, 230);
-            this.medicalNotesLabel.Name = "medicalNotesLabel";
-            this.medicalNotesLabel.Size = new System.Drawing.Size(150, 23);
-            this.medicalNotesLabel.TabIndex = 14;
-            this.medicalNotesLabel.Text = "Medical Notes:";
-            // 
-            // medicalNotesTextBox
-            // 
-            this.medicalNotesTextBox.Location = new System.Drawing.Point(180, 230);
-            this.medicalNotesTextBox.Multiline = true;
-            this.medicalNotesTextBox.Name = "medicalNotesTextBox";
-            this.medicalNotesTextBox.Size = new System.Drawing.Size(300, 60);
-            this.medicalNotesTextBox.TabIndex = 15;
+            this.specializationsTextBox.Location = new System.Drawing.Point(180, 240);
+            this.specializationsTextBox.Multiline = true;
+            this.specializationsTextBox.Name = "specializationsTextBox";
+            this.specializationsTextBox.Size = new System.Drawing.Size(300, 60);
+            this.specializationsTextBox.TabIndex = 13;
             // 
             // statusLabel
             // 
-            this.statusLabel.Location = new System.Drawing.Point(20, 300);
+            this.statusLabel.Location = new System.Drawing.Point(20, 310);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(150, 23);
-            this.statusLabel.TabIndex = 16;
+            this.statusLabel.TabIndex = 14;
             this.statusLabel.Text = "Status:";
             // 
             // statusComboBox
             // 
             this.statusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.statusComboBox.Location = new System.Drawing.Point(180, 300);
+            this.statusComboBox.Location = new System.Drawing.Point(180, 310);
             this.statusComboBox.Name = "statusComboBox";
             this.statusComboBox.Size = new System.Drawing.Size(300, 23);
-            this.statusComboBox.TabIndex = 17;
+            this.statusComboBox.TabIndex = 15;
             // 
             // saveButton
             // 
@@ -193,7 +177,7 @@ namespace Gym_Manager_System.Forms
             this.saveButton.Location = new System.Drawing.Point(180, 350);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(100, 23);
-            this.saveButton.TabIndex = 18;
+            this.saveButton.TabIndex = 16;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
@@ -204,29 +188,27 @@ namespace Gym_Manager_System.Forms
             this.cancelButton.Location = new System.Drawing.Point(290, 350);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(100, 23);
-            this.cancelButton.TabIndex = 19;
+            this.cancelButton.TabIndex = 17;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // MemberDetailsForm
+            // InstructorDetailsForm
             // 
             this.AcceptButton = this.saveButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(500, 500);
+            this.ClientSize = new System.Drawing.Size(500, 400);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.statusComboBox);
             this.Controls.Add(this.statusLabel);
-            this.Controls.Add(this.medicalNotesTextBox);
-            this.Controls.Add(this.medicalNotesLabel);
-            this.Controls.Add(this.emergencyContactPhoneTextBox);
-            this.Controls.Add(this.emergencyPhoneLabel);
-            this.Controls.Add(this.emergencyContactNameTextBox);
-            this.Controls.Add(this.emergencyNameLabel);
-            this.Controls.Add(this.dateOfBirthPicker);
-            this.Controls.Add(this.dobLabel);
+            this.Controls.Add(this.specializationsTextBox);
+            this.Controls.Add(this.specializationsLabel);
+            this.Controls.Add(this.certificationsTextBox);
+            this.Controls.Add(this.certificationsLabel);
+            this.Controls.Add(this.hireDatePicker);
+            this.Controls.Add(this.hireDateLabel);
             this.Controls.Add(this.phoneTextBox);
             this.Controls.Add(this.phoneLabel);
             this.Controls.Add(this.emailTextBox);
@@ -238,9 +220,9 @@ namespace Gym_Manager_System.Forms
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "MemberDetailsForm";
+            this.Name = "InstructorDetailsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Add New Member";
+            this.Text = "Add New Instructor";
             this.ResumeLayout(false);
             this.PerformLayout();
         }
@@ -255,19 +237,16 @@ namespace Gym_Manager_System.Forms
         private System.Windows.Forms.TextBox emailTextBox;
         private System.Windows.Forms.Label phoneLabel;
         private System.Windows.Forms.TextBox phoneTextBox;
-        private System.Windows.Forms.Label dobLabel;
-        private System.Windows.Forms.DateTimePicker dateOfBirthPicker;
-        private System.Windows.Forms.Label emergencyNameLabel;
-        private System.Windows.Forms.TextBox emergencyContactNameTextBox;
-        private System.Windows.Forms.Label emergencyPhoneLabel;
-        private System.Windows.Forms.TextBox emergencyContactPhoneTextBox;
-        private System.Windows.Forms.Label medicalNotesLabel;
-        private System.Windows.Forms.TextBox medicalNotesTextBox;
+        private System.Windows.Forms.Label hireDateLabel;
+        private System.Windows.Forms.DateTimePicker hireDatePicker;
+        private System.Windows.Forms.Label certificationsLabel;
+        private System.Windows.Forms.TextBox certificationsTextBox;
+        private System.Windows.Forms.Label specializationsLabel;
+        private System.Windows.Forms.TextBox specializationsTextBox;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.ComboBox statusComboBox;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button cancelButton;
     }
 }
-
 

@@ -56,7 +56,7 @@ namespace Gym_Manager_System.Forms
                 }
 
                 var subscriptions = memberId == 0
-                    ? await _subscriptionService.GetMemberSubscriptionsAsync(0) // This needs to be fixed
+                    ? await _subscriptionService.GetAllMember() // Fetch all subscriptions when memberId is 0
                     : await _subscriptionService.GetMemberSubscriptionsAsync(memberId);
 
                 subscriptionsGridView.DataSource = subscriptions.ToList();
@@ -150,6 +150,11 @@ namespace Gym_Manager_System.Forms
             bool hasSelection = subscriptionsGridView.SelectedRows.Count > 0;
             renewButton.Enabled = hasSelection;
             cancelButton.Enabled = hasSelection;
+        }
+
+        private void SubscriptionsForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

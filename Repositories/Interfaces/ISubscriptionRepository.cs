@@ -9,6 +9,7 @@ namespace Gym_Manager_System.Repositories.Interfaces
     {
         Task<Subscription?> GetByIdAsync(int subscriptionId);
         Task<IEnumerable<Subscription>> GetByMemberIdAsync(int memberId);
+        Task<IEnumerable<Subscription>> GetAllMemberIdAsync();
         Task<Subscription?> GetActiveSubscriptionByMemberIdAsync(int memberId);
         Task<IEnumerable<Subscription>> GetExpiringSubscriptionsAsync(int daysAhead);
         Task<IEnumerable<Subscription>> GetExpiredSubscriptionsAsync();

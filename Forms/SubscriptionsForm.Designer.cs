@@ -28,131 +28,132 @@ namespace Gym_Manager_System.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.filterPanel = new System.Windows.Forms.Panel();
-            this.memberFilterLabel = new System.Windows.Forms.Label();
-            this.memberFilterComboBox = new System.Windows.Forms.ComboBox();
-            this.subscriptionsGridView = new System.Windows.Forms.DataGridView();
-            this.buttonPanel = new System.Windows.Forms.Panel();
-            this.addButton = new System.Windows.Forms.Button();
-            this.renewButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.refreshButton = new System.Windows.Forms.Button();
-            this.filterPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.subscriptionsGridView)).BeginInit();
-            this.buttonPanel.SuspendLayout();
-            this.SuspendLayout();
+            filterPanel = new Panel();
+            memberFilterLabel = new Label();
+            memberFilterComboBox = new ComboBox();
+            subscriptionsGridView = new DataGridView();
+            buttonPanel = new Panel();
+            addButton = new Button();
+            renewButton = new Button();
+            cancelButton = new Button();
+            refreshButton = new Button();
+            filterPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)subscriptionsGridView).BeginInit();
+            buttonPanel.SuspendLayout();
+            SuspendLayout();
             // 
             // filterPanel
             // 
-            this.filterPanel.Controls.Add(this.memberFilterLabel);
-            this.filterPanel.Controls.Add(this.memberFilterComboBox);
-            this.filterPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.filterPanel.Location = new System.Drawing.Point(0, 0);
-            this.filterPanel.Name = "filterPanel";
-            this.filterPanel.Size = new System.Drawing.Size(1200, 50);
-            this.filterPanel.TabIndex = 0;
+            filterPanel.Controls.Add(memberFilterLabel);
+            filterPanel.Controls.Add(memberFilterComboBox);
+            filterPanel.Dock = DockStyle.Top;
+            filterPanel.Location = new Point(0, 0);
+            filterPanel.Name = "filterPanel";
+            filterPanel.Size = new Size(1200, 50);
+            filterPanel.TabIndex = 0;
             // 
             // memberFilterLabel
             // 
-            this.memberFilterLabel.AutoSize = true;
-            this.memberFilterLabel.Location = new System.Drawing.Point(10, 15);
-            this.memberFilterLabel.Name = "memberFilterLabel";
-            this.memberFilterLabel.Size = new System.Drawing.Size(104, 15);
-            this.memberFilterLabel.TabIndex = 0;
-            this.memberFilterLabel.Text = "Filter by Member:";
+            memberFilterLabel.AutoSize = true;
+            memberFilterLabel.Location = new Point(10, 15);
+            memberFilterLabel.Name = "memberFilterLabel";
+            memberFilterLabel.Size = new Size(100, 15);
+            memberFilterLabel.TabIndex = 0;
+            memberFilterLabel.Text = "Filter by Member:";
             // 
             // memberFilterComboBox
             // 
-            this.memberFilterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.memberFilterComboBox.Location = new System.Drawing.Point(120, 12);
-            this.memberFilterComboBox.Name = "memberFilterComboBox";
-            this.memberFilterComboBox.Size = new System.Drawing.Size(200, 23);
-            this.memberFilterComboBox.TabIndex = 1;
-            this.memberFilterComboBox.SelectedIndexChanged += new System.EventHandler(this.MemberFilterComboBox_SelectedIndexChanged);
+            memberFilterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            memberFilterComboBox.Location = new Point(120, 12);
+            memberFilterComboBox.Name = "memberFilterComboBox";
+            memberFilterComboBox.Size = new Size(200, 23);
+            memberFilterComboBox.TabIndex = 1;
+            memberFilterComboBox.SelectedIndexChanged += MemberFilterComboBox_SelectedIndexChanged;
             // 
             // subscriptionsGridView
             // 
-            this.subscriptionsGridView.AllowUserToAddRows = false;
-            this.subscriptionsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.subscriptionsGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.subscriptionsGridView.Location = new System.Drawing.Point(0, 50);
-            this.subscriptionsGridView.Name = "subscriptionsGridView";
-            this.subscriptionsGridView.ReadOnly = true;
-            this.subscriptionsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.subscriptionsGridView.Size = new System.Drawing.Size(1200, 500);
-            this.subscriptionsGridView.TabIndex = 1;
-            this.subscriptionsGridView.SelectionChanged += new System.EventHandler(this.SubscriptionsGridView_SelectionChanged);
+            subscriptionsGridView.AllowUserToAddRows = false;
+            subscriptionsGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            subscriptionsGridView.Dock = DockStyle.Fill;
+            subscriptionsGridView.Location = new Point(0, 50);
+            subscriptionsGridView.Name = "subscriptionsGridView";
+            subscriptionsGridView.ReadOnly = true;
+            subscriptionsGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            subscriptionsGridView.Size = new Size(1200, 500);
+            subscriptionsGridView.TabIndex = 1;
+            subscriptionsGridView.SelectionChanged += SubscriptionsGridView_SelectionChanged;
             // 
             // buttonPanel
             // 
-            this.buttonPanel.Controls.Add(this.addButton);
-            this.buttonPanel.Controls.Add(this.renewButton);
-            this.buttonPanel.Controls.Add(this.cancelButton);
-            this.buttonPanel.Controls.Add(this.refreshButton);
-            this.buttonPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonPanel.Location = new System.Drawing.Point(0, 550);
-            this.buttonPanel.Name = "buttonPanel";
-            this.buttonPanel.Size = new System.Drawing.Size(1200, 50);
-            this.buttonPanel.TabIndex = 2;
+            buttonPanel.Controls.Add(addButton);
+            buttonPanel.Controls.Add(renewButton);
+            buttonPanel.Controls.Add(cancelButton);
+            buttonPanel.Controls.Add(refreshButton);
+            buttonPanel.Dock = DockStyle.Bottom;
+            buttonPanel.Location = new Point(0, 550);
+            buttonPanel.Name = "buttonPanel";
+            buttonPanel.Size = new Size(1200, 50);
+            buttonPanel.TabIndex = 2;
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(10, 10);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(120, 30);
-            this.addButton.TabIndex = 0;
-            this.addButton.Text = "New Subscription";
-            this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.AddButton_Click);
+            addButton.Location = new Point(10, 10);
+            addButton.Name = "addButton";
+            addButton.Size = new Size(120, 30);
+            addButton.TabIndex = 0;
+            addButton.Text = "New Subscription";
+            addButton.UseVisualStyleBackColor = true;
+            addButton.Click += AddButton_Click;
             // 
             // renewButton
             // 
-            this.renewButton.Enabled = false;
-            this.renewButton.Location = new System.Drawing.Point(140, 10);
-            this.renewButton.Name = "renewButton";
-            this.renewButton.Size = new System.Drawing.Size(100, 30);
-            this.renewButton.TabIndex = 1;
-            this.renewButton.Text = "Renew";
-            this.renewButton.UseVisualStyleBackColor = true;
-            this.renewButton.Click += new System.EventHandler(this.RenewButton_Click);
+            renewButton.Enabled = false;
+            renewButton.Location = new Point(140, 10);
+            renewButton.Name = "renewButton";
+            renewButton.Size = new Size(100, 30);
+            renewButton.TabIndex = 1;
+            renewButton.Text = "Renew";
+            renewButton.UseVisualStyleBackColor = true;
+            renewButton.Click += RenewButton_Click;
             // 
             // cancelButton
             // 
-            this.cancelButton.Enabled = false;
-            this.cancelButton.Location = new System.Drawing.Point(250, 10);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(100, 30);
-            this.cancelButton.TabIndex = 2;
-            this.cancelButton.Text = "Cancel";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            cancelButton.Enabled = false;
+            cancelButton.Location = new Point(250, 10);
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new Size(100, 30);
+            cancelButton.TabIndex = 2;
+            cancelButton.Text = "Cancel";
+            cancelButton.UseVisualStyleBackColor = true;
+            cancelButton.Click += CancelButton_Click;
             // 
             // refreshButton
             // 
-            this.refreshButton.Location = new System.Drawing.Point(360, 10);
-            this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(100, 30);
-            this.refreshButton.TabIndex = 3;
-            this.refreshButton.Text = "Refresh";
-            this.refreshButton.UseVisualStyleBackColor = true;
-            this.refreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
+            refreshButton.Location = new Point(360, 10);
+            refreshButton.Name = "refreshButton";
+            refreshButton.Size = new Size(100, 30);
+            refreshButton.TabIndex = 3;
+            refreshButton.Text = "Refresh";
+            refreshButton.UseVisualStyleBackColor = true;
+            refreshButton.Click += RefreshButton_Click;
             // 
             // SubscriptionsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 600);
-            this.Controls.Add(this.subscriptionsGridView);
-            this.Controls.Add(this.buttonPanel);
-            this.Controls.Add(this.filterPanel);
-            this.Name = "SubscriptionsForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Subscriptions Management";
-            this.filterPanel.ResumeLayout(false);
-            this.filterPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.subscriptionsGridView)).EndInit();
-            this.buttonPanel.ResumeLayout(false);
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1200, 600);
+            Controls.Add(subscriptionsGridView);
+            Controls.Add(buttonPanel);
+            Controls.Add(filterPanel);
+            Name = "SubscriptionsForm";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Subscriptions Management";
+            Load += SubscriptionsForm_Load;
+            filterPanel.ResumeLayout(false);
+            filterPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)subscriptionsGridView).EndInit();
+            buttonPanel.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
@@ -168,4 +169,5 @@ namespace Gym_Manager_System.Forms
         private System.Windows.Forms.Button refreshButton;
     }
 }
+
 
