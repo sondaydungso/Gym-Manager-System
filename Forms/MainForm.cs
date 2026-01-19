@@ -26,10 +26,8 @@ namespace Gym_Manager_System.Forms
         {
             try
             {
-                // Initialize dependencies
                 var connectionString = "Server=54.252.85.7;Database=gym_management_system;UserID=admin_son;Password=son16012005;";
 
-                // Test connection first
                 string? connectionError = null;
                 if (!TestDatabaseConnection(connectionString, out connectionError))
                 {
@@ -52,13 +50,11 @@ namespace Gym_Manager_System.Forms
                         Application.Exit();
                         return;
                     }
-                    // Continue without services
                     return;
                 }
 
                 var dbContext = new DatabaseContext(connectionString);
 
-                // Initialize repositories
                 var memberRepository = new MemberRepository(dbContext);
                 var bookingRepository = new BookingRepository(dbContext);
                 var classInstanceRepository = new ClassInstanceRepository(dbContext);
@@ -67,7 +63,6 @@ namespace Gym_Manager_System.Forms
                 var membershipPlanRepository = new MembershipPlanRepository(dbContext);
                 var attendanceRepository = new AttendanceRepository(dbContext);
 
-                // Initialize services
                 _memberService = new MemberService(memberRepository);
                 _bookingService = new BookingService(bookingRepository, classInstanceRepository, memberRepository, subscriptionRepository, attendanceRepository);
                 _classService = new ClassService(classInstanceRepository, classScheduleRepository, bookingRepository);

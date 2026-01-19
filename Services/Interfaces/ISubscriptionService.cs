@@ -9,7 +9,7 @@ namespace Gym_Manager_System.Services.Interfaces
     {
         Task<Subscription?> GetSubscriptionByIdAsync(int subscriptionId);
         Task<IEnumerable<Subscription>> GetMemberSubscriptionsAsync(int memberId);
-        Task<IEnumerable<Subscription>> GetAllMember();
+        Task<IEnumerable<Subscription>> GetAllSubscriptionsAsync();
         Task<Subscription?> GetActiveSubscriptionAsync(int memberId);
         Task<Subscription> CreateSubscriptionAsync(int memberId, int planId, DateTime? startDate = null);
         Task<bool> RenewSubscriptionAsync(int subscriptionId);

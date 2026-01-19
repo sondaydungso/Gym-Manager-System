@@ -56,7 +56,7 @@ namespace Gym_Manager_System.Forms
                 }
 
                 var subscriptions = memberId == 0
-                    ? await _subscriptionService.GetAllMember() // Fetch all subscriptions when memberId is 0
+                    ? await _subscriptionService.GetAllSubscriptionsAsync() // Fetch all subscriptions when memberId is 0
                     : await _subscriptionService.GetMemberSubscriptionsAsync(memberId);
 
                 subscriptionsGridView.DataSource = subscriptions.ToList();

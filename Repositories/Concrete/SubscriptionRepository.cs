@@ -92,7 +92,7 @@ namespace Gym_Manager_System.Repositories
             return Task.FromResult<IEnumerable<Subscription>>(subscriptions); //return a list of subscription
         }
 
-        public Task<IEnumerable<Subscription>> GetAllMemberIdAsync()
+        public Task<IEnumerable<Subscription>> GetAllAsync()
         {
             var query = "SELECT * FROM subscriptions";
             var subscriptions = new List<Subscription>();
@@ -130,7 +130,7 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand()) 
                 {
                     command.CommandText = query;
                     var parameter = command.CreateParameter();
@@ -138,7 +138,7 @@ namespace Gym_Manager_System.Repositories
                     parameter.Value = memberId;
                     command.Parameters.Add(parameter);
 
-                    using (var reader = command.ExecuteReader()) // Execute the command and read the results
+                    using (var reader = command.ExecuteReader()) 
                     {
                         if (reader.Read())
                         {
@@ -153,7 +153,7 @@ namespace Gym_Manager_System.Repositories
                                 CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default,
                                 UpdatedAt = reader["updated_at"] != DBNull.Value ? Convert.ToDateTime(reader["updated_at"]) : default
                             };
-                            return Task.FromResult<Subscription?>(subscription); //Static method by .NET
+                            return Task.FromResult<Subscription?>(subscription); //Static method AI requested, it used to return result
                         }
                     }
                 }
@@ -168,14 +168,14 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand()) 
                 {
                     command.CommandText = query;
                     var parameter = command.CreateParameter();
                     parameter.ParameterName = "@DaysAhead";
                     parameter.Value = daysAhead;
                     command.Parameters.Add(parameter);
-                    using (var reader = command.ExecuteReader()) // Execute the command and read the results
+                    using (var reader = command.ExecuteReader()) 
                     {
                         while (reader.Read())
                         {
@@ -205,10 +205,10 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand()) 
                 {
                     command.CommandText = query;
-                    using (var reader = command.ExecuteReader()) // Execute the command and read the results
+                    using (var reader = command.ExecuteReader()) 
                     {
                         while (reader.Read())
                         {
@@ -228,7 +228,7 @@ namespace Gym_Manager_System.Repositories
                     }
                 }
             }
-            return Task.FromResult<IEnumerable<Subscription>>(subscriptions); //return a list of subscription
+            return Task.FromResult<IEnumerable<Subscription>>(subscriptions); 
         }
 
         public Task<int> CreateAsync(Subscription subscription)
@@ -239,7 +239,7 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand()) 
                 {
                     command.CommandText = query;
 
@@ -284,7 +284,7 @@ namespace Gym_Manager_System.Repositories
                     updatedAtParam.Value = subscription.UpdatedAt;
                     command.Parameters.Add(updatedAtParam);
 
-                    var result = command.ExecuteNonQuery(); // Execute the command
+                    var result = command.ExecuteNonQuery(); 
                     return Task.FromResult<int>(result);
                 }
             }
@@ -299,7 +299,7 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand()) 
                 {
                     command.CommandText = query;
 
@@ -334,8 +334,8 @@ namespace Gym_Manager_System.Repositories
                     subscriptionIdParam.Value = subscription.SubscriptionId;
                     command.Parameters.Add(subscriptionIdParam);
 
-                    var result = command.ExecuteNonQuery(); // Execute the command
-                    return Task.FromResult(result > 0); // Return true if at least one row was updated
+                    var result = command.ExecuteNonQuery(); 
+                    return Task.FromResult(result > 0); // Return true if  one row was updated
                 }
             }
         }
@@ -347,16 +347,16 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
-                {
+                using (var command = connection.CreateCommand())
+                { 
                     command.CommandText = query;
                     var parameter = command.CreateParameter();
                     parameter.ParameterName = "@SubscriptionID";
                     parameter.Value = subscriptionId;
                     command.Parameters.Add(parameter);
 
-                    var result = command.ExecuteNonQuery(); // Execute the command
-                    return Task.FromResult(result > 0); // Return true if at least one row was deleted
+                    var result = command.ExecuteNonQuery(); 
+                    return Task.FromResult(result > 0); 
                 }
             }
         }
@@ -367,7 +367,7 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand()) 
                 {
                     command.CommandText = query;
                     var parameter = command.CreateParameter();
@@ -375,7 +375,7 @@ namespace Gym_Manager_System.Repositories
                     parameter.Value = memberId;
                     command.Parameters.Add(parameter);
 
-                    var result = command.ExecuteScalar(); // Execute the command
+                    var result = command.ExecuteScalar(); 
                     var count = Convert.ToInt32(result);
                     return Task.FromResult(count > 0);
                 }

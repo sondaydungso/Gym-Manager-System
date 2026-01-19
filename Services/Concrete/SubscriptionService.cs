@@ -37,18 +37,14 @@ namespace Gym_Manager_System.Services.Concrete
         {
             return _subscriptionRepository.GetByMemberIdAsync(memberId);
         }
-        public Task<IEnumerable<Subscription>> GetAllMembersAsync() 
-        {
-            return _subscriptionRepository.GetAllMemberIdAsync();
-        }
 
         public Task<Subscription?> GetActiveSubscriptionAsync(int memberId)
         {
             return _subscriptionRepository.GetActiveSubscriptionByMemberIdAsync(memberId);
         }
-        public Task<IEnumerable<Subscription>> GetAllMember()
+        public Task<IEnumerable<Subscription>> GetAllSubscriptionsAsync()
         {
-            return _subscriptionRepository.GetAllMemberIdAsync();
+            return _subscriptionRepository.GetAllAsync();
         }
         public async Task<Subscription> CreateSubscriptionAsync(int memberId, int planId, DateTime? startDate = null)
         {

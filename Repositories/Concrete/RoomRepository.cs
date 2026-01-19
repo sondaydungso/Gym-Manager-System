@@ -20,10 +20,10 @@ namespace Gym_Manager_System.Repositories
         public Task<Room?> GetByIdAsync(int roomId)
         {
             string query = "SELECT * FROM rooms WHERE room_id = @RoomID";
-            using (var connection = _context.CreateConnection()) // Open a connection to the database
+            using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
                     var parameter = command.CreateParameter();
@@ -31,7 +31,7 @@ namespace Gym_Manager_System.Repositories
                     parameter.Value = roomId;
                     command.Parameters.Add(parameter);
 
-                    using (var reader = command.ExecuteReader()) // Execute the command and read the results
+                    using (var reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -44,7 +44,7 @@ namespace Gym_Manager_System.Repositories
                                 Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
                                 CreatedAt = reader["created_at"] != DBNull.Value ? Convert.ToDateTime(reader["created_at"]) : default
                             };
-                            return Task.FromResult<Room?>(room); //Static method by .NET
+                            return Task.FromResult<Room?>(room);
                         }
                     }
                 }
@@ -60,10 +60,10 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
-                    using (var reader = command.ExecuteReader()) // Execute the command and read the results
+                    using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -81,7 +81,7 @@ namespace Gym_Manager_System.Repositories
                     }
                 }
             }
-            return Task.FromResult<IEnumerable<Room>>(rooms); //return a list of room
+            return Task.FromResult<IEnumerable<Room>>(rooms);
         }
 
         public Task<IEnumerable<Room>> GetAvailableRoomsAsync()
@@ -91,10 +91,10 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
-                    using (var reader = command.ExecuteReader()) // Execute the command and read the results
+                    using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -112,7 +112,7 @@ namespace Gym_Manager_System.Repositories
                     }
                 }
             }
-            return Task.FromResult<IEnumerable<Room>>(rooms); //return a list of room
+            return Task.FromResult<IEnumerable<Room>>(rooms);
         }
 
         public Task<int> CreateAsync(Room room)
@@ -123,11 +123,10 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
 
-                    // Bind parameters directly
                     var roomNameParam = command.CreateParameter();
                     roomNameParam.ParameterName = "@RoomName";
                     roomNameParam.Value = room.RoomName ?? (object)DBNull.Value;
@@ -153,7 +152,7 @@ namespace Gym_Manager_System.Repositories
                     createdAtParam.Value = room.CreatedAt;
                     command.Parameters.Add(createdAtParam);
 
-                    var result = command.ExecuteNonQuery(); // Execute the command
+                    var result = command.ExecuteNonQuery();
                     return Task.FromResult<int>(result);
                 }
             }
@@ -168,11 +167,10 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
 
-                    // Bind parameters directly
                     var roomNameParam = command.CreateParameter();
                     roomNameParam.ParameterName = "@RoomName";
                     roomNameParam.Value = room.RoomName ?? (object)DBNull.Value;
@@ -198,8 +196,8 @@ namespace Gym_Manager_System.Repositories
                     roomIdParam.Value = room.RoomId;
                     command.Parameters.Add(roomIdParam);
 
-                    var result = command.ExecuteNonQuery(); // Execute the command
-                    return Task.FromResult(result > 0); // Return true if at least one row was updated
+                    var result = command.ExecuteNonQuery();
+                    return Task.FromResult(result > 0);
                 }
             }
         }
@@ -211,7 +209,7 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
                     var parameter = command.CreateParameter();
@@ -219,8 +217,8 @@ namespace Gym_Manager_System.Repositories
                     parameter.Value = roomId;
                     command.Parameters.Add(parameter);
 
-                    var result = command.ExecuteNonQuery(); // Execute the command
-                    return Task.FromResult(result > 0); // Return true if at least one row was deleted
+                    var result = command.ExecuteNonQuery();
+                    return Task.FromResult(result > 0);
                 }
             }
         }
@@ -231,7 +229,7 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
                     var parameter = command.CreateParameter();
@@ -239,7 +237,7 @@ namespace Gym_Manager_System.Repositories
                     parameter.Value = roomId;
                     command.Parameters.Add(parameter);
 
-                    var result = command.ExecuteScalar(); // Execute the command
+                    var result = command.ExecuteScalar();
                     var count = Convert.ToInt32(result);
                     return Task.FromResult(count > 0);
                 }
@@ -252,7 +250,7 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
                     var parameter = command.CreateParameter();
@@ -260,7 +258,7 @@ namespace Gym_Manager_System.Repositories
                     parameter.Value = roomId;
                     command.Parameters.Add(parameter);
 
-                    var result = command.ExecuteScalar(); // Execute the command
+                    var result = command.ExecuteScalar();
                     return Task.FromResult(result != null && result.ToString() == "available");
                 }
             }
