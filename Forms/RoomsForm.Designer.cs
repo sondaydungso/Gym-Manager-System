@@ -1,6 +1,6 @@
 namespace Gym_Manager_System.Forms
 {
-    partial class MembersForm
+    partial class RoomsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,28 +28,28 @@ namespace Gym_Manager_System.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.membersGridView = new System.Windows.Forms.DataGridView();
+            this.roomsGridView = new System.Windows.Forms.DataGridView();
             this.buttonPanel = new System.Windows.Forms.Panel();
             this.addButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
             this.refreshButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.membersGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.roomsGridView)).BeginInit();
             this.buttonPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // membersGridView
+            // roomsGridView
             // 
-            this.membersGridView.AllowUserToAddRows = false;
-            this.membersGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.membersGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.membersGridView.Location = new System.Drawing.Point(0, 0);
-            this.membersGridView.Name = "membersGridView";
-            this.membersGridView.ReadOnly = true;
-            this.membersGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.membersGridView.Size = new System.Drawing.Size(1000, 550);
-            this.membersGridView.TabIndex = 0;
-            this.membersGridView.SelectionChanged += new System.EventHandler(this.MembersGridView_SelectionChanged);
+            this.roomsGridView.AllowUserToAddRows = false;
+            this.roomsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.roomsGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.roomsGridView.Location = new System.Drawing.Point(0, 0);
+            this.roomsGridView.Name = "roomsGridView";
+            this.roomsGridView.ReadOnly = true;
+            this.roomsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.roomsGridView.Size = new System.Drawing.Size(1000, 550);
+            this.roomsGridView.TabIndex = 0;
+            this.roomsGridView.SelectionChanged += new System.EventHandler(this.RoomsGridView_SelectionChanged);
             // 
             // buttonPanel
             // 
@@ -69,7 +69,7 @@ namespace Gym_Manager_System.Forms
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(100, 30);
             this.addButton.TabIndex = 0;
-            this.addButton.Text = "Add Member";
+            this.addButton.Text = "Add Room";
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
@@ -80,7 +80,7 @@ namespace Gym_Manager_System.Forms
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(100, 30);
             this.editButton.TabIndex = 1;
-            this.editButton.Text = "Edit Member";
+            this.editButton.Text = "Edit Room";
             this.editButton.UseVisualStyleBackColor = true;
             this.editButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
@@ -91,7 +91,7 @@ namespace Gym_Manager_System.Forms
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(100, 30);
             this.deleteButton.TabIndex = 2;
-            this.deleteButton.Text = "Delete Member";
+            this.deleteButton.Text = "Delete Room";
             this.deleteButton.UseVisualStyleBackColor = true;
             this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
@@ -105,24 +105,24 @@ namespace Gym_Manager_System.Forms
             this.refreshButton.UseVisualStyleBackColor = true;
             this.refreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
-            // MembersForm
+            // RoomsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 600);
-            this.Controls.Add(this.membersGridView);
+            this.Controls.Add(this.roomsGridView);
             this.Controls.Add(this.buttonPanel);
-            this.Name = "MembersForm";
+            this.Name = "RoomsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Members Management";
-            ((System.ComponentModel.ISupportInitialize)(this.membersGridView)).EndInit();
+            this.Text = "Rooms Management";
+            ((System.ComponentModel.ISupportInitialize)(this.roomsGridView)).EndInit();
             this.buttonPanel.ResumeLayout(false);
             this.ResumeLayout(false);
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView membersGridView;
+        private System.Windows.Forms.DataGridView roomsGridView;
         private System.Windows.Forms.Panel buttonPanel;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button editButton;
@@ -130,5 +130,4 @@ namespace Gym_Manager_System.Forms
         private System.Windows.Forms.Button refreshButton;
     }
 }
-
 

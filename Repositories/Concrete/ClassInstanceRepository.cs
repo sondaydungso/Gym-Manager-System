@@ -39,7 +39,7 @@ namespace Gym_Manager_System.Repositories
                             var instance = new ClassInstance
                             {
                                 ClassInstanceId = Convert.ToInt32(reader["instance_id"]),
-                                ClassScheduleId = Convert.ToInt32(reader["schedule_id"]),
+                                ClassScheduleId = reader["schedule_id"] != DBNull.Value ? Convert.ToInt32(reader["schedule_id"]) : 0,
                                 ClassDate = reader["class_date"] != DBNull.Value ? Convert.ToDateTime(reader["class_date"]) : default,
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 RoomId = Convert.ToInt32(reader["room_id"]),
@@ -77,7 +77,7 @@ namespace Gym_Manager_System.Repositories
                             var instance = new ClassInstance
                             {
                                 ClassInstanceId = Convert.ToInt32(reader["instance_id"]),
-                                ClassScheduleId = Convert.ToInt32(reader["schedule_id"]),
+                                ClassScheduleId = reader["schedule_id"] != DBNull.Value ? Convert.ToInt32(reader["schedule_id"]) : 0,
                                 ClassDate = reader["class_date"] != DBNull.Value ? Convert.ToDateTime(reader["class_date"]) : default,
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 RoomId = Convert.ToInt32(reader["room_id"]),
@@ -118,7 +118,7 @@ namespace Gym_Manager_System.Repositories
                             var instance = new ClassInstance
                             {
                                 ClassInstanceId = Convert.ToInt32(reader["instance_id"]),
-                                ClassScheduleId = Convert.ToInt32(reader["schedule_id"]),
+                                ClassScheduleId = reader["schedule_id"] != DBNull.Value ? Convert.ToInt32(reader["schedule_id"]) : 0,
                                 ClassDate = reader["class_date"] != DBNull.Value ? Convert.ToDateTime(reader["class_date"]) : default,
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 RoomId = Convert.ToInt32(reader["room_id"]),
@@ -159,7 +159,7 @@ namespace Gym_Manager_System.Repositories
                             var instance = new ClassInstance
                             {
                                 ClassInstanceId = Convert.ToInt32(reader["instance_id"]),
-                                ClassScheduleId = Convert.ToInt32(reader["schedule_id"]),
+                                ClassScheduleId = reader["schedule_id"] != DBNull.Value ? Convert.ToInt32(reader["schedule_id"]) : 0,
                                 ClassDate = reader["class_date"] != DBNull.Value ? Convert.ToDateTime(reader["class_date"]) : default,
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 RoomId = Convert.ToInt32(reader["room_id"]),
@@ -204,7 +204,7 @@ namespace Gym_Manager_System.Repositories
                             var instance = new ClassInstance
                             {
                                 ClassInstanceId = Convert.ToInt32(reader["instance_id"]),
-                                ClassScheduleId = Convert.ToInt32(reader["schedule_id"]),
+                                ClassScheduleId = reader["schedule_id"] != DBNull.Value ? Convert.ToInt32(reader["schedule_id"]) : 0,
                                 ClassDate = reader["class_date"] != DBNull.Value ? Convert.ToDateTime(reader["class_date"]) : default,
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 RoomId = Convert.ToInt32(reader["room_id"]),
@@ -245,7 +245,7 @@ namespace Gym_Manager_System.Repositories
                             var instance = new ClassInstance
                             {
                                 ClassInstanceId = Convert.ToInt32(reader["instance_id"]),
-                                ClassScheduleId = Convert.ToInt32(reader["schedule_id"]),
+                                ClassScheduleId = reader["schedule_id"] != DBNull.Value ? Convert.ToInt32(reader["schedule_id"]) : 0,
                                 ClassDate = reader["class_date"] != DBNull.Value ? Convert.ToDateTime(reader["class_date"]) : default,
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 RoomId = Convert.ToInt32(reader["room_id"]),
@@ -308,7 +308,7 @@ namespace Gym_Manager_System.Repositories
                             var instance = new ClassInstance
                             {
                                 ClassInstanceId = Convert.ToInt32(reader["instance_id"]),
-                                ClassScheduleId = Convert.ToInt32(reader["schedule_id"]),
+                                ClassScheduleId = reader["schedule_id"] != DBNull.Value ? Convert.ToInt32(reader["schedule_id"]) : 0,
                                 ClassDate = reader["class_date"] != DBNull.Value ? Convert.ToDateTime(reader["class_date"]) : default,
                                 InstructorId = Convert.ToInt32(reader["instructor_id"]),
                                 RoomId = Convert.ToInt32(reader["room_id"]),
@@ -343,7 +343,15 @@ namespace Gym_Manager_System.Repositories
                     // Bind parameters directly
                     var scheduleIdParam = command.CreateParameter();
                     scheduleIdParam.ParameterName = "@ScheduleID";
-                    scheduleIdParam.Value = instance.ClassScheduleId;
+                    // Handle NULL for manual classes (when ClassScheduleId is 0 or invalid)
+                    if (instance.ClassScheduleId <= 0)
+                    {
+                        scheduleIdParam.Value = DBNull.Value;
+                    }
+                    else
+                    {
+                        scheduleIdParam.Value = instance.ClassScheduleId;
+                    }
                     command.Parameters.Add(scheduleIdParam);
 
                     var classDateParam = command.CreateParameter();

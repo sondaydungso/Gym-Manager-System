@@ -37,12 +37,19 @@ namespace Gym_Manager_System.Services.Concrete
         {
             return _subscriptionRepository.GetByMemberIdAsync(memberId);
         }
+        public Task<IEnumerable<Subscription>> GetAllMembersAsync() 
+        {
+            return _subscriptionRepository.GetAllMemberIdAsync();
+        }
 
         public Task<Subscription?> GetActiveSubscriptionAsync(int memberId)
         {
             return _subscriptionRepository.GetActiveSubscriptionByMemberIdAsync(memberId);
         }
-
+        public Task<IEnumerable<Subscription>> GetAllMember()
+        {
+            return _subscriptionRepository.GetAllMemberIdAsync();
+        }
         public async Task<Subscription> CreateSubscriptionAsync(int memberId, int planId, DateTime? startDate = null)
         {
             // Validate member exists
@@ -124,9 +131,7 @@ namespace Gym_Manager_System.Services.Concrete
                 return false;
             }
 
-            // Update subscription status to cancelled
-            // Note: You might want to add a Status property to Subscription model
-            // For now, we'll set the end date to today
+            
             subscription.EndDate = DateTime.Now.Date;
             subscription.UpdatedAt = DateTime.Now;
 
@@ -143,11 +148,12 @@ namespace Gym_Manager_System.Services.Concrete
 
             // Pause subscription by extending end date
             // Calculate days remaining and add them to end date when resuming
-            // For now, we'll just update the subscription
+            
             subscription.UpdatedAt = DateTime.Now;
-            // Note: You might want to add a Status property to handle paused state
+            
             return await _subscriptionRepository.UpdateAsync(subscription);
         }
+        
 
         public async Task<bool> ResumeSubscriptionAsync(int subscriptionId)
         {

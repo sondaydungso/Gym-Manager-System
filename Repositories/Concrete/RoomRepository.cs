@@ -162,7 +162,7 @@ namespace Gym_Manager_System.Repositories
         public Task<bool> UpdateAsync(Room room)
         {
             var query = "UPDATE rooms SET room_name = @RoomName, capacity = @Capacity, " +
-                        "equipment_available = @EquipmentAvailable " +
+                        "equipment_available = @EquipmentAvailable, status = @Status " +
                         "WHERE room_id = @RoomID";
 
             using (var connection = _context.CreateConnection())
@@ -187,6 +187,11 @@ namespace Gym_Manager_System.Repositories
                     equipmentAvailableParam.ParameterName = "@EquipmentAvailable";
                     equipmentAvailableParam.Value = room.EquipmentAvailable ?? (object)DBNull.Value;
                     command.Parameters.Add(equipmentAvailableParam);
+
+                    var statusParam = command.CreateParameter();
+                    statusParam.ParameterName = "@Status";
+                    statusParam.Value = room.Status ?? "available";
+                    command.Parameters.Add(statusParam);
 
                     var roomIdParam = command.CreateParameter();
                     roomIdParam.ParameterName = "@RoomID";

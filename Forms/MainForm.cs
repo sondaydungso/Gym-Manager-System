@@ -128,6 +128,11 @@ namespace Gym_Manager_System.Forms
             OpenSubscriptionsForm();
         }
 
+        private void ViewInstructorsMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenInstructorsForm();
+        }
+
         private void OpenMembersForm()
         {
             if (_memberService == null)
@@ -174,6 +179,37 @@ namespace Gym_Manager_System.Forms
             var subscriptionsForm = new SubscriptionsForm(_subscriptionService, _memberService);
             subscriptionsForm.MdiParent = this;
             subscriptionsForm.Show();
+        }
+
+        private void OpenInstructorsForm()
+        {
+            var instructorsForm = new InstructorsForm();
+            instructorsForm.MdiParent = this;
+            instructorsForm.Show();
+        }
+
+        private void ViewRoomsMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenRoomsForm();
+        }
+
+        private void OpenRoomsForm()
+        {
+            var roomsForm = new RoomsForm();
+            roomsForm.MdiParent = this;
+            roomsForm.Show();
+        }
+
+        private void ViewPlansMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenPlansForm();
+        }
+
+        private void OpenPlansForm()
+        {
+            var plansForm = new MembershipPlansForm();
+            plansForm.MdiParent = this;
+            plansForm.Show();
         }
 
         
