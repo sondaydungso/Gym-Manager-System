@@ -151,9 +151,9 @@ namespace Gym_Manager_System.Forms
                 // Since the database requires a valid schedule_id, we'll need to check if NULL is allowed
                 // For now, we'll try to use a special value or handle it in the repository
                 // Note: This may require database schema change to allow NULL schedule_id
-                instance.ClassScheduleId = 0; // Manual class, not from schedule - will be set to NULL in repository
-                instance.CreatedAt = DateTime.Now; // Ensure CreatedAt is set
-                instance.CurrentBookings = 0; // Initialize current bookings
+                instance.ClassScheduleId = 0;
+                instance.CreatedAt = DateTime.Now;
+                instance.CurrentBookings = 0;
 
                 var createdInstance = await _classService.CreateClassInstanceAsync(instance);
                 if (createdInstance != null)

@@ -21,10 +21,10 @@ namespace Gym_Manager_System.Repositories
         public Task<ClassInstance?> GetByIdAsync(int instanceId)
         {
             string query = "SELECT * FROM class_instances WHERE instance_id = @InstanceID";
-            using (var connection = _context.CreateConnection()) // Open a connection to the database
+            using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
                     var parameter = command.CreateParameter();
@@ -32,7 +32,7 @@ namespace Gym_Manager_System.Repositories
                     parameter.Value = instanceId;
                     command.Parameters.Add(parameter);
 
-                    using (var reader = command.ExecuteReader()) // Execute the command and read the results
+                    using (var reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -51,7 +51,7 @@ namespace Gym_Manager_System.Repositories
                                 CancelationReason = reader["cancellation_reason"]?.ToString(),
                                 Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty
                             };
-                            return Task.FromResult<ClassInstance?>(instance); //Static method by .NET
+                            return Task.FromResult<ClassInstance?>(instance);
                         }
                     }
                 }
@@ -67,10 +67,10 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
-                    using (var reader = command.ExecuteReader()) // Execute the command and read the results
+                    using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -94,7 +94,7 @@ namespace Gym_Manager_System.Repositories
                     }
                 }
             }
-            return Task.FromResult<IEnumerable<ClassInstance>>(instances); //return a list of instance
+            return Task.FromResult<IEnumerable<ClassInstance>>(instances);
         }
 
         public Task<IEnumerable<ClassInstance>> GetByDateAsync(DateTime date)
@@ -104,14 +104,14 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
                     var parameter = command.CreateParameter();
                     parameter.ParameterName = "@Date";
                     parameter.Value = date.Date;
                     command.Parameters.Add(parameter);
-                    using (var reader = command.ExecuteReader()) // Execute the command and read the results
+                    using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -135,7 +135,7 @@ namespace Gym_Manager_System.Repositories
                     }
                 }
             }
-            return Task.FromResult<IEnumerable<ClassInstance>>(instances); //return a list of instance
+            return Task.FromResult<IEnumerable<ClassInstance>>(instances);
         }
 
         public Task<IEnumerable<ClassInstance>> GetUpcomingInstancesAsync(int daysAhead)
@@ -145,14 +145,14 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
                     var parameter = command.CreateParameter();
                     parameter.ParameterName = "@DaysAhead";
                     parameter.Value = daysAhead;
                     command.Parameters.Add(parameter);
-                    using (var reader = command.ExecuteReader()) // Execute the command and read the results
+                    using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -176,7 +176,7 @@ namespace Gym_Manager_System.Repositories
                     }
                 }
             }
-            return Task.FromResult<IEnumerable<ClassInstance>>(instances); //return a list of instance
+            return Task.FromResult<IEnumerable<ClassInstance>>(instances);
         }
 
         public Task<IEnumerable<ClassInstance>> GetAvailableInstancesAsync(DateTime fromDate, DateTime toDate)
@@ -186,7 +186,7 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
                     var fromParam = command.CreateParameter();
@@ -197,7 +197,7 @@ namespace Gym_Manager_System.Repositories
                     toParam.ParameterName = "@ToDate";
                     toParam.Value = toDate.Date;
                     command.Parameters.Add(toParam);
-                    using (var reader = command.ExecuteReader()) // Execute the command and read the results
+                    using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -221,7 +221,7 @@ namespace Gym_Manager_System.Repositories
                     }
                 }
             }
-            return Task.FromResult<IEnumerable<ClassInstance>>(instances); //return a list of instance
+            return Task.FromResult<IEnumerable<ClassInstance>>(instances);
         }
 
         public Task<IEnumerable<ClassInstance>> GetInstancesByScheduleAsync(int scheduleId)
@@ -231,14 +231,14 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
                     var parameter = command.CreateParameter();
                     parameter.ParameterName = "@ScheduleID";
                     parameter.Value = scheduleId;
                     command.Parameters.Add(parameter);
-                    using (var reader = command.ExecuteReader()) // Execute the command and read the results
+                    using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -262,7 +262,7 @@ namespace Gym_Manager_System.Repositories
                     }
                 }
             }
-            return Task.FromResult<IEnumerable<ClassInstance>>(instances); //return a list of instance
+            return Task.FromResult<IEnumerable<ClassInstance>>(instances);
         }
 
         public Task<IEnumerable<ClassInstance>> GetInstancesByInstructorAsync(int instructorId, DateTime? fromDate, DateTime? toDate)
@@ -280,7 +280,7 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
                     var parameter = command.CreateParameter();
@@ -301,7 +301,7 @@ namespace Gym_Manager_System.Repositories
                         toParam.Value = toDate.Value.Date;
                         command.Parameters.Add(toParam);
                     }
-                    using (var reader = command.ExecuteReader()) // Execute the command and read the results
+                    using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -325,7 +325,7 @@ namespace Gym_Manager_System.Repositories
                     }
                 }
             }
-            return Task.FromResult<IEnumerable<ClassInstance>>(instances); //return a list of instance
+            return Task.FromResult<IEnumerable<ClassInstance>>(instances);
         }
 
         public Task<int> CreateAsync(ClassInstance instance)
@@ -336,22 +336,15 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
 
-                    // Bind parameters directly
                     var scheduleIdParam = command.CreateParameter();
                     scheduleIdParam.ParameterName = "@ScheduleID";
-                    // Handle NULL for manual classes (when ClassScheduleId is 0 or invalid)
-                    if (instance.ClassScheduleId <= 0)
-                    {
-                        scheduleIdParam.Value = DBNull.Value;
-                    }
-                    else
-                    {
-                        scheduleIdParam.Value = instance.ClassScheduleId;
-                    }
+                    scheduleIdParam.Value = instance.ClassScheduleId <= 0
+                        ? (object)DBNull.Value
+                        : instance.ClassScheduleId;
                     command.Parameters.Add(scheduleIdParam);
 
                     var classDateParam = command.CreateParameter();
@@ -404,7 +397,7 @@ namespace Gym_Manager_System.Repositories
                     createdAtParam.Value = instance.CreatedAt;
                     command.Parameters.Add(createdAtParam);
 
-                    var result = command.ExecuteNonQuery(); // Execute the command
+                    var result = command.ExecuteNonQuery();
                     return Task.FromResult<int>(result);
                 }
             }
@@ -421,11 +414,10 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
 
-                    // Bind parameters directly
                     var scheduleIdParam = command.CreateParameter();
                     scheduleIdParam.ParameterName = "@ScheduleID";
                     scheduleIdParam.Value = instance.ClassScheduleId;
@@ -481,7 +473,7 @@ namespace Gym_Manager_System.Repositories
                     instanceIdParam.Value = instance.ClassInstanceId;
                     command.Parameters.Add(instanceIdParam);
 
-                    var result = command.ExecuteNonQuery(); // Execute the command
+                    var result = command.ExecuteNonQuery();
                     return Task.FromResult(result > 0); // Return true if at least one row was updated
                 }
             }
@@ -494,7 +486,7 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
                     var parameter = command.CreateParameter();
@@ -502,7 +494,7 @@ namespace Gym_Manager_System.Repositories
                     parameter.Value = instanceId;
                     command.Parameters.Add(parameter);
 
-                    var result = command.ExecuteNonQuery(); // Execute the command
+                    var result = command.ExecuteNonQuery();
                     return Task.FromResult(result > 0); // Return true if at least one row was updated
                 }
             }
@@ -515,7 +507,7 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
                     var parameter = command.CreateParameter();
@@ -523,7 +515,7 @@ namespace Gym_Manager_System.Repositories
                     parameter.Value = instanceId;
                     command.Parameters.Add(parameter);
 
-                    var result = command.ExecuteNonQuery(); // Execute the command
+                    var result = command.ExecuteNonQuery();
                     return Task.FromResult(result > 0); // Return true if at least one row was updated
                 }
             }
@@ -536,7 +528,7 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
                     var parameter = command.CreateParameter();
@@ -544,7 +536,7 @@ namespace Gym_Manager_System.Repositories
                     parameter.Value = instanceId;
                     command.Parameters.Add(parameter);
 
-                    var result = command.ExecuteNonQuery(); // Execute the command
+                    var result = command.ExecuteNonQuery();
                     return Task.FromResult(result > 0); // Return true if at least one row was deleted
                 }
             }
@@ -556,7 +548,7 @@ namespace Gym_Manager_System.Repositories
             using (var connection = _context.CreateConnection())
             {
                 connection.Open();
-                using (var command = connection.CreateCommand()) // Create a command to execute the query
+                using (var command = connection.CreateCommand())
                 {
                     command.CommandText = query;
                     var parameter = command.CreateParameter();
@@ -564,7 +556,7 @@ namespace Gym_Manager_System.Repositories
                     parameter.Value = instanceId;
                     command.Parameters.Add(parameter);
 
-                    var result = command.ExecuteScalar(); // Execute the command
+                    var result = command.ExecuteScalar();
                     return Task.FromResult(result != null && Convert.ToBoolean(result));
                 }
             }
