@@ -92,6 +92,11 @@ namespace Gym_Manager_System.Forms
                 this.DialogResult = DialogResult.None;
             }
         }
+
+        private void BookingDetailsForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

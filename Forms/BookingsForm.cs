@@ -166,6 +166,11 @@ namespace Gym_Manager_System.Forms
             cancelButton.Enabled = hasSelection;
             checkInButton.Enabled = hasSelection;
         }
+
+        private void BookingsForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

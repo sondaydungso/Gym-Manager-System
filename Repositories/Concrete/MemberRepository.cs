@@ -46,7 +46,7 @@ namespace Gym_Manager_System.Repositories
                                 Emergency_contact_name = reader["emergency_contact_name"] != DBNull.Value ? reader["emergency_contact_name"].ToString() : string.Empty,
                                 Emergency_contact_phone = reader["emergency_contact_phone"] != DBNull.Value ? reader["emergency_contact_phone"].ToString() : string.Empty,
                                 Medical_notes = reader["medical_notes"] != DBNull.Value ? reader["medical_notes"].ToString() : string.Empty,
-                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
                             };
                             return Task.FromResult<Member?>(member); //Static method by .NET
                         }
@@ -88,7 +88,7 @@ namespace Gym_Manager_System.Repositories
                                 Emergency_contact_name = reader["emergency_contact_name"] != DBNull.Value ? reader["emergency_contact_name"].ToString() : string.Empty,
                                 Emergency_contact_phone = reader["emergency_contact_phone"] != DBNull.Value ? reader["emergency_contact_phone"].ToString() : string.Empty,
                                 Medical_notes = reader["medical_notes"] != DBNull.Value ? reader["medical_notes"].ToString() : string.Empty,
-                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
                             };
                             return Task.FromResult<Member?>(member); //Static method by .NET
                         }

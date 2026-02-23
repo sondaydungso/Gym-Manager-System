@@ -67,7 +67,7 @@ namespace Gym_Manager_System.Forms
             viewPlansMenuItem = new ToolStripMenuItem();
             statusStrip = new StatusStrip();
             statusLabel = new ToolStripStatusLabel();
-            
+            registerFaceToolStripMenuItem = new ToolStripMenuItem();
             menuStrip.SuspendLayout();
             statusStrip.SuspendLayout();
             SuspendLayout();
@@ -91,13 +91,13 @@ namespace Gym_Manager_System.Forms
             // exitMenuItem
             // 
             exitMenuItem.Name = "exitMenuItem";
-            exitMenuItem.Size = new Size(92, 22);
+            exitMenuItem.Size = new Size(180, 22);
             exitMenuItem.Text = "Exit";
             exitMenuItem.Click += ExitMenuItem_Click;
             // 
             // membersMenu
             // 
-            membersMenu.DropDownItems.AddRange(new ToolStripItem[] { viewMembersMenuItem });
+            membersMenu.DropDownItems.AddRange(new ToolStripItem[] { viewMembersMenuItem, registerFaceToolStripMenuItem });
             membersMenu.Name = "membersMenu";
             membersMenu.Size = new Size(69, 20);
             membersMenu.Text = "Members";
@@ -105,7 +105,7 @@ namespace Gym_Manager_System.Forms
             // viewMembersMenuItem
             // 
             viewMembersMenuItem.Name = "viewMembersMenuItem";
-            viewMembersMenuItem.Size = new Size(152, 22);
+            viewMembersMenuItem.Size = new Size(180, 22);
             viewMembersMenuItem.Text = "View Members";
             viewMembersMenuItem.Click += ViewMembersMenuItem_Click;
             // 
@@ -155,13 +155,13 @@ namespace Gym_Manager_System.Forms
             // 
             instructorsMenu.DropDownItems.AddRange(new ToolStripItem[] { viewInstructorsMenuItem });
             instructorsMenu.Name = "instructorsMenu";
-            instructorsMenu.Size = new Size(78, 20);
+            instructorsMenu.Size = new Size(75, 20);
             instructorsMenu.Text = "Instructors";
             // 
             // viewInstructorsMenuItem
             // 
             viewInstructorsMenuItem.Name = "viewInstructorsMenuItem";
-            viewInstructorsMenuItem.Size = new Size(162, 22);
+            viewInstructorsMenuItem.Size = new Size(158, 22);
             viewInstructorsMenuItem.Text = "View Instructors";
             viewInstructorsMenuItem.Click += ViewInstructorsMenuItem_Click;
             // 
@@ -169,13 +169,13 @@ namespace Gym_Manager_System.Forms
             // 
             roomsMenu.DropDownItems.AddRange(new ToolStripItem[] { viewRoomsMenuItem });
             roomsMenu.Name = "roomsMenu";
-            roomsMenu.Size = new Size(55, 20);
+            roomsMenu.Size = new Size(56, 20);
             roomsMenu.Text = "Rooms";
             // 
             // viewRoomsMenuItem
             // 
             viewRoomsMenuItem.Name = "viewRoomsMenuItem";
-            viewRoomsMenuItem.Size = new Size(139, 22);
+            viewRoomsMenuItem.Size = new Size(180, 22);
             viewRoomsMenuItem.Text = "View Rooms";
             viewRoomsMenuItem.Click += ViewRoomsMenuItem_Click;
             // 
@@ -183,7 +183,7 @@ namespace Gym_Manager_System.Forms
             // 
             plansMenu.DropDownItems.AddRange(new ToolStripItem[] { viewPlansMenuItem });
             plansMenu.Name = "plansMenu";
-            plansMenu.Size = new Size(55, 20);
+            plansMenu.Size = new Size(47, 20);
             plansMenu.Text = "Plans";
             // 
             // viewPlansMenuItem
@@ -208,7 +208,11 @@ namespace Gym_Manager_System.Forms
             statusLabel.Size = new Size(39, 17);
             statusLabel.Text = "Ready";
             // 
-            
+            // registerFaceToolStripMenuItem
+            // 
+            registerFaceToolStripMenuItem.Name = "registerFaceToolStripMenuItem";
+            registerFaceToolStripMenuItem.Size = new Size(180, 22);
+            registerFaceToolStripMenuItem.Text = "Register Face";
             // 
             // MainForm
             // 
@@ -232,6 +236,8 @@ namespace Gym_Manager_System.Forms
         }
 
         #endregion
+
+        private ToolStripMenuItem registerFaceToolStripMenuItem;
     }
 }
 

@@ -28,87 +28,88 @@ namespace Gym_Manager_System.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.memberLabel = new System.Windows.Forms.Label();
-            this.memberComboBox = new System.Windows.Forms.ComboBox();
-            this.classLabel = new System.Windows.Forms.Label();
-            this.classComboBox = new System.Windows.Forms.ComboBox();
-            this.saveButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            memberLabel = new Label();
+            memberComboBox = new ComboBox();
+            classLabel = new Label();
+            classComboBox = new ComboBox();
+            saveButton = new Button();
+            cancelButton = new Button();
+            SuspendLayout();
             // 
             // memberLabel
             // 
-            this.memberLabel.Location = new System.Drawing.Point(20, 20);
-            this.memberLabel.Name = "memberLabel";
-            this.memberLabel.Size = new System.Drawing.Size(150, 23);
-            this.memberLabel.TabIndex = 0;
-            this.memberLabel.Text = "Member:";
+            memberLabel.Location = new Point(20, 20);
+            memberLabel.Name = "memberLabel";
+            memberLabel.Size = new Size(150, 23);
+            memberLabel.TabIndex = 0;
+            memberLabel.Text = "Member:";
             // 
             // memberComboBox
             // 
-            this.memberComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.memberComboBox.Location = new System.Drawing.Point(180, 20);
-            this.memberComboBox.Name = "memberComboBox";
-            this.memberComboBox.Size = new System.Drawing.Size(300, 23);
-            this.memberComboBox.TabIndex = 1;
+            memberComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            memberComboBox.Location = new Point(180, 20);
+            memberComboBox.Name = "memberComboBox";
+            memberComboBox.Size = new Size(300, 23);
+            memberComboBox.TabIndex = 1;
             // 
             // classLabel
             // 
-            this.classLabel.Location = new System.Drawing.Point(20, 60);
-            this.classLabel.Name = "classLabel";
-            this.classLabel.Size = new System.Drawing.Size(150, 23);
-            this.classLabel.TabIndex = 2;
-            this.classLabel.Text = "Class:";
+            classLabel.Location = new Point(20, 60);
+            classLabel.Name = "classLabel";
+            classLabel.Size = new Size(150, 23);
+            classLabel.TabIndex = 2;
+            classLabel.Text = "Class:";
             // 
             // classComboBox
             // 
-            this.classComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.classComboBox.Location = new System.Drawing.Point(180, 60);
-            this.classComboBox.Name = "classComboBox";
-            this.classComboBox.Size = new System.Drawing.Size(300, 23);
-            this.classComboBox.TabIndex = 3;
+            classComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            classComboBox.Location = new Point(180, 60);
+            classComboBox.Name = "classComboBox";
+            classComboBox.Size = new Size(300, 23);
+            classComboBox.TabIndex = 3;
             // 
             // saveButton
             // 
-            this.saveButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.saveButton.Location = new System.Drawing.Point(180, 120);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(100, 23);
-            this.saveButton.TabIndex = 4;
-            this.saveButton.Text = "Save";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            saveButton.DialogResult = DialogResult.OK;
+            saveButton.Location = new Point(180, 120);
+            saveButton.Name = "saveButton";
+            saveButton.Size = new Size(100, 23);
+            saveButton.TabIndex = 4;
+            saveButton.Text = "Save";
+            saveButton.UseVisualStyleBackColor = true;
+            saveButton.Click += SaveButton_Click;
             // 
             // cancelButton
             // 
-            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(290, 120);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(100, 23);
-            this.cancelButton.TabIndex = 5;
-            this.cancelButton.Text = "Cancel";
-            this.cancelButton.UseVisualStyleBackColor = true;
+            cancelButton.DialogResult = DialogResult.Cancel;
+            cancelButton.Location = new Point(290, 120);
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new Size(100, 23);
+            cancelButton.TabIndex = 5;
+            cancelButton.Text = "Cancel";
+            cancelButton.UseVisualStyleBackColor = true;
             // 
             // BookingDetailsForm
             // 
-            this.AcceptButton = this.saveButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(500, 200);
-            this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.classComboBox);
-            this.Controls.Add(this.classLabel);
-            this.Controls.Add(this.memberComboBox);
-            this.Controls.Add(this.memberLabel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "BookingDetailsForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "New Booking";
-            this.ResumeLayout(false);
+            AcceptButton = saveButton;
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = cancelButton;
+            ClientSize = new Size(500, 200);
+            Controls.Add(cancelButton);
+            Controls.Add(saveButton);
+            Controls.Add(classComboBox);
+            Controls.Add(classLabel);
+            Controls.Add(memberComboBox);
+            Controls.Add(memberLabel);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "BookingDetailsForm";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "New Booking";
+            Load += BookingDetailsForm_Load;
+            ResumeLayout(false);
         }
 
         #endregion
@@ -121,5 +122,6 @@ namespace Gym_Manager_System.Forms
         private System.Windows.Forms.Button cancelButton;
     }
 }
+
 
 

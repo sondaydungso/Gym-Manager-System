@@ -241,4 +241,4 @@ $RECYCLE.BIN/
 appsettings.Development.json
 secrets.json
 *.secrets.json
-
+*.env
