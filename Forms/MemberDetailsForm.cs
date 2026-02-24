@@ -1,5 +1,7 @@
 using System;
 using System.Windows.Forms;
+using Azure;
+using Gym_Manager_System.Face_Recognition;
 using Gym_Manager_System.Model;
 using Gym_Manager_System.Services.Interfaces;
 
@@ -70,8 +72,53 @@ namespace Gym_Manager_System.Forms
                     // Create new member
                     member.JoinDate = DateTime.Now;
                     member.Status = "active";
-                    await _memberService.CreateMemberAsync(member);
-                    MessageBox.Show("Member created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    var created = await _memberService.CreateMemberAsync(member);
+                    int newMemberId = created.MemberId;
+                    string memberName = $"{created.FirstName} {created.LastName}".Trim();
+
+                    // Open camera to capture face
+                    using (var captureForm = new FaceCaptureForm())
+                    {
+                        if (captureForm.ShowDialog() != DialogResult.OK || captureForm.CapturedImageStream == null)
+                        {
+                            MessageBox.Show("Member created without face registration. You can add face later via Edit.", "Face skipped", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.DialogResult = DialogResult.OK;
+                            return;
+                        }
+
+                        using (var imageStream = captureForm.CapturedImageStream)
+                        {
+                            var detectionService = new FaceDetectionService();
+                            var (isValid, message) = await detectionService.ValidateImageForRegistrationAsync(imageStream);
+                            if (!isValid)
+                            {
+                                MessageBox.Show($"Face validation failed: {message}. Member was created but face was not registered. You can add face later via Edit.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                this.DialogResult = DialogResult.OK;
+                                return;
+                            }
+
+                            imageStream.Position = 0;
+                            try
+                            {
+                                var faceMatch = new FaceMatchService();
+                                await faceMatch.InitializeAsync();
+                                var personId = await faceMatch.RegisterPersonAsync(memberName);
+                                await faceMatch.AddFaceAsync(personId, imageStream);
+                                await faceMatch.TrainAsync();
+                                await _memberService.UpdateMemberFaceIdAsync(newMemberId, personId);
+                                MessageBox.Show("Member and face registered successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            catch (Exception ex)
+                            {
+                                string message = ex.Message;
+                                if (ex is RequestFailedException rfe && rfe.Status == 403)
+                                    message = "Your Azure Face resource does not have access to Identification/Verification. Apply for access at https://aka.ms/facerecognition";
+                                else if (message.Contains("UnsupportedFeature", StringComparison.OrdinalIgnoreCase) || message.Contains("apply for access", StringComparison.OrdinalIgnoreCase))
+                                    message = "Azure Face Identification is not enabled for your subscription. Apply for access at https://aka.ms/facerecognition";
+                                MessageBox.Show($"Member created but face registration failed: {message}. You can add face later via Edit.", "Face registration error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                        }
+                    }
                 }
                 else
                 {

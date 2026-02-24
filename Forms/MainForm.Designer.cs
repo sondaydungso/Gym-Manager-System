@@ -67,7 +67,6 @@ namespace Gym_Manager_System.Forms
             viewPlansMenuItem = new ToolStripMenuItem();
             statusStrip = new StatusStrip();
             statusLabel = new ToolStripStatusLabel();
-            registerFaceToolStripMenuItem = new ToolStripMenuItem();
             menuStrip.SuspendLayout();
             statusStrip.SuspendLayout();
             SuspendLayout();
@@ -91,13 +90,13 @@ namespace Gym_Manager_System.Forms
             // exitMenuItem
             // 
             exitMenuItem.Name = "exitMenuItem";
-            exitMenuItem.Size = new Size(180, 22);
+            exitMenuItem.Size = new Size(92, 22);
             exitMenuItem.Text = "Exit";
             exitMenuItem.Click += ExitMenuItem_Click;
             // 
             // membersMenu
             // 
-            membersMenu.DropDownItems.AddRange(new ToolStripItem[] { viewMembersMenuItem, registerFaceToolStripMenuItem });
+            membersMenu.DropDownItems.AddRange(new ToolStripItem[] { viewMembersMenuItem });
             membersMenu.Name = "membersMenu";
             membersMenu.Size = new Size(69, 20);
             membersMenu.Text = "Members";
@@ -175,7 +174,7 @@ namespace Gym_Manager_System.Forms
             // viewRoomsMenuItem
             // 
             viewRoomsMenuItem.Name = "viewRoomsMenuItem";
-            viewRoomsMenuItem.Size = new Size(180, 22);
+            viewRoomsMenuItem.Size = new Size(139, 22);
             viewRoomsMenuItem.Text = "View Rooms";
             viewRoomsMenuItem.Click += ViewRoomsMenuItem_Click;
             // 
@@ -189,7 +188,7 @@ namespace Gym_Manager_System.Forms
             // viewPlansMenuItem
             // 
             viewPlansMenuItem.Name = "viewPlansMenuItem";
-            viewPlansMenuItem.Size = new Size(180, 22);
+            viewPlansMenuItem.Size = new Size(130, 22);
             viewPlansMenuItem.Text = "View Plans";
             viewPlansMenuItem.Click += ViewPlansMenuItem_Click;
             // 
@@ -207,12 +206,6 @@ namespace Gym_Manager_System.Forms
             statusLabel.Name = "statusLabel";
             statusLabel.Size = new Size(39, 17);
             statusLabel.Text = "Ready";
-            // 
-            // registerFaceToolStripMenuItem
-            // 
-            registerFaceToolStripMenuItem.Name = "registerFaceToolStripMenuItem";
-            registerFaceToolStripMenuItem.Size = new Size(180, 22);
-            registerFaceToolStripMenuItem.Text = "Register Face";
             // 
             // MainForm
             // 
@@ -236,8 +229,6 @@ namespace Gym_Manager_System.Forms
         }
 
         #endregion
-
-        private ToolStripMenuItem registerFaceToolStripMenuItem;
     }
 }
 

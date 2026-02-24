@@ -1,4 +1,4 @@
-﻿using Gym_Manager_System.DataFolder;
+using Gym_Manager_System.DataFolder;
 using Gym_Manager_System.Model;
 using Gym_Manager_System.Repositories.Interfaces;
 using System.Collections.Generic;
@@ -47,6 +47,7 @@ namespace Gym_Manager_System.Repositories
                                 Emergency_contact_phone = reader["emergency_contact_phone"] != DBNull.Value ? reader["emergency_contact_phone"].ToString() : string.Empty,
                                 Medical_notes = reader["medical_notes"] != DBNull.Value ? reader["medical_notes"].ToString() : string.Empty,
                                 Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
+                                FaceId = reader["face_id"] != DBNull.Value && reader["face_id"] != null ? reader["face_id"].ToString() : null,
                             };
                             return Task.FromResult<Member?>(member); //Static method by .NET
                         }
@@ -89,6 +90,7 @@ namespace Gym_Manager_System.Repositories
                                 Emergency_contact_phone = reader["emergency_contact_phone"] != DBNull.Value ? reader["emergency_contact_phone"].ToString() : string.Empty,
                                 Medical_notes = reader["medical_notes"] != DBNull.Value ? reader["medical_notes"].ToString() : string.Empty,
                                 Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
+                                FaceId = reader["face_id"] != DBNull.Value && reader["face_id"] != null ? reader["face_id"].ToString() : null,
                             };
                             return Task.FromResult<Member?>(member); //Static method by .NET
                         }
@@ -125,7 +127,8 @@ namespace Gym_Manager_System.Repositories
                                 Emergency_contact_name = reader["emergency_contact_name"] != DBNull.Value ? reader["emergency_contact_name"].ToString() : string.Empty,
                                 Emergency_contact_phone = reader["emergency_contact_phone"] != DBNull.Value ? reader["emergency_contact_phone"].ToString() : string.Empty,
                                 Medical_notes = reader["medical_notes"] != DBNull.Value ? reader["medical_notes"].ToString() : string.Empty,
-                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
+                                FaceId = reader["face_id"] != DBNull.Value && reader["face_id"] != null ? reader["face_id"].ToString() : null,
                             };
                             members.Add(member);
                         }
@@ -166,7 +169,8 @@ namespace Gym_Manager_System.Repositories
                                 Emergency_contact_name = reader["emergency_contact_name"] != DBNull.Value ? reader["emergency_contact_name"].ToString() : string.Empty,
                                 Emergency_contact_phone = reader["emergency_contact_phone"] != DBNull.Value ? reader["emergency_contact_phone"].ToString() : string.Empty,
                                 Medical_notes = reader["medical_notes"] != DBNull.Value ? reader["medical_notes"].ToString() : string.Empty,
-                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty
+                                Status = reader["status"] != DBNull.Value ? reader["status"].ToString() : string.Empty,
+                                FaceId = reader["face_id"] != DBNull.Value && reader["face_id"] != null ? reader["face_id"].ToString() : null,
                             };
                             members.Add(member);
                         }
@@ -244,7 +248,7 @@ namespace Gym_Manager_System.Repositories
         {
             var query = "UPDATE members SET first_name = @FirstName, last_name = @LastName, email = @Email, phone = @PhoneNumber, " +
                         "date_of_birth = @DateOfBirth, join_date = @JoinDate, emergency_contact_name = @Emergency_contact_name, " +
-                        "emergency_contact_phone = @Emergency_contact_phone, medical_notes = @Medical_notes, status = @Status " +
+                        "emergency_contact_phone = @Emergency_contact_phone, medical_notes = @Medical_notes, status = @Status, face_id = @FaceId " +
                         "WHERE member_id = @MemberID";
 
             using (var connection = _context.CreateConnection())
@@ -305,6 +309,11 @@ namespace Gym_Manager_System.Repositories
                     statusParam.Value = member.Status ?? (object)DBNull.Value;
                     command.Parameters.Add(statusParam);
 
+                    var faceIdParam = command.CreateParameter();
+                    faceIdParam.ParameterName = "@FaceId";
+                    faceIdParam.Value = string.IsNullOrEmpty(member.FaceId) ? (object)DBNull.Value : member.FaceId;
+                    command.Parameters.Add(faceIdParam);
+
                     var memberIdParam = command.CreateParameter();
                     memberIdParam.ParameterName = "@MemberID";
                     memberIdParam.Value = member.MemberId;
@@ -312,6 +321,29 @@ namespace Gym_Manager_System.Repositories
 
                     var result = command.ExecuteNonQuery(); // Execute the command
                     return Task.FromResult(result > 0); // Return true if at least one row was updated
+                }
+            }
+        }
+
+        public Task<bool> UpdateFaceIdAsync(int memberId, Guid faceId)
+        {
+            var query = "UPDATE members SET face_id = @FaceId WHERE member_id = @MemberID";
+            using (var connection = _context.CreateConnection())
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = query;
+                    var faceIdParam = command.CreateParameter();
+                    faceIdParam.ParameterName = "@FaceId";
+                    faceIdParam.Value = faceId.ToString();
+                    command.Parameters.Add(faceIdParam);
+                    var idParam = command.CreateParameter();
+                    idParam.ParameterName = "@MemberID";
+                    idParam.Value = memberId;
+                    command.Parameters.Add(idParam);
+                    var result = command.ExecuteNonQuery();
+                    return Task.FromResult(result > 0);
                 }
             }
         }

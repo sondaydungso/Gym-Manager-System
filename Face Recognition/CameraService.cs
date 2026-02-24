@@ -1,10 +1,10 @@
-﻿using Emgu.CV;
+using Emgu.CV;
 using Emgu.CV.CvEnum;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
-namespace GymManagerSystem.FaceRecognition
+namespace Gym_Manager_System.Face_Recognition
 {
     public class CameraService : IDisposable
     {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +19,7 @@ namespace Gym_Manager_System.Model
         private string _emergency_contact_name = string.Empty;
         private string _emergency_contact_phone = string.Empty;
         private string _medical_notes = string.Empty;
+        private string? _faceId; // Azure Person ID (Guid string) for face recognition
 
 
         public int MemberId { get => _memberId; set => _memberId = value; }
@@ -32,6 +33,8 @@ namespace Gym_Manager_System.Model
         public string Emergency_contact_phone { get => _emergency_contact_phone; set => _emergency_contact_phone = value; }
         public string Medical_notes { get => _medical_notes; set => _medical_notes = value; }
         public string Status { get => _status; set => _status = value; }
+        ///Azure Face API Person ID (Guid string). Null until face is registered.
+        public string? FaceId { get => _faceId; set => _faceId = value; }
 
 
     }

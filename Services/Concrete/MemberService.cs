@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -84,6 +84,11 @@ namespace Gym_Manager_System.Services.Concrete
         public Task<bool> DeleteMemberAsync(int memberId)
         {
             return _memberRepository.DeleteAsync(memberId);
+        }
+
+        public Task<bool> UpdateMemberFaceIdAsync(int memberId, Guid faceId)
+        {
+            return _memberRepository.UpdateFaceIdAsync(memberId, faceId);
         }
 
         public async Task<bool> IsMemberActiveAsync(int memberId)

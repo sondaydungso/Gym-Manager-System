@@ -1,32 +1,27 @@
-﻿using ServiceStack.Text;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gym_Manager_System.Face_Recognition
 {
     public class ConfigLoader
     {
-        private string _FaceKey;
-        private string _FaceEndpoint;
+        private readonly string _FaceKey;
+        private readonly string _FaceEndpoint;
 
-        public ConfigLoader() 
+        public ConfigLoader()
         {
-           LoadEnvironmentVariables();
-        }
-        private void LoadEnvironmentVariables()
-        {
+            // Load .env first so env vars are set before we read them
             EnvParser.Load(".env");
-            _FaceKey = Environment.GetEnvironmentVariable("key1");
-            _FaceEndpoint = Environment.GetEnvironmentVariable("endpoint");
+
+            _FaceKey = (Environment.GetEnvironmentVariable("key1") ?? Environment.GetEnvironmentVariable("key") ?? "").Trim();
+            _FaceEndpoint = (Environment.GetEnvironmentVariable("endpoint1") ?? Environment.GetEnvironmentVariable("endpoint") ?? "").Trim();
+
             if (string.IsNullOrEmpty(_FaceKey) || string.IsNullOrEmpty(_FaceEndpoint))
-                throw new Exception("Azure credentials not found in .env file");
+                throw new InvalidOperationException(
+                    "Azure Face API is not configured. Add a .env file in the application folder with:\r\n" +
+                    "key1=your_azure_face_key\r\nendpoint=https://your-resource.cognitiveservices.azure.com/");
         }
 
-        public string FaceKey { get { return _FaceKey; } }
-        public string FaceEndpoint { get { return _FaceEndpoint; } }
-
+        public string FaceKey => _FaceKey;
+        public string FaceEndpoint => _FaceEndpoint;
     }
 }

@@ -29,8 +29,10 @@ CREATE TABLE members (
     emergency_contact_name VARCHAR(100),
     emergency_contact_phone VARCHAR(20),
     medical_notes TEXT,
+    face_id VARCHAR(36) NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_face_id (face_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 2. MEMBERSHIP_PLANS (no dependencies)
